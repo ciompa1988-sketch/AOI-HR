@@ -46,6 +46,10 @@ button{cursor:pointer}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px}
 .card,.panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 1px 2px rgba(15,23,42,.02)}
 .card{padding:22px}
+.card-clickable{cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.card-clickable:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(15,23,42,.09);border-color:#c7d2fe}
+.card-clickable:focus-visible{outline:3px solid rgba(79,70,229,.25);outline-offset:3px}
+.card-hint{display:block;margin-top:12px;color:var(--primary);font-size:13px;font-weight:800}
 .card small{color:var(--muted);font-weight:600}
 .card strong{display:block;font-size:34px;margin-top:7px}
 .badge,.status{display:inline-flex;align-items:center;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}
@@ -53,6 +57,10 @@ button{cursor:pointer}
 .warn{background:var(--warning-bg);color:var(--warning)}
 .danger{background:var(--danger-bg);color:var(--danger)}
 .neutral{background:#f1f5f9;color:#475569}
+.attention{background:#fef3c7;color:#92400e}
+.upcoming{background:#dcfce7;color:#166534}
+.critical{background:#fee2e2;color:#b91c1c}
+.expired{background:#7f1d1d;color:#fff}
 .panel{padding:20px;margin-bottom:20px}
 .panel h3{font-size:18px;margin-bottom:16px}
 .split{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
@@ -91,6 +99,40 @@ tbody tr:hover td{background:#fafcff}
 .leave-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
 .leave-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px}
 .leave-card strong{font-size:30px;display:block;margin-top:5px}
+
+.leave-balance{display:grid;grid-template-columns:1.35fr .65fr;gap:18px;margin-bottom:20px}
+.balance-main,.balance-side{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px}
+.balance-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}
+.balance-head h3{font-size:22px;margin-bottom:4px}
+.balance-year{font-weight:800;color:var(--primary);background:#eef2ff;padding:8px 12px;border-radius:12px}
+.balance-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.balance-stat{padding:15px;border:1px solid var(--border);border-radius:14px;background:#f8fafc}
+.balance-stat span{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+.balance-stat strong{font-size:25px}
+.balance-total{grid-column:1/-1;background:#eef2ff;border-color:#c7d2fe}
+.progress-wrap{margin-top:18px}
+.progress-info{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:7px}
+.progress-bar{height:11px;background:#e5e7eb;border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#4f46e5,#7c3aed);border-radius:999px}
+.remaining-number{font-size:42px;font-weight:800;line-height:1;color:#059669;margin:10px 0 6px}
+.leave-years{display:grid;gap:12px}
+.leave-year{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.leave-year summary{list-style:none;cursor:pointer;padding:17px 19px;display:flex;justify-content:space-between;align-items:center;gap:14px;font-weight:800}
+.leave-year summary::-webkit-details-marker{display:none}
+.leave-year summary:after{content:'⌄';font-size:20px;color:var(--muted);transition:.2s}
+.leave-year[open] summary:after{transform:rotate(180deg)}
+.year-summary{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.year-summary small{font-weight:500;color:var(--muted)}
+.year-body{padding:0 19px 19px;border-top:1px solid var(--border)}
+.year-numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.year-number{padding:12px;border-radius:12px;background:#f8fafc;border:1px solid var(--border)}
+.year-number span{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
+.year-number strong{font-size:19px}
+.leave-mobile-list{display:none}
+
+.status-action{cursor:pointer;border:none;font:inherit;transition:transform .15s ease,box-shadow .15s ease}
+.status-action:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(15,23,42,.12)}
+.status-action:focus-visible{outline:3px solid rgba(79,70,229,.25);outline-offset:2px}
 .hidden{display:none!important}
 .toast{position:fixed;right:22px;bottom:22px;background:#0f172a;color:#fff;padding:13px 16px;border-radius:12px;opacity:0;transform:translateY(10px);transition:.2s;z-index:100}
 
@@ -105,7 +147,20 @@ tbody tr:hover td{background:#fafcff}
 .preview-frame{width:100%;height:65vh;border:1px solid var(--border);border-radius:12px}
 .toast.show{opacity:1;transform:translateY(0)}
 @media(max-width:1050px){.grid4{grid-template-columns:repeat(2,1fr)}.split,.profile{grid-template-columns:1fr}.sidebar{width:230px}.main{margin-left:230px}}
-@media(max-width:760px){.sidebar{position:static;width:100%;height:auto}.app{display:block}.main{margin-left:0}.topbar{position:static}.grid4,.leave-summary,.form-grid,.profile-data{grid-template-columns:1fr}.content{padding:18px}.search{display:none}}
+@media(max-width:760px){.sidebar{position:static;width:100%;height:auto}.app{display:block}.main{margin-left:0}.topbar{position:static}.grid4,.leave-summary,.form-grid,.profile-data,.leave-balance,.balance-grid,.year-numbers{grid-template-columns:1fr}.content{padding:18px}.search{display:none}.balance-total{grid-column:auto}.leave-year table{display:none}.leave-mobile-list{display:grid;gap:10px}.leave-mobile-item{padding:12px;border:1px solid var(--border);border-radius:12px;background:#f8fafc}.leave-mobile-item strong,.leave-mobile-item span{display:block}.leave-mobile-item span{font-size:13px;color:var(--muted);margin-top:4px}}
+
+.company-status-card{cursor:pointer;transition:.18s}
+.company-status-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(15,23,42,.09);border-color:#c7d2fe}
+.company-status-line{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:20px;font-weight:800}
+.company-status-dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.company-status-dot.active{background:#16a34a}
+.company-status-dot.suspended{background:#d97706}
+.company-status-dot.closed{background:#dc2626}
+.company-status-dot.archived{background:#64748b}
+.company-status-hint{display:block;margin-top:12px;color:var(--primary);font-size:13px;font-weight:800}
+.company-status-option{width:100%;display:flex;align-items:center;gap:12px;padding:14px 16px;margin-bottom:10px;border:1px solid var(--border);border-radius:13px;background:#fff;font-weight:700;font-size:15px;text-align:left}
+.company-status-option:hover{background:#f8fafc;border-color:#a5b4fc}
+.company-status-option.selected{background:#eef2ff;border-color:#4f46e5}
 </style>
 </head>
 <body>
@@ -153,8 +208,8 @@ tbody tr:hover td{background:#fafcff}
 const companies = [
  {id:1,name:'ABC Sp. z o.o.',nip:'1234567890',contact:'Jan Kowalski',status:'Aktywna'},
  {id:2,name:'Delta Transport',nip:'0987654321',contact:'Piotr Wiśniewski',status:'Aktywna'},
- {id:3,name:'Profi-Bud',nip:'1122334455',contact:'Tomasz Malinowski',status:'Wymaga uwagi'},
- {id:4,name:'Omega Tech',nip:'5566778899',contact:'Maria Zielińska',status:'Nieaktywna'}
+ {id:3,name:'Profi-Bud',nip:'1122334455',contact:'Tomasz Malinowski',status:'Zawieszona'},
+ {id:4,name:'Omega Tech',nip:'5566778899',contact:'Maria Zielińska',status:'Zawieszona'}
 ];
 
 const employees = [
@@ -166,21 +221,59 @@ const employees = [
  {id:6,companyId:4,name:'Maria Zielińska',position:'Programista',email:'maria@omega.pl',phone:'600 666 777',leaveTotal:26,leaveUsed:5,medical:'2027-05-08',contract:'2027-02-28'}
 ];
 
+let medicalHistory = [
+ {id:1,employeeId:1,completed:'2025-09-10',validTo:'2026-09-15',notes:'Badania okresowe'},
+ {id:2,employeeId:2,completed:'2026-03-18',validTo:'2027-03-20',notes:'Badania okresowe'},
+ {id:3,employeeId:3,completed:'2025-08-08',validTo:'2026-08-10',notes:'Badania kierowcy'},
+ {id:4,employeeId:4,completed:'2025-08-04',validTo:'2026-08-05',notes:'Badania okresowe'}
+];
+
+let contractHistory = [
+ {id:1,employeeId:1,type:'Umowa na okres próbny',start:'2025-01-01',end:'2025-03-31',notes:''},
+ {id:2,employeeId:1,type:'Umowa o pracę',start:'2025-04-01',end:'2026-12-31',notes:'Przedłużenie umowy'},
+ {id:3,employeeId:2,type:'Umowa o pracę',start:'2024-06-01',end:'Bezterminowa',notes:''},
+ {id:4,employeeId:3,type:'Umowa o pracę',start:'2025-12-01',end:'2026-11-30',notes:''}
+];
+
+
+let leaveBalances = [
+ {employeeId:1,year:2026,base:26,carried:6,used:14},
+ {employeeId:1,year:2025,base:26,carried:2,used:22},
+ {employeeId:1,year:2024,base:26,carried:2,used:26},
+ {employeeId:1,year:2023,base:26,carried:0,used:24},
+ {employeeId:2,year:2026,base:26,carried:0,used:8},
+ {employeeId:3,year:2026,base:20,carried:0,used:7},
+ {employeeId:4,year:2026,base:26,carried:0,used:16},
+ {employeeId:5,year:2026,base:26,carried:0,used:10},
+ {employeeId:6,year:2026,base:26,carried:0,used:5}
+];
+
 let leaveRequests = [
  {id:1,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-05-12',to:'2026-05-16',days:5,status:'Zaakceptowany'},
  {id:2,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-07-03',to:'2026-07-07',days:5,status:'Zaakceptowany'},
  {id:3,employeeId:1,type:'Urlop na żądanie',from:'2026-07-22',to:'2026-07-22',days:1,status:'Zaakceptowany'},
- {id:4,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-08-18',to:'2026-08-22',days:5,status:'Oczekuje'}
+ {id:4,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-08-18',to:'2026-08-22',days:5,status:'Oczekuje'},
+ {id:18,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-03-09',to:'2026-03-11',days:3,status:'Zaakceptowany'},
+ {id:5,employeeId:1,type:'Urlop wypoczynkowy',from:'2025-02-10',to:'2025-02-14',days:5,status:'Zaakceptowany'},
+ {id:6,employeeId:1,type:'Urlop wypoczynkowy',from:'2025-05-19',to:'2025-05-23',days:5,status:'Zaakceptowany'},
+ {id:7,employeeId:1,type:'Urlop na żądanie',from:'2025-07-04',to:'2025-07-04',days:1,status:'Zaakceptowany'},
+ {id:8,employeeId:1,type:'Urlop wypoczynkowy',from:'2025-09-01',to:'2025-09-09',days:7,status:'Zaakceptowany'},
+ {id:9,employeeId:1,type:'Urlop wypoczynkowy',from:'2025-12-22',to:'2025-12-23',days:2,status:'Zaakceptowany'},
+ {id:17,employeeId:1,type:'Urlop wypoczynkowy',from:'2025-11-06',to:'2025-11-07',days:2,status:'Zaakceptowany'},
+ {id:10,employeeId:1,type:'Urlop wypoczynkowy',from:'2024-03-04',to:'2024-03-08',days:5,status:'Zaakceptowany'},
+ {id:11,employeeId:1,type:'Urlop wypoczynkowy',from:'2024-06-03',to:'2024-06-14',days:10,status:'Zaakceptowany'},
+ {id:12,employeeId:1,type:'Urlop wypoczynkowy',from:'2024-08-12',to:'2024-08-23',days:10,status:'Zaakceptowany'},
+ {id:13,employeeId:1,type:'Urlop na żądanie',from:'2024-11-15',to:'2024-11-15',days:1,status:'Zaakceptowany'},
+ {id:14,employeeId:1,type:'Urlop wypoczynkowy',from:'2023-04-03',to:'2023-04-07',days:5,status:'Zaakceptowany'},
+ {id:15,employeeId:1,type:'Urlop wypoczynkowy',from:'2023-07-03',to:'2023-07-14',days:10,status:'Zaakceptowany'},
+ {id:16,employeeId:1,type:'Urlop wypoczynkowy',from:'2023-09-11',to:'2023-09-22',days:9,status:'Zaakceptowany'}
 ];
 
 let notifications = [
  {id:1,type:'urlop',employeeId:1,message:'Jan Kowalski wysłał wniosek o urlop. Oczekuje na zatwierdzenie kierownika.',created:'30.07.2026, 10:15',read:false}
 ];
 
-let employeeDocuments = [
- {id:1,employeeId:1,category:'Umowa o pracę',name:'Umowa_o_prace_Jan_Kowalski.pdf',date:'2026-01-02',url:'',type:'application/pdf'},
- {id:2,employeeId:1,category:'Badania lekarskie',name:'Badania_Jan_Kowalski.jpg',date:'2026-03-12',url:'',type:'image/jpeg'}
-];
+
 
 let currentView='dashboard';
 let employeeMode=false;
@@ -191,7 +284,22 @@ const content=document.getElementById('content');
 function companyName(id){return companies.find(c=>c.id===id)?.name||'-'}
 function fmt(d){if(!d||d==='Bezterminowa')return d; const [y,m,day]=d.split('-'); return `${day}.${m}.${y}`}
 function statusClass(s){return s==='Aktywna'||s==='Zaakceptowany'?'ok':s==='Nieaktywna'||s==='Odrzucony'?'danger':'warn'}
+
+function leaveStatusBadge(request){
+ if(request.status==='Oczekuje'){
+  return `<button type="button" class="status warn status-action" onclick="openLeaveRequest(${request.id})" title="Otwórz wniosek i podejmij decyzję">${request.status}</button>`;
+ }
+ return `<span class="status ${statusClass(request.status)}">${request.status}</span>`;
+}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function navigateAdmin(view){
+ employeeMode=false;
+ currentView=view;
+ document.querySelectorAll('#adminNav [data-view]').forEach(button=>{
+  button.classList.toggle('active',button.dataset.view===view);
+ });
+ render();
+}
 
 function render(){
  if(employeeMode){renderEmployee();return}
@@ -208,10 +316,26 @@ function dashboardView(){
  return `
  <div class="page-header"><div><h2>Dashboard</h2><p>Najważniejsze informacje o firmach i pracownikach.</p></div></div>
  <div class="grid4">
-  <div class="card"><small>Liczba firm</small><strong>${companies.length}</strong><span class="badge ok">Aktywne: ${companies.filter(c=>c.status==='Aktywna').length}</span></div>
-  <div class="card"><small>Liczba pracowników</small><strong>${employees.length}</strong><span class="badge ok">W bazie</span></div>
-  <div class="card"><small>Badania do 60 dni</small><strong>${employees.filter(e=>e.medical<'2026-09-30').length}</strong><span class="badge warn">Wymaga uwagi</span></div>
-  <div class="card"><small>Kończące się umowy</small><strong>${employees.filter(e=>e.contract!=='Bezterminowa'&&e.contract<'2026-12-01').length}</strong><span class="badge danger">Do sprawdzenia</span></div>
+  <div class="card card-clickable" role="button" tabindex="0" onclick="navigateAdmin('companies')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('companies')}">
+   <small>Liczba firm</small><strong>${companies.length}</strong>
+   <span class="badge ok">Aktywne: ${companies.filter(c=>c.status==='Aktywna').length}</span>
+   <span class="card-hint">Pokaż firmy →</span>
+  </div>
+  <div class="card card-clickable" role="button" tabindex="0" onclick="navigateAdmin('employees')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('employees')}">
+   <small>Liczba pracowników</small><strong>${employees.length}</strong>
+   <span class="badge ok">W bazie</span>
+   <span class="card-hint">Pokaż pracowników →</span>
+  </div>
+  <div class="card card-clickable" role="button" tabindex="0" onclick="navigateAdmin('medical')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('medical')}">
+   <small>Badania krytyczne</small><strong>${employees.filter(e=>daysToDate(e.medical)!==null&&daysToDate(e.medical)<30).length}</strong>
+   <span class="badge critical">Poniżej 30 dni</span>
+   <span class="card-hint">${employees.filter(e=>daysToDate(e.medical)>=30&&daysToDate(e.medical)<=60).length} do zaplanowania · Sprawdź →</span>
+  </div>
+  <div class="card card-clickable" role="button" tabindex="0" onclick="navigateAdmin('contracts')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('contracts')}">
+   <small>Umowy krytyczne</small><strong>${employees.filter(e=>e.contract!=='Bezterminowa'&&daysToDate(e.contract)!==null&&daysToDate(e.contract)<30).length}</strong>
+   <span class="badge critical">Poniżej 30 dni</span>
+   <span class="card-hint">${employees.filter(e=>e.contract!=='Bezterminowa'&&daysToDate(e.contract)>=30&&daysToDate(e.contract)<=60).length} do zaplanowania · Sprawdź →</span>
+  </div>
  </div>
  <div class="panel"><h3>Nowe powiadomienia <span class="badge warn">${notifications.filter(n=>!n.read).length}</span></h3>
  ${notifications.filter(n=>!n.read).slice(0,3).map(n=>`<div onclick="openNotification(${n.id})" style="padding:12px;border-bottom:1px solid var(--border);cursor:pointer;border-radius:10px" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'"><strong>${n.message}</strong><br><small style="color:var(--muted)">${n.created}</small><div style="margin-top:7px;color:var(--primary);font-size:13px;font-weight:700">Otwórz wniosek →</div></div>`).join('') || '<div class="empty">Brak nowych powiadomień</div>'}
@@ -251,12 +375,129 @@ function employeesView(companyId=null){
 }
 
 function leavesView(){
- return `<div class="page-header"><div><h2>Urlopy</h2><p>Wnioski urlopowe wszystkich pracowników.</p></div></div><div class="panel"><table><thead><tr><th>Pracownik</th><th>Firma</th><th>Rodzaj</th><th>Termin</th><th>Dni</th><th>Status</th></tr></thead><tbody>${leaveRequests.map(r=>{const e=employees.find(x=>x.id===r.employeeId);return `<tr><td><span class="link" onclick="openEmployee(${e.id})">${e.name}</span></td><td>${companyName(e.companyId)}</td><td>${r.type}</td><td>${fmt(r.from)}–${fmt(r.to)}</td><td>${r.days}</td><td><span class="status ${statusClass(r.status)}">${r.status}</span></td></tr>`}).join('')}</tbody></table></div>`;
+ const pending=leaveRequests
+  .filter(r=>r.status==='Oczekuje')
+  .sort((a,b)=>a.from.localeCompare(b.from));
+
+ return `
+  <div class="page-header">
+   <div>
+    <h2>Urlopy do rozpatrzenia</h2>
+    <p>Widoczne są tylko wnioski oczekujące na decyzję. Pełna historia znajduje się w karcie pracownika.</p>
+   </div>
+   <span class="status ${pending.length?'warn':'ok'}">${pending.length} ${pending.length===1?'wniosek':'wniosków'}</span>
+  </div>
+
+  <div class="panel">
+   ${pending.length?`
+    <table>
+     <thead>
+      <tr><th>Pracownik</th><th>Firma</th><th>Rodzaj</th><th>Termin</th><th>Dni</th><th>Akcja</th></tr>
+     </thead>
+     <tbody>
+      ${pending.map(r=>{
+       const e=employees.find(x=>x.id===r.employeeId);
+       return `<tr>
+        <td><span class="link" onclick="openEmployee(${e.id})">${e.name}</span></td>
+        <td>${companyName(e.companyId)}</td>
+        <td>${r.type}</td>
+        <td>${fmt(r.from)}–${fmt(r.to)}</td>
+        <td>${r.days}</td>
+        <td><button class="btn primary" onclick="openLeaveRequest(${r.id})">Rozpatrz wniosek</button></td>
+       </tr>`;
+      }).join('')}
+     </tbody>
+    </table>
+   `:`
+    <div class="empty">
+     <strong>Brak wniosków oczekujących</strong>
+     <p style="margin-top:6px">Wszystkie zgłoszenia zostały już rozpatrzone.</p>
+    </div>
+   `}
+  </div>`;
 }
-function medicalView(){return genericEmployeeTable('Badania lekarskie','Terminy badań pracowników','medical')}
-function contractsView(){return genericEmployeeTable('Umowy','Terminy obowiązywania umów','contract')}
-function genericEmployeeTable(title,sub,key){return `<div class="page-header"><div><h2>${title}</h2><p>${sub}</p></div></div><div class="panel"><table><thead><tr><th>Pracownik</th><th>Firma</th><th>Stanowisko</th><th>Termin</th></tr></thead><tbody>${employees.map(e=>`<tr><td><span class="link" onclick="openEmployee(${e.id})">${e.name}</span></td><td>${companyName(e.companyId)}</td><td>${e.position}</td><td>${fmt(e[key])}</td></tr>`).join('')}</tbody></table></div>`}
-function documentsView(){return `<div class="page-header"><div><h2>Dokumenty</h2><p>Przyszłe miejsce na umowy, badania, zaświadczenia i aneksy.</p></div><button class="btn primary" onclick="showToast('W prototypie dodawanie plików jest wyłączone')">Dodaj dokument</button></div><div class="panel empty">Moduł dokumentów jest gotowy jako makieta i zostanie później połączony z bazą danych.</div>`}
+function medicalView(){
+ const critical=employees
+  .filter(e=>{const d=daysToDate(e.medical);return d!==null&&d<30})
+  .sort((a,b)=>a.medical.localeCompare(b.medical));
+ const attention=employees
+  .filter(e=>{const d=daysToDate(e.medical);return d!==null&&d>=30&&d<=60})
+  .sort((a,b)=>a.medical.localeCompare(b.medical));
+ const valid=employees
+  .filter(e=>{const d=daysToDate(e.medical);return d!==null&&d>60})
+  .sort((a,b)=>a.medical.localeCompare(b.medical));
+ return deadlineView(
+  'Terminy badań lekarskich',
+  'Czerwone: mniej niż 30 dni. Żółte: 30–60 dni. Zielone: ponad 60 dni.',
+  'medical',
+  critical,
+  attention,
+  valid,
+  'Badania'
+ );
+}
+
+function contractsView(){
+ const critical=employees
+  .filter(e=>e.contract!=='Bezterminowa'&&daysToDate(e.contract)!==null&&daysToDate(e.contract)<30)
+  .sort((a,b)=>a.contract.localeCompare(b.contract));
+ const attention=employees
+  .filter(e=>e.contract!=='Bezterminowa'&&daysToDate(e.contract)>=30&&daysToDate(e.contract)<=60)
+  .sort((a,b)=>a.contract.localeCompare(b.contract));
+ const valid=employees
+  .filter(e=>e.contract!=='Bezterminowa'&&daysToDate(e.contract)>60)
+  .sort((a,b)=>a.contract.localeCompare(b.contract));
+ return deadlineView(
+  'Terminy umów',
+  'Czerwone: mniej niż 30 dni. Żółte: 30–60 dni. Zielone: ponad 60 dni.',
+  'contract',
+  critical,
+  attention,
+  valid,
+  'Umowy'
+ );
+}
+
+function deadlineView(title,sub,key,critical,attention,valid,tabLabel){
+ const row=(e,statusClass)=>`<tr>
+  <td><span class="link" onclick="openEmployeeTabDirect(${e.id},'${key}')">${e.name}</span></td>
+  <td>${companyName(e.companyId)}</td>
+  <td>${e.position}</td>
+  <td><span class="status ${statusClass}">${fmt(e[key])}</span></td>
+  <td><span class="status ${statusClass}">${dateStatusLabel(e[key])}</span></td>
+  <td><button class="btn primary" onclick="openEmployeeTabDirect(${e.id},'${key}')">Otwórz ${tabLabel.toLowerCase()}</button></td>
+ </tr>`;
+
+ const table=(items,statusClass,emptyText)=>items.length
+  ? `<table><thead><tr><th>Pracownik</th><th>Firma</th><th>Stanowisko</th><th>Termin</th><th>Status</th><th>Akcja</th></tr></thead><tbody>${items.map(e=>row(e,statusClass)).join('')}</tbody></table>`
+  : `<div class="empty">${emptyText}</div>`;
+
+ return `<div class="page-header">
+  <div><h2>${title}</h2><p>${sub}</p></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+   <span class="status critical">${critical.length} pilne</span>
+   <span class="status attention">${attention.length} do zaplanowania</span>
+   <span class="status upcoming">${valid.length} ważne</span>
+  </div>
+ </div>
+
+ <div class="panel">
+  <h3 style="margin-bottom:14px">Pilne — mniej niż 30 dni</h3>
+  ${table(critical,'critical','Brak pilnych terminów.')}
+ </div>
+
+ <div class="panel">
+  <h3 style="margin-bottom:14px">Do zaplanowania — 30 do 60 dni</h3>
+  ${table(attention,'attention','Brak terminów do zaplanowania.')}
+ </div>
+
+ <div class="panel">
+  <h3 style="margin-bottom:14px">Ważne — ponad 60 dni</h3>
+  ${table(valid,'upcoming','Brak dalszych terminów.')}
+ </div>`;
+}
+
+function documentsView(){return `<div class="page-header"><div><h2>Terminy dokumentów</h2><p>System przechowuje daty ważności badań, umów i BHP — bez przesyłania skanów.</p></div></div><div class="panel empty">Terminy można edytować bezpośrednio w karcie każdego pracownika w zakładkach Badania i Umowy.</div>`}
 function notificationsView(){
  return `<div class="page-header"><div><h2>Powiadomienia</h2><p>Nowe wnioski urlopowe i ważne alerty pracownicze.</p></div></div>
  <div class="panel">
@@ -271,6 +512,87 @@ function notificationsView(){
    </div>`).join('') : '<div class="empty">Brak powiadomień</div>'}
  </div>`}
 
+
+const companyStatuses={
+ 'Aktywna':{dot:'active'},
+ 'Zawieszona':{dot:'suspended'},
+ 'Zamknięta':{dot:'closed'},
+ 'Archiwalna':{dot:'archived'}
+};
+
+function companyStatusDot(status){
+ return (companyStatuses[status]||companyStatuses['Aktywna']).dot;
+}
+
+function openCompanyStatusModal(companyId){
+ const c=companies.find(x=>x.id===companyId);
+ if(!c) return;
+
+ openModal(
+  'Zmień status firmy',
+  `
+   <p style="color:var(--muted);margin:0 0 18px">${c.name}</p>
+
+   <div>
+    ${Object.keys(companyStatuses).map(status=>`
+     <button type="button"
+             class="company-status-option ${c.status===status?'selected':''}"
+             onclick="confirmCompanyStatus(${c.id},'${status}')">
+      <span class="company-status-dot ${companyStatusDot(status)}"></span>
+      <span>${status}</span>
+      ${c.status===status?'<span style="margin-left:auto;color:var(--primary)">Aktualny</span>':''}
+     </button>
+    `).join('')}
+   </div>
+  `,
+  function(event){event.preventDefault()}
+ );
+}
+
+function confirmCompanyStatus(companyId,newStatus){
+ const c=companies.find(x=>x.id===companyId);
+ if(!c) return;
+
+ if(c.status===newStatus){
+  closeModal();
+  return;
+ }
+
+ openModal(
+  'Potwierdź zmianę',
+  `
+   <p style="color:var(--muted);margin:0 0 18px">${c.name}</p>
+
+   <p style="margin:0 0 22px;font-size:16px;line-height:1.6">
+    Czy na pewno chcesz zmienić status firmy z
+    <strong>„${c.status}”</strong> na <strong>„${newStatus}”</strong>?
+   </p>
+
+   <div style="display:flex;justify-content:flex-end;gap:10px">
+    <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+    <button type="button" class="btn primary"
+            onclick="saveCompanyStatus(${companyId},'${newStatus}')">
+     Zmień status
+    </button>
+   </div>
+  `,
+  function(event){event.preventDefault()}
+ );
+}
+
+function saveCompanyStatus(companyId,newStatus){
+ const c=companies.find(x=>x.id===companyId);
+ if(!c) return;
+
+ c.status=newStatus;
+ closeModal();
+ openCompany(companyId);
+
+ if(typeof showToast==='function'){
+  showToast(`Status firmy zmieniono na „${newStatus}”`);
+ }
+}
+
 function openCompany(id){
  const c=companies.find(x=>x.id===id);
  content.innerHTML=`<div class="page-header"><div><h2>${c.name}</h2><p>NIP: ${c.nip} · Kontakt: ${c.contact}</p></div><button class="btn" onclick="render()">Wróć</button></div>
@@ -278,7 +600,14 @@ function openCompany(id){
  <div class="card"><small>Pracownicy</small><strong>${employees.filter(e=>e.companyId===id).length}</strong></div>
  <div class="card"><small>Badania do 60 dni</small><strong>${employees.filter(e=>e.companyId===id&&e.medical<'2026-09-30').length}</strong></div>
  <div class="card"><small>Kończące się umowy</small><strong>${employees.filter(e=>e.companyId===id&&e.contract!=='Bezterminowa'&&e.contract<'2026-12-01').length}</strong></div>
- <div class="card"><small>Status</small><strong style="font-size:20px;margin-top:14px">${c.status}</strong></div>
+ <div class="card company-status-card" onclick="openCompanyStatusModal(${c.id})">
+  <small>Status firmy</small>
+  <div class="company-status-line">
+   <span class="company-status-dot ${companyStatusDot(c.status)}"></span>
+   <span>${c.status}</span>
+  </div>
+  <span class="company-status-hint">Kliknij, aby zmienić →</span>
+ </div>
  </div>${employeesView(id)}`;
 }
 
@@ -286,19 +615,38 @@ function openEmployee(id){
  selectedEmployeeId=id; const e=employees.find(x=>x.id===id);
  content.innerHTML=`<div class="page-header"><div><h2>Karta pracownika</h2><p>${companyName(e.companyId)}</p></div><button class="btn" onclick="render()">Wróć</button></div>
  <div class="profile">
-  <div class="panel profile-card"><div class="avatar">${e.name.split(' ').map(x=>x[0]).join('')}</div><h3>${e.name}</h3><p style="color:var(--muted)">${e.position}</p><button class="btn primary" style="margin-top:15px" onclick="openEmployeePanel(${e.id})">Pokaż panel pracownika</button></div>
+  <div class="panel profile-card">
+   <div class="avatar">${e.name.split(' ').map(x=>x[0]).join('')}</div>
+   <h3>${e.name}</h3>
+   <p style="color:var(--muted)">${e.position}</p>
+   <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:15px">
+    <button class="btn primary" onclick="openEmployeePanel(${e.id})">Pokaż panel pracownika</button>
+    <button class="btn" onclick="openEditEmployeeForm(${e.id})">Edytuj dane</button>
+    <button class="btn danger" onclick="confirmDeleteEmployee(${e.id})">Usuń pracownika</button>
+   </div>
+  </div>
   <div class="panel">
    <div class="tabs">
     <button class="tab active" onclick="showEmployeeTab(${e.id},'data',this)">Dane</button>
     <button class="tab" onclick="showEmployeeTab(${e.id},'leave',this)">Urlopy</button>
-    <button class="tab" onclick="showEmployeeTab(${e.id},'medicalDocs',this)">Badania</button>
-    <button class="tab" onclick="showEmployeeTab(${e.id},'contractDocs',this)">Umowy</button>
+    <button class="tab" onclick="showEmployeeTab(${e.id},'medical',this)">Badania</button>
+    <button class="tab" onclick="showEmployeeTab(${e.id},'contract',this)">Umowy</button>
    </div>
    <div id="employeeTabContent">
     ${employeeDataSection(e)}
    </div>
   </div>
  </div>`;
+}
+
+
+function openEmployeeTabDirect(employeeId,tab){
+ openEmployee(employeeId);
+ requestAnimationFrame(()=>{
+  const labels={medical:'Badania',contract:'Umowy',leave:'Urlopy',data:'Dane'};
+  const button=[...document.querySelectorAll('.tabs .tab')].find(item=>item.textContent.trim()===labels[tab]);
+  if(button)showEmployeeTab(employeeId,tab,button);
+ });
 }
 
 
@@ -321,88 +669,329 @@ function showEmployeeTab(employeeId,tab,button){
  const e=employees.find(x=>x.id===employeeId);
  const target=document.getElementById('employeeTabContent');
  if(tab==='data') target.innerHTML=employeeDataSection(e);
- if(tab==='leave') target.innerHTML=`<h3>Historia urlopów</h3>${employeeLeaveTable(employeeId)}`;
- if(tab==='medicalDocs') target.innerHTML=employeeDocumentsSection(employeeId,'Badania lekarskie');
- if(tab==='contractDocs') target.innerHTML=employeeDocumentsSection(employeeId,'Umowa o pracę');
+ if(tab==='leave') target.innerHTML=employeeLeaveYearsView(employeeId);
+ if(tab==='medical') target.innerHTML=employeeMedicalSection(e);
+ if(tab==='contract') target.innerHTML=employeeContractSection(e);
 }
 
-function employeeDocumentsSection(employeeId,category){
- const docs=employeeDocuments.filter(d=>d.employeeId===employeeId&&d.category===category);
- const label=category==='Badania lekarskie'?'Dodaj skan lub zdjęcie badań':'Dodaj zeskanowaną umowę o pracę';
+function employeeMedicalSection(e){
+ const history=medicalHistory
+  .filter(item=>item.employeeId===e.id)
+  .sort((a,b)=>(b.validTo||'').localeCompare(a.validTo||''));
+
  return `
-  <div class="upload-box">
-   <strong>${label}</strong>
-   <p style="color:var(--muted);font-size:13px;margin-top:6px">Obsługiwane: PDF, JPG, PNG</p>
-   <input type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/*" onchange="uploadEmployeeDocument(event,${employeeId},'${category}')">
+  <div class="page-header" style="margin-bottom:16px">
+   <div>
+    <h3>Badania lekarskie</h3>
+    <p>Każde nowe badanie tworzy kolejny wpis w historii pracownika.</p>
+   </div>
+   <span class="status ${dateStatusClass(e.medical)}">${dateStatusLabel(e.medical)}</span>
   </div>
-  <div style="height:16px"></div>
+
+  <div class="panel" style="box-shadow:none;margin-bottom:18px">
+   <h3>Dodaj nowe badania / przedłużenie</h3>
+   <form onsubmit="saveMedicalDate(event,${e.id})">
+    <div class="form-grid">
+     <div class="field">
+      <label>Data wykonania badań</label>
+      <input id="employeeMedicalCompleted" type="date" required>
+     </div>
+     <div class="field">
+      <label>Badania ważne do</label>
+      <input id="employeeMedicalDate" type="date" required>
+     </div>
+     <div class="field full">
+      <label>Uwagi</label>
+      <textarea id="employeeMedicalNotes" rows="3" placeholder="Np. badania okresowe, kontrolne..."></textarea>
+     </div>
+    </div>
+    <footer>
+     <button type="submit" class="btn primary">Dodaj do historii</button>
+    </footer>
+   </form>
+  </div>
+
+  <h3 style="margin-bottom:12px">Historia badań</h3>
   <div class="doc-list">
-   ${docs.length?docs.map(d=>`
+   ${history.length ? history.map((item,index)=>`
     <div class="doc-item">
-      <div class="doc-meta">
-       <strong>${d.name}</strong>
-       <small style="color:var(--muted)">${d.category} · dodano ${fmt(d.date)}</small>
-      </div>
-      <div class="doc-actions">
-       <button class="btn" onclick="previewEmployeeDocument(${d.id})">Podgląd</button>
-       <button class="btn danger" onclick="deleteEmployeeDocument(${d.id},${employeeId},'${category}')">Usuń</button>
-      </div>
-    </div>`).join(''):'<div class="empty">Nie dodano jeszcze żadnego dokumentu.</div>'}
+     <div class="doc-meta">
+      <strong>${index===0?'Aktualne badania':'Poprzednie badania'}</strong>
+      <small style="color:var(--muted)">
+       Wykonane: ${fmt(item.completed)} · ważne do: ${fmt(item.validTo)}
+       ${item.notes?` · ${item.notes}`:''}
+      </small>
+     </div>
+     <span class="status ${dateStatusClass(item.validTo)}">${dateStatusLabel(item.validTo)}</span>
+    </div>`).join('') : '<div class="empty">Brak historii badań.</div>'}
   </div>`;
 }
 
-function uploadEmployeeDocument(event,employeeId,category){
- const file=event.target.files[0];
- if(!file)return;
- const allowed=['application/pdf','image/jpeg','image/png'];
- if(!allowed.includes(file.type)){
-   showToast('Wybierz plik PDF, JPG lub PNG');
-   event.target.value='';
-   return;
+function employeeContractSection(e){
+ const history=contractHistory
+  .filter(item=>item.employeeId===e.id)
+  .sort((a,b)=>(b.start||'').localeCompare(a.start||''));
+ const indefinite=e.contract==='Bezterminowa';
+
+ return `
+  <div class="page-header" style="margin-bottom:16px">
+   <div>
+    <h3>Umowy pracownika</h3>
+    <p>Każde przedłużenie lub nowa umowa jest zapisywana jako osobny okres.</p>
+   </div>
+   <span class="status ${indefinite?'ok':dateStatusClass(e.contract)}">${indefinite?'Bezterminowa':dateStatusLabel(e.contract)}</span>
+  </div>
+
+  <div class="panel" style="box-shadow:none;margin-bottom:18px">
+   <h3>Dodaj nową umowę / przedłużenie</h3>
+   <form onsubmit="saveContractDates(event,${e.id})">
+    <div class="form-grid">
+     <div class="field">
+      <label>Rodzaj umowy</label>
+      <select id="employeeContractType">
+       ${['Umowa o pracę','Umowa zlecenie','Umowa na okres próbny','B2B','Inna'].map(type=>`<option>${type}</option>`).join('')}
+      </select>
+     </div>
+     <div class="field">
+      <label>Data rozpoczęcia</label>
+      <input id="employeeContractStart" type="date" required>
+     </div>
+     <div class="field">
+      <label>Data zakończenia</label>
+      <input id="employeeContractEnd" type="date">
+     </div>
+     <div class="field">
+      <label>Okres umowy</label>
+      <label style="display:flex;align-items:center;gap:9px;padding:11px 0">
+       <input id="employeeContractIndefinite" type="checkbox" onchange="toggleContractEndDate()" style="width:auto">
+       Umowa bezterminowa
+      </label>
+     </div>
+     <div class="field full">
+      <label>Uwagi</label>
+      <textarea id="employeeContractNotes" rows="3" placeholder="Np. przedłużenie, kolejna umowa..."></textarea>
+     </div>
+    </div>
+    <footer>
+     <button type="submit" class="btn primary">Dodaj do historii</button>
+    </footer>
+   </form>
+  </div>
+
+  <h3 style="margin-bottom:12px">Historia umów</h3>
+  <div class="doc-list">
+   ${history.length ? history.map((item,index)=>`
+    <div class="doc-item">
+     <div class="doc-meta">
+      <strong>${index===0?'Aktualna umowa':'Poprzednia umowa'} — ${item.type}</strong>
+      <small style="color:var(--muted)">
+       Od ${fmt(item.start)} do ${item.end==='Bezterminowa'?'bezterminowo':fmt(item.end)}
+       ${item.notes?` · ${item.notes}`:''}
+      </small>
+     </div>
+     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+      <span class="status ${item.end==='Bezterminowa'?'ok':dateStatusClass(item.end)}">
+       ${item.end==='Bezterminowa'?'Bezterminowa':dateStatusLabel(item.end)}
+      </span>
+      ${index===0?`<button type="button" class="btn" onclick="openEditContractForm(${e.id},${item.id})">Edytuj</button>`:''}
+     </div>
+    </div>`).join('') : '<div class="empty">Brak historii umów.</div>'}
+  </div>`;
+}
+
+function daysToDate(date){
+ if(!date||date==='Bezterminowa') return null;
+ const today=new Date();
+ today.setHours(0,0,0,0);
+ const end=new Date(date+'T00:00:00');
+ return Math.ceil((end-today)/(1000*60*60*24));
+}
+
+function dateStatusClass(date){
+ if(!date||date==='Bezterminowa') return 'neutral';
+ const days=daysToDate(date);
+ if(days<0) return 'expired';
+ if(days<30) return 'critical';
+ if(days<=60) return 'attention';
+ return 'upcoming';
+}
+
+function dateStatusLabel(date){
+ if(!date) return 'Brak terminu';
+ if(date==='Bezterminowa') return 'Bezterminowa';
+ const days=daysToDate(date);
+ if(days<0) return `Po terminie ${Math.abs(days)} dni`;
+ if(days===0) return 'Wygasa dzisiaj';
+ if(days<30) return `Pilne: ${days} dni`;
+ if(days<=60) return `Do zaplanowania: ${days} dni`;
+ return `Ważne: ${days} dni`;
+}
+
+function saveMedicalDate(event,employeeId){
+ event.preventDefault();
+ const e=employees.find(x=>x.id===employeeId);
+ const completed=document.getElementById('employeeMedicalCompleted').value;
+ const validTo=document.getElementById('employeeMedicalDate').value;
+ const notes=document.getElementById('employeeMedicalNotes').value.trim();
+
+ if(validTo<completed){
+  showToast('Data ważności nie może być wcześniejsza niż data wykonania');
+  return;
  }
- const url=URL.createObjectURL(file);
- employeeDocuments.unshift({
-   id:Date.now(),
-   employeeId,
-   category,
-   name:file.name,
-   date:new Date().toISOString().slice(0,10),
-   url,
-   type:file.type
+
+ medicalHistory.push({
+  id:Date.now(),
+  employeeId,
+  completed,
+  validTo,
+  notes
  });
- showToast('Dokument został dodany do karty pracownika');
- const activeButton=[...document.querySelectorAll('.tabs .tab')].find(b=>b.classList.contains('active'));
- document.getElementById('employeeTabContent').innerHTML=employeeDocumentsSection(employeeId,category);
- if(activeButton)activeButton.classList.add('active');
+
+ e.medical=validTo;
+ e.medicalCompleted=completed;
+ e.medicalNotes=notes;
+
+ showToast('Nowe badania dodano do historii');
+ document.getElementById('employeeTabContent').innerHTML=employeeMedicalSection(e);
 }
 
-function previewEmployeeDocument(documentId){
- const doc=employeeDocuments.find(d=>d.id===documentId);
- if(!doc)return;
- let preview='';
- if(doc.url){
-   preview=doc.type==='application/pdf'
-     ? `<iframe class="preview-frame" src="${doc.url}"></iframe>`
-     : `<img class="preview-img" src="${doc.url}" alt="${doc.name}">`;
- }else{
-   preview=`<div class="empty">To jest przykładowy dokument demonstracyjny. Dodaj własny plik, aby zobaczyć jego podgląd.</div>`;
+function toggleContractEndDate(){
+ const checkbox=document.getElementById('employeeContractIndefinite');
+ const input=document.getElementById('employeeContractEnd');
+ input.disabled=checkbox.checked;
+ if(checkbox.checked) input.value='';
+}
+
+function saveContractDates(event,employeeId){
+ event.preventDefault();
+ const e=employees.find(x=>x.id===employeeId);
+ const indefinite=document.getElementById('employeeContractIndefinite').checked;
+ const type=document.getElementById('employeeContractType').value;
+ const startDate=document.getElementById('employeeContractStart').value;
+ const endDate=document.getElementById('employeeContractEnd').value;
+ const notes=document.getElementById('employeeContractNotes').value.trim();
+
+ if(!indefinite && !endDate){
+  showToast('Wpisz datę zakończenia albo zaznacz umowę bezterminową');
+  return;
  }
- openModal(doc.name,`${preview}<footer><button type="button" class="btn" onclick="closeModal()">Zamknij</button></footer>`,e=>e.preventDefault());
-}
+ if(!indefinite && endDate<startDate){
+  showToast('Data zakończenia nie może być wcześniejsza niż rozpoczęcie');
+  return;
+ }
 
-function deleteEmployeeDocument(documentId,employeeId,category){
- const index=employeeDocuments.findIndex(d=>d.id===documentId);
- if(index<0)return;
- const doc=employeeDocuments[index];
- if(doc.url)URL.revokeObjectURL(doc.url);
- employeeDocuments.splice(index,1);
- document.getElementById('employeeTabContent').innerHTML=employeeDocumentsSection(employeeId,category);
- showToast('Dokument został usunięty');
+ const finalEnd=indefinite?'Bezterminowa':endDate;
+
+ contractHistory.push({
+  id:Date.now(),
+  employeeId,
+  type,
+  start:startDate,
+  end:finalEnd,
+  notes
+ });
+
+ e.contractType=type;
+ e.startDate=startDate;
+ e.contract=finalEnd;
+ e.contractNotes=notes;
+
+ showToast('Nową umowę dodano do historii');
+ document.getElementById('employeeTabContent').innerHTML=employeeContractSection(e);
 }
 
 function employeeLeaveTable(id){
- const list=leaveRequests.filter(r=>r.employeeId===id);
- return `<table><thead><tr><th>Rodzaj</th><th>Od</th><th>Do</th><th>Dni</th><th>Status</th></tr></thead><tbody>${list.length?list.map(r=>`<tr><td>${r.type}</td><td>${fmt(r.from)}</td><td>${fmt(r.to)}</td><td>${r.days}</td><td><span class="status ${statusClass(r.status)}">${r.status}</span></td></tr>`).join(''):'<tr><td colspan="5" class="empty">Brak wniosków</td></tr>'}</tbody></table>`;
+ return employeeLeaveYearsView(id);
+}
+
+function employeeLeaveYearsView(employeeId){
+ const balances=leaveBalances
+  .filter(item=>item.employeeId===employeeId)
+  .sort((a,b)=>b.year-a.year);
+
+ if(!balances.length){
+  const e=employees.find(x=>x.id===employeeId);
+  balances.push({
+   employeeId,
+   year:new Date().getFullYear(),
+   base:e?.leaveTotal||26,
+   carried:0,
+   used:e?.leaveUsed||0
+  });
+ }
+
+ const current=balances[0];
+ const total=current.base+current.carried;
+ const remaining=Math.max(0,total-current.used);
+ const percent=total?Math.min(100,Math.round((current.used/total)*100)):0;
+
+ return `
+  <div class="leave-balance">
+   <div class="balance-main">
+    <div class="balance-head">
+     <div>
+      <h3>Bilans urlopu</h3>
+      <p>Aktualny stan dni urlopowych pracownika.</p>
+     </div>
+     <span class="balance-year">${current.year}</span>
+    </div>
+    <div class="balance-grid">
+     <div class="balance-stat"><span>Limit podstawowy</span><strong>${current.base} dni</strong></div>
+     <div class="balance-stat"><span>Przeniesione z ${current.year-1}</span><strong>+ ${current.carried} dni</strong></div>
+     <div class="balance-stat balance-total"><span>Łącznie do wykorzystania</span><strong>${total} dni</strong></div>
+    </div>
+    <div class="progress-wrap">
+     <div class="progress-info"><span>Wykorzystano ${current.used} z ${total} dni</span><strong>${percent}%</strong></div>
+     <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
+    </div>
+   </div>
+   <div class="balance-side">
+    <small style="color:var(--muted)">Pozostało w ${current.year}</small>
+    <div class="remaining-number">${remaining}</div>
+    <strong>dni urlopu</strong>
+    <p style="color:var(--muted);margin-top:14px;font-size:13px">
+     ${current.carried>0?`${current.carried} dni zostało przeniesionych z poprzedniego roku.`:'Brak dni przeniesionych z poprzedniego roku.'}
+    </p>
+   </div>
+  </div>
+  <div class="leave-years">
+   ${balances.map((balance,index)=>leaveYearAccordion(employeeId,balance,index===0)).join('')}
+  </div>`;
+}
+
+function leaveYearAccordion(employeeId,balance,isCurrent){
+ const total=balance.base+balance.carried;
+ const remaining=Math.max(0,total-balance.used);
+ const requests=leaveRequests
+  .filter(r=>r.employeeId===employeeId && Number(r.from.slice(0,4))===balance.year)
+  .sort((a,b)=>b.from.localeCompare(a.from));
+
+ return `
+  <details class="leave-year" ${isCurrent?'open':''}>
+   <summary>
+    <div class="year-summary">
+     <span>${balance.year}</span>
+     <small>${total} dni · wykorzystano ${balance.used} · pozostało ${remaining}</small>
+    </div>
+   </summary>
+   <div class="year-body">
+    <div class="year-numbers">
+     <div class="year-number"><span>Limit podstawowy</span><strong>${balance.base}</strong></div>
+     <div class="year-number"><span>Przeniesione</span><strong>${balance.carried}</strong></div>
+     <div class="year-number"><span>Wykorzystano</span><strong>${balance.used}</strong></div>
+     <div class="year-number"><span>${isCurrent?'Pozostało':'Przeniesiono dalej'}</span><strong>${remaining}</strong></div>
+    </div>
+    ${requests.length?`
+     <table>
+      <thead><tr><th>Rodzaj</th><th>Od</th><th>Do</th><th>Dni</th><th>Status</th></tr></thead>
+      <tbody>${requests.map(r=>`<tr><td>${r.type}</td><td>${fmt(r.from)}</td><td>${fmt(r.to)}</td><td>${r.days}</td><td>${leaveStatusBadge(r)}</td></tr>`).join('')}</tbody>
+     </table>
+     <div class="leave-mobile-list">
+      ${requests.map(r=>`<div class="leave-mobile-item"><strong>${r.type} · ${r.days} ${r.days===1?'dzień':'dni'}</strong><span>${fmt(r.from)} – ${fmt(r.to)}</span><span style="display:inline-block;margin-top:8px">${leaveStatusBadge(r)}</span></div>`).join('')}
+     </div>
+    `:'<div class="empty">Brak zapisanych urlopów w tym roku.</div>'}
+   </div>
+  </details>`;
 }
 
 function openEmployeePanel(id){selectedEmployeeId=id;employeeMode=true;renderEmployee()}
@@ -419,8 +1008,7 @@ function renderEmployee(view='employeeHome'){
 }
 
 function employeeHomeView(e){return `<div class="hero"><div><h2>${e.name}</h2><p>${companyName(e.companyId)} · ${e.position}</p></div><button class="btn" onclick="renderEmployee('employeeRequest')">Złóż wniosek urlopowy</button></div>
- <div class="leave-summary"><div class="leave-card"><small>Roczny limit</small><strong>${e.leaveTotal}</strong>dni</div><div class="leave-card"><small>Wykorzystano</small><strong>${e.leaveUsed}</strong>dni</div><div class="leave-card"><small>Pozostało</small><strong>${e.leaveTotal-e.leaveUsed}</strong>dni</div></div>
- <div class="panel"><h3>Ostatnie wnioski</h3>${employeeLeaveTable(e.id)}</div>`}
+ <div class="panel">${employeeLeaveYearsView(e.id)}</div>`}
 function employeeRequestView(e){return `<div class="page-header"><div><h2>Złóż wniosek urlopowy</h2><p>Wniosek zostanie przekazany do administratora.</p></div></div><div class="panel"><form onsubmit="submitLeave(event,${e.id})"><div class="form-grid">
  <div class="field"><label>Rodzaj urlopu</label><select id="leaveType"><option>Urlop wypoczynkowy</option><option>Urlop na żądanie</option><option>Urlop bezpłatny</option><option>Opieka nad dzieckiem</option></select></div>
  <div class="field"><label>Liczba dni roboczych</label><input id="leaveDays" type="number" min="1" readonly required></div>
@@ -577,6 +1165,215 @@ function openCompanyForm(){openModal('Dodaj firmę',`
    currentView='companies';
    render();
  })}
+
+
+function openEditContractForm(employeeId,contractId){
+ const employee=employees.find(e=>e.id===employeeId);
+ const contract=contractHistory.find(item=>item.id===contractId);
+ if(!employee||!contract) return;
+
+ const indefinite=contract.end==='Bezterminowa';
+
+ openModal('Edytuj aktualną umowę',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Rodzaj umowy</label>
+    <select id="editContractType">
+     ${['Umowa o pracę','Umowa zlecenie','Umowa na okres próbny','B2B','Inna']
+      .map(type=>`<option ${type===contract.type?'selected':''}>${type}</option>`).join('')}
+    </select>
+   </div>
+
+   <div class="field">
+    <label>Data rozpoczęcia</label>
+    <input id="editContractStart" type="date" value="${contract.start||''}" required>
+   </div>
+
+   <div class="field">
+    <label>Data zakończenia</label>
+    <input id="editContractEnd" type="date" value="${indefinite?'':contract.end||''}" ${indefinite?'disabled':''}>
+   </div>
+
+   <div class="field">
+    <label>Okres umowy</label>
+    <label style="display:flex;align-items:center;gap:9px;padding:11px 0">
+     <input id="editContractIndefinite" type="checkbox" ${indefinite?'checked':''}
+            onchange="toggleEditContractEndDate()" style="width:auto">
+     Umowa bezterminowa
+    </label>
+   </div>
+
+   <div class="field full">
+    <label>Uwagi</label>
+    <textarea id="editContractNotes" rows="3">${contract.notes||''}</textarea>
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz zmiany</button>
+  </footer>
+ `,event=>{
+   event.preventDefault();
+
+   const isIndefinite=document.getElementById('editContractIndefinite').checked;
+   const start=document.getElementById('editContractStart').value;
+   const end=document.getElementById('editContractEnd').value;
+
+   if(!isIndefinite&&!end){
+    showToast('Wpisz datę zakończenia albo zaznacz umowę bezterminową');
+    return;
+   }
+
+   if(!isIndefinite&&end<start){
+    showToast('Data zakończenia nie może być wcześniejsza niż rozpoczęcie');
+    return;
+   }
+
+   contract.type=document.getElementById('editContractType').value;
+   contract.start=start;
+   contract.end=isIndefinite?'Bezterminowa':end;
+   contract.notes=document.getElementById('editContractNotes').value.trim();
+
+   employee.contractType=contract.type;
+   employee.startDate=contract.start;
+   employee.contract=contract.end;
+   employee.contractNotes=contract.notes;
+
+   closeModal();
+   showToast('Aktualna umowa została poprawiona');
+   openEmployeeTabDirect(employeeId,'contract');
+ });
+}
+
+function toggleEditContractEndDate(){
+ const checkbox=document.getElementById('editContractIndefinite');
+ const input=document.getElementById('editContractEnd');
+ if(!checkbox||!input) return;
+ input.disabled=checkbox.checked;
+ if(checkbox.checked) input.value='';
+}
+
+function openEditEmployeeForm(employeeId){
+ const employee=employees.find(e=>e.id===employeeId);
+ if(!employee) return;
+
+ openModal('Edytuj dane pracownika',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Imię i nazwisko</label>
+    <input id="editEmployeeName" value="${employee.name||''}" required>
+   </div>
+
+   <div class="field">
+    <label>Firma</label>
+    <select id="editEmployeeCompany">
+     ${companies.map(c=>`<option value="${c.id}" ${c.id===employee.companyId?'selected':''}>${c.name}</option>`).join('')}
+    </select>
+   </div>
+
+   <div class="field">
+    <label>Stanowisko</label>
+    <input id="editEmployeePosition" value="${employee.position||''}" required>
+   </div>
+
+   <div class="field">
+    <label>Data zatrudnienia</label>
+    <input id="editEmployeeStartDate" type="date" value="${employee.startDate||''}">
+   </div>
+
+   <div class="field">
+    <label>E-mail</label>
+    <input id="editEmployeeEmail" type="email" value="${employee.email||''}">
+   </div>
+
+   <div class="field">
+    <label>Telefon</label>
+    <input id="editEmployeePhone" value="${employee.phone||''}">
+   </div>
+
+   <div class="field">
+    <label>PESEL</label>
+    <input id="editEmployeePesel" maxlength="11" value="${employee.pesel||''}">
+   </div>
+
+   <div class="field">
+    <label>Limit urlopu</label>
+    <input id="editEmployeeLeave" type="number" min="0" value="${employee.leaveTotal??26}">
+   </div>
+
+   <div class="field">
+    <label>BHP ważne do</label>
+    <input id="editEmployeeBhp" type="date" value="${employee.bhp||''}">
+   </div>
+
+   <div class="field full">
+    <label>Uwagi</label>
+    <textarea id="editEmployeeNotes" rows="3">${employee.notes||''}</textarea>
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz zmiany</button>
+  </footer>
+ `,event=>{
+   event.preventDefault();
+
+   employee.name=document.getElementById('editEmployeeName').value.trim();
+   employee.companyId=Number(document.getElementById('editEmployeeCompany').value);
+   employee.position=document.getElementById('editEmployeePosition').value.trim();
+   employee.startDate=document.getElementById('editEmployeeStartDate').value;
+   employee.email=document.getElementById('editEmployeeEmail').value.trim();
+   employee.phone=document.getElementById('editEmployeePhone').value.trim();
+   employee.pesel=document.getElementById('editEmployeePesel').value.trim();
+   employee.leaveTotal=Number(document.getElementById('editEmployeeLeave').value)||0;
+   employee.bhp=document.getElementById('editEmployeeBhp').value;
+   employee.notes=document.getElementById('editEmployeeNotes').value.trim();
+
+   closeModal();
+   showToast('Dane pracownika zostały zaktualizowane');
+   openEmployee(employeeId);
+ });
+}
+
+function confirmDeleteEmployee(employeeId){
+ const employee=employees.find(e=>e.id===employeeId);
+ if(!employee) return;
+
+ openModal('Usuń pracownika',`
+  <p style="font-size:16px;line-height:1.6;margin-bottom:14px">
+   Czy na pewno chcesz usunąć pracownika <strong>${employee.name}</strong>?
+  </p>
+
+  <div class="status critical" style="display:block;padding:14px;margin-bottom:20px">
+   Usunięta zostanie również historia umów, badań, urlopów i powiadomień tego pracownika.
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="button" class="btn danger" onclick="deleteEmployee(${employeeId})">Usuń pracownika</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function deleteEmployee(employeeId){
+ const index=employees.findIndex(e=>e.id===employeeId);
+ if(index===-1) return;
+
+ employees.splice(index,1);
+ contractHistory=contractHistory.filter(item=>item.employeeId!==employeeId);
+ medicalHistory=medicalHistory.filter(item=>item.employeeId!==employeeId);
+ leaveBalances=leaveBalances.filter(item=>item.employeeId!==employeeId);
+ leaveRequests=leaveRequests.filter(item=>item.employeeId!==employeeId);
+ notifications=notifications.filter(item=>item.employeeId!==employeeId);
+
+ closeModal();
+ showToast('Pracownik został usunięty');
+ currentView='employees';
+ selectedEmployeeId=employees[0]?.id||null;
+ render();
+}
 
 function openEmployeeForm(companyId=''){openModal('Dodaj pracownika',`
  <div class="form-grid">
