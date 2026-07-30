@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AOI HR — Centrum Zarządzania Pracownikami</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f8fc; --surface:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+  --primary:#4f46e5; --primary-soft:#eef2ff; --success:#047857; --success-bg:#ecfdf5;
+  --warning:#c2410c; --warning-bg:#fff7ed; --danger:#b91c1c; --danger-bg:#fef2f2;
+  --radius:16px; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:270px;background:#fff;border-right:1px solid var(--border);position:fixed;inset:0 auto 0 0;display:flex;flex-direction:column;z-index:20}
+.brand{padding:26px 22px;border-bottom:1px solid var(--border)}
+.brand h1{font-size:20px}
+.brand p{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:5px}
+.nav{padding:14px 12px;display:flex;flex-direction:column;gap:5px;overflow:auto}
+.nav button{border:0;background:transparent;text-align:left;padding:11px 13px;border-radius:12px;color:var(--muted);font-weight:600}
+.nav button:hover{background:#f8fafc;color:var(--text)}
+.nav button.active{background:var(--primary-soft);color:var(--primary)}
+.nav .employee-switch{margin-top:16px;border-top:1px solid var(--border);padding-top:16px}
+.main{margin-left:270px;min-width:0;flex:1}
+.topbar{height:68px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10}
+.search{width:min(420px,48vw)}
+.search input{width:100%;height:42px;border:1px solid var(--border);border-radius:12px;padding:0 14px;background:#f8fafc}
+.userbox{display:flex;align-items:center;gap:10px}
+.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#818cf8,#4f46e5);color:#fff;font-weight:700}
+.content{padding:28px}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.page-header h2{font-size:28px;letter-spacing:-.03em}
+.page-header p{color:var(--muted);margin-top:5px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{height:40px;border-radius:11px;padding:0 16px;border:1px solid var(--border);background:#fff;font-weight:700}
+.btn:hover{background:#f8fafc}
+.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.btn.danger{background:var(--danger-bg);color:var(--danger);border-color:#fecaca}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px}
+.card,.panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 1px 2px rgba(15,23,42,.02)}
+.card{padding:22px}
+.card small{color:var(--muted);font-weight:600}
+.card strong{display:block;font-size:34px;margin-top:7px}
+.badge,.status{display:inline-flex;align-items:center;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}
+.ok{background:var(--success-bg);color:var(--success)}
+.warn{background:var(--warning-bg);color:var(--warning)}
+.danger{background:var(--danger-bg);color:var(--danger)}
+.neutral{background:#f1f5f9;color:#475569}
+.panel{padding:20px;margin-bottom:20px}
+.panel h3{font-size:18px;margin-bottom:16px}
+.split{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:13px 12px;border-bottom:1px solid var(--border);font-size:14px;vertical-align:middle}
+th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+tbody tr:hover td{background:#fafcff}
+.link{color:var(--primary);font-weight:700;cursor:pointer}
+.filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.chip{border:1px solid var(--border);background:#fff;color:var(--muted);padding:7px 12px;border-radius:999px;font-weight:600}
+.chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.empty{text-align:center;color:var(--muted);padding:30px}
+.profile{display:grid;grid-template-columns:220px 1fr;gap:20px}
+.profile-card{text-align:center}
+.profile-card .avatar{width:86px;height:86px;font-size:24px;margin:0 auto 12px}
+.profile-data{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.info{background:#f8fafc;border-radius:12px;padding:13px}
+.info span{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
+.tabs{display:flex;gap:8px;border-bottom:1px solid var(--border);margin-bottom:18px;overflow:auto}
+.tab{border:0;background:transparent;padding:11px 13px;font-weight:700;color:var(--muted);border-bottom:2px solid transparent}
+.tab.active{color:var(--primary);border-color:var(--primary)}
+.modal-bg{position:fixed;inset:0;background:rgba(15,23,42,.42);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:18px;box-shadow:var(--shadow);width:min(700px,100%);max-height:92vh;overflow:auto}
+.modal header{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--border)}
+.modal form{padding:22px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;font-weight:700;color:var(--muted)}
+.field input,.field select,.field textarea{border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:#f8fafc}
+.modal footer{display:flex;justify-content:flex-end;gap:10px;padding-top:18px}
+.employee-view{max-width:1100px;margin:0 auto}
+.hero{background:linear-gradient(135deg,#312e81,#4f46e5);color:#fff;border-radius:22px;padding:28px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.hero p{opacity:.8;margin-top:5px}
+.leave-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.leave-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px}
+.leave-card strong{font-size:30px;display:block;margin-top:5px}
+.hidden{display:none!important}
+.toast{position:fixed;right:22px;bottom:22px;background:#0f172a;color:#fff;padding:13px 16px;border-radius:12px;opacity:0;transform:translateY(10px);transition:.2s;z-index:100}
+
+.upload-box{border:2px dashed var(--border);border-radius:14px;padding:18px;text-align:center;background:#f8fafc}
+.upload-box input{margin-top:10px;max-width:100%}
+.doc-list{display:grid;gap:10px}
+.doc-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:13px;border:1px solid var(--border);border-radius:12px;background:#fff}
+.doc-meta{min-width:0}
+.doc-meta strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-actions{display:flex;gap:8px;flex-wrap:wrap}
+.preview-img{max-width:100%;max-height:65vh;border-radius:12px;border:1px solid var(--border)}
+.preview-frame{width:100%;height:65vh;border:1px solid var(--border);border-radius:12px}
+.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1050px){.grid4{grid-template-columns:repeat(2,1fr)}.split,.profile{grid-template-columns:1fr}.sidebar{width:230px}.main{margin-left:230px}}
+@media(max-width:760px){.sidebar{position:static;width:100%;height:auto}.app{display:block}.main{margin-left:0}.topbar{position:static}.grid4,.leave-summary,.form-grid,.profile-data{grid-template-columns:1fr}.content{padding:18px}.search{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><h1>Grażyna Zachwieja</h1><p>Centrum Zarządzania Pracownikami</p></div>
+  <div class="nav" id="adminNav">
+    <button class="active" data-view="dashboard">Dashboard</button>
+    <button data-view="companies">Firmy</button>
+    <button data-view="employees">Pracownicy</button>
+    <button data-view="leaves">Urlopy</button>
+    <button data-view="medical">Badania</button>
+    <button data-view="contracts">Umowy</button>
+    <button data-view="documents">Dokumenty</button>
+    <button data-view="notifications">Powiadomienia</button>
+    <button class="employee-switch" id="employeeModeBtn">Otwórz panel pracownika</button>
+  </div>
+  <div class="nav hidden" id="employeeNav">
+    <button class="active" data-employee-view="employeeHome">Mój pulpit</button>
+    <button data-employee-view="employeeRequest">Złóż wniosek</button>
+    <button data-employee-view="employeeHistory">Historia urlopów</button>
+    <button data-employee-view="employeeProfile">Mój profil</button>
+    <button class="employee-switch" id="adminModeBtn">Wróć do panelu administratora</button>
+  </div>
+</aside>
+
+<section class="main">
+  <div class="topbar">
+    <div class="search"><input id="globalSearch" placeholder="Szukaj firm lub pracowników..."></div>
+    <div class="userbox"><span id="modeLabel">Administrator</span><div class="avatar" id="topAvatar">GZ</div></div>
+  </div>
+  <main class="content" id="content"></main>
+</section>
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <header><h3 id="modalTitle">Formularz</h3><button class="btn" onclick="closeModal()">Zamknij</button></header>
+    <form id="modalForm"></form>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const companies = [
+ {id:1,name:'ABC Sp. z o.o.',nip:'1234567890',contact:'Jan Kowalski',status:'Aktywna'},
+ {id:2,name:'Delta Transport',nip:'0987654321',contact:'Piotr Wiśniewski',status:'Aktywna'},
+ {id:3,name:'Profi-Bud',nip:'1122334455',contact:'Tomasz Malinowski',status:'Wymaga uwagi'},
+ {id:4,name:'Omega Tech',nip:'5566778899',contact:'Maria Zielińska',status:'Nieaktywna'}
+];
+
+const employees = [
+ {id:1,companyId:1,name:'Jan Kowalski',position:'Magazynier',email:'jan@abc.pl',phone:'600 111 222',leaveTotal:26,leaveUsed:12,medical:'2026-09-15',contract:'2026-12-31'},
+ {id:2,companyId:1,name:'Anna Nowak',position:'Specjalista ds. sprzedaży',email:'anna@abc.pl',phone:'600 222 333',leaveTotal:26,leaveUsed:8,medical:'2027-03-20',contract:'Bezterminowa'},
+ {id:3,companyId:2,name:'Piotr Wiśniewski',position:'Kierowca',email:'piotr@delta.pl',phone:'600 333 444',leaveTotal:20,leaveUsed:7,medical:'2026-08-10',contract:'2026-11-30'},
+ {id:4,companyId:3,name:'Tomasz Malinowski',position:'Brygadzista',email:'tomasz@profi.pl',phone:'600 444 555',leaveTotal:26,leaveUsed:16,medical:'2026-08-05',contract:'2026-09-30'},
+ {id:5,companyId:3,name:'Ewa Król',position:'Administracja',email:'ewa@profi.pl',phone:'600 555 666',leaveTotal:26,leaveUsed:10,medical:'2027-01-14',contract:'Bezterminowa'},
+ {id:6,companyId:4,name:'Maria Zielińska',position:'Programista',email:'maria@omega.pl',phone:'600 666 777',leaveTotal:26,leaveUsed:5,medical:'2027-05-08',contract:'2027-02-28'}
+];
+
+let leaveRequests = [
+ {id:1,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-05-12',to:'2026-05-16',days:5,status:'Zaakceptowany'},
+ {id:2,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-07-03',to:'2026-07-07',days:5,status:'Zaakceptowany'},
+ {id:3,employeeId:1,type:'Urlop na żądanie',from:'2026-07-22',to:'2026-07-22',days:1,status:'Zaakceptowany'},
+ {id:4,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-08-18',to:'2026-08-22',days:5,status:'Oczekuje'}
+];
+
+let notifications = [
+ {id:1,type:'urlop',employeeId:1,message:'Jan Kowalski wysłał wniosek o urlop. Oczekuje na zatwierdzenie kierownika.',created:'30.07.2026, 10:15',read:false}
+];
+
+let employeeDocuments = [
+ {id:1,employeeId:1,category:'Umowa o pracę',name:'Umowa_o_prace_Jan_Kowalski.pdf',date:'2026-01-02',url:'',type:'application/pdf'},
+ {id:2,employeeId:1,category:'Badania lekarskie',name:'Badania_Jan_Kowalski.jpg',date:'2026-03-12',url:'',type:'image/jpeg'}
+];
+
+let currentView='dashboard';
+let employeeMode=false;
+let selectedEmployeeId=1;
+
+const content=document.getElementById('content');
+
+function companyName(id){return companies.find(c=>c.id===id)?.name||'-'}
+function fmt(d){if(!d||d==='Bezterminowa')return d; const [y,m,day]=d.split('-'); return `${day}.${m}.${y}`}
+function statusClass(s){return s==='Aktywna'||s==='Zaakceptowany'?'ok':s==='Nieaktywna'||s==='Odrzucony'?'danger':'warn'}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+
+function render(){
+ if(employeeMode){renderEmployee();return}
+ document.getElementById('adminNav').classList.remove('hidden');
+ document.getElementById('employeeNav').classList.add('hidden');
+ document.getElementById('modeLabel').textContent='Administrator';
+ document.getElementById('topAvatar').textContent='GZ';
+ const views={dashboard:dashboardView,companies:companiesView,employees:employeesView,leaves:leavesView,medical:medicalView,contracts:contractsView,documents:documentsView,notifications:notificationsView};
+ content.innerHTML=(views[currentView]||dashboardView)();
+ bindDynamic();
+}
+
+function dashboardView(){
+ return `
+ <div class="page-header"><div><h2>Dashboard</h2><p>Najważniejsze informacje o firmach i pracownikach.</p></div></div>
+ <div class="grid4">
+  <div class="card"><small>Liczba firm</small><strong>${companies.length}</strong><span class="badge ok">Aktywne: ${companies.filter(c=>c.status==='Aktywna').length}</span></div>
+  <div class="card"><small>Liczba pracowników</small><strong>${employees.length}</strong><span class="badge ok">W bazie</span></div>
+  <div class="card"><small>Badania do 60 dni</small><strong>${employees.filter(e=>e.medical<'2026-09-30').length}</strong><span class="badge warn">Wymaga uwagi</span></div>
+  <div class="card"><small>Kończące się umowy</small><strong>${employees.filter(e=>e.contract!=='Bezterminowa'&&e.contract<'2026-12-01').length}</strong><span class="badge danger">Do sprawdzenia</span></div>
+ </div>
+ <div class="panel"><h3>Nowe powiadomienia <span class="badge warn">${notifications.filter(n=>!n.read).length}</span></h3>
+ ${notifications.filter(n=>!n.read).slice(0,3).map(n=>`<div onclick="openNotification(${n.id})" style="padding:12px;border-bottom:1px solid var(--border);cursor:pointer;border-radius:10px" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'"><strong>${n.message}</strong><br><small style="color:var(--muted)">${n.created}</small><div style="margin-top:7px;color:var(--primary);font-size:13px;font-weight:700">Otwórz wniosek →</div></div>`).join('') || '<div class="empty">Brak nowych powiadomień</div>'}
+ </div>
+ <div class="split">
+  <div class="panel"><h3>Najpilniejsze sprawy</h3>${taskTable()}</div>
+  <div class="panel"><h3>Firmy wymagające uwagi</h3>${companies.filter(c=>c.status==='Wymaga uwagi').map(c=>`<p style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="link" onclick="openCompany(${c.id})">${c.name}</span><br><small style="color:var(--muted)">Sprawdź badania i umowy pracowników</small></p>`).join('')||'<div class="empty">Brak pilnych firm</div>'}</div>
+ </div>`;
+}
+
+function taskTable(){
+ const rows=[
+  ['Profi-Bud','Tomasz Malinowski','Badania lekarskie','05.08.2026','Pilne'],
+  ['Delta Transport','Piotr Wiśniewski','Badania lekarskie','10.08.2026','Pilne'],
+  ['Profi-Bud','Tomasz Malinowski','Kończąca się umowa','30.09.2026','Do sprawdzenia'],
+  ['ABC Sp. z o.o.','Jan Kowalski','Wniosek urlopowy','18.08.2026','Oczekuje']
+ ];
+ return `<table><thead><tr><th>Firma</th><th>Pracownik</th><th>Zadanie</th><th>Termin</th><th>Status</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.slice(0,4).map(x=>`<td>${x}</td>`).join('')}<td><span class="status ${r[4]==='Pilne'?'danger':'warn'}">${r[4]}</span></td></tr>`).join('')}</tbody></table>`
+}
+
+function companiesView(){
+ return `
+ <div class="page-header"><div><h2>Firmy</h2><p>Zarządzaj firmami oraz przypisanymi pracownikami.</p></div><div class="actions"><button class="btn primary" onclick="openCompanyForm()">Dodaj firmę</button></div></div>
+ <div class="panel"><table><thead><tr><th>Nazwa</th><th>NIP</th><th>Kontakt</th><th>Pracownicy</th><th>Status</th><th></th></tr></thead><tbody>
+ ${companies.map(c=>`<tr><td><span class="link" onclick="openCompany(${c.id})">${c.name}</span></td><td>${c.nip}</td><td>${c.contact}</td><td>${employees.filter(e=>e.companyId===c.id).length}</td><td><span class="status ${statusClass(c.status)}">${c.status}</span></td><td><button class="btn" onclick="openCompany(${c.id})">Otwórz</button></td></tr>`).join('')}
+ </tbody></table></div>`;
+}
+
+function employeesView(companyId=null){
+ const list=companyId?employees.filter(e=>e.companyId===companyId):employees;
+ const title=companyId?`Pracownicy — ${companyName(companyId)}`:'Pracownicy';
+ return `
+ <div class="page-header"><div><h2>${title}</h2><p>${companyId?'Lista pracowników wybranej firmy.':'Wszyscy pracownicy we wszystkich firmach.'}</p></div><button class="btn primary" onclick="openEmployeeForm(${companyId||''})">Dodaj pracownika</button></div>
+ <div class="panel"><table><thead><tr><th>Pracownik</th><th>Firma</th><th>Stanowisko</th><th>Pozostało urlopu</th><th>Badania</th><th>Umowa</th></tr></thead><tbody>
+ ${list.map(e=>`<tr><td><span class="link" onclick="openEmployee(${e.id})">${e.name}</span></td><td>${companyName(e.companyId)}</td><td>${e.position}</td><td>${e.leaveTotal-e.leaveUsed} dni</td><td>${fmt(e.medical)}</td><td>${fmt(e.contract)}</td></tr>`).join('')}
+ </tbody></table></div>`;
+}
+
+function leavesView(){
+ return `<div class="page-header"><div><h2>Urlopy</h2><p>Wnioski urlopowe wszystkich pracowników.</p></div></div><div class="panel"><table><thead><tr><th>Pracownik</th><th>Firma</th><th>Rodzaj</th><th>Termin</th><th>Dni</th><th>Status</th></tr></thead><tbody>${leaveRequests.map(r=>{const e=employees.find(x=>x.id===r.employeeId);return `<tr><td><span class="link" onclick="openEmployee(${e.id})">${e.name}</span></td><td>${companyName(e.companyId)}</td><td>${r.type}</td><td>${fmt(r.from)}–${fmt(r.to)}</td><td>${r.days}</td><td><span class="status ${statusClass(r.status)}">${r.status}</span></td></tr>`}).join('')}</tbody></table></div>`;
+}
+function medicalView(){return genericEmployeeTable('Badania lekarskie','Terminy badań pracowników','medical')}
+function contractsView(){return genericEmployeeTable('Umowy','Terminy obowiązywania umów','contract')}
+function genericEmployeeTable(title,sub,key){return `<div class="page-header"><div><h2>${title}</h2><p>${sub}</p></div></div><div class="panel"><table><thead><tr><th>Pracownik</th><th>Firma</th><th>Stanowisko</th><th>Termin</th></tr></thead><tbody>${employees.map(e=>`<tr><td><span class="link" onclick="openEmployee(${e.id})">${e.name}</span></td><td>${companyName(e.companyId)}</td><td>${e.position}</td><td>${fmt(e[key])}</td></tr>`).join('')}</tbody></table></div>`}
+function documentsView(){return `<div class="page-header"><div><h2>Dokumenty</h2><p>Przyszłe miejsce na umowy, badania, zaświadczenia i aneksy.</p></div><button class="btn primary" onclick="showToast('W prototypie dodawanie plików jest wyłączone')">Dodaj dokument</button></div><div class="panel empty">Moduł dokumentów jest gotowy jako makieta i zostanie później połączony z bazą danych.</div>`}
+function notificationsView(){
+ return `<div class="page-header"><div><h2>Powiadomienia</h2><p>Nowe wnioski urlopowe i ważne alerty pracownicze.</p></div></div>
+ <div class="panel">
+ ${notifications.length ? notifications.map(n=>`
+   <div onclick="openNotification(${n.id})" style="padding:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;align-items:flex-start;cursor:pointer;border-radius:10px" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+     <div>
+       <strong>${n.message}</strong>
+       <div style="color:var(--muted);font-size:12px;margin-top:5px">${n.created}</div>
+       <div style="margin-top:7px;color:var(--primary);font-size:13px;font-weight:700">Otwórz wniosek →</div>
+     </div>
+     <span class="status ${n.read?'neutral':'warn'}">${n.read?'Przeczytane':'Nowe'}</span>
+   </div>`).join('') : '<div class="empty">Brak powiadomień</div>'}
+ </div>`}
+
+function openCompany(id){
+ const c=companies.find(x=>x.id===id);
+ content.innerHTML=`<div class="page-header"><div><h2>${c.name}</h2><p>NIP: ${c.nip} · Kontakt: ${c.contact}</p></div><button class="btn" onclick="render()">Wróć</button></div>
+ <div class="grid4">
+ <div class="card"><small>Pracownicy</small><strong>${employees.filter(e=>e.companyId===id).length}</strong></div>
+ <div class="card"><small>Badania do 60 dni</small><strong>${employees.filter(e=>e.companyId===id&&e.medical<'2026-09-30').length}</strong></div>
+ <div class="card"><small>Kończące się umowy</small><strong>${employees.filter(e=>e.companyId===id&&e.contract!=='Bezterminowa'&&e.contract<'2026-12-01').length}</strong></div>
+ <div class="card"><small>Status</small><strong style="font-size:20px;margin-top:14px">${c.status}</strong></div>
+ </div>${employeesView(id)}`;
+}
+
+function openEmployee(id){
+ selectedEmployeeId=id; const e=employees.find(x=>x.id===id);
+ content.innerHTML=`<div class="page-header"><div><h2>Karta pracownika</h2><p>${companyName(e.companyId)}</p></div><button class="btn" onclick="render()">Wróć</button></div>
+ <div class="profile">
+  <div class="panel profile-card"><div class="avatar">${e.name.split(' ').map(x=>x[0]).join('')}</div><h3>${e.name}</h3><p style="color:var(--muted)">${e.position}</p><button class="btn primary" style="margin-top:15px" onclick="openEmployeePanel(${e.id})">Pokaż panel pracownika</button></div>
+  <div class="panel">
+   <div class="tabs">
+    <button class="tab active" onclick="showEmployeeTab(${e.id},'data',this)">Dane</button>
+    <button class="tab" onclick="showEmployeeTab(${e.id},'leave',this)">Urlopy</button>
+    <button class="tab" onclick="showEmployeeTab(${e.id},'medicalDocs',this)">Badania</button>
+    <button class="tab" onclick="showEmployeeTab(${e.id},'contractDocs',this)">Umowy</button>
+   </div>
+   <div id="employeeTabContent">
+    ${employeeDataSection(e)}
+   </div>
+  </div>
+ </div>`;
+}
+
+
+function employeeDataSection(e){
+ return `<div class="profile-data">
+  <div class="info"><span>Firma</span>${companyName(e.companyId)}</div><div class="info"><span>E-mail</span>${e.email||'-'}</div>
+  <div class="info"><span>Telefon</span>${e.phone||'-'}</div><div class="info"><span>Stanowisko</span>${e.position}</div>
+  <div class="info"><span>Urlop pozostały</span>${e.leaveTotal-e.leaveUsed} dni</div><div class="info"><span>Badania ważne do</span>${fmt(e.medical)}</div>
+  <div class="info"><span>Umowa do</span>${fmt(e.contract)}</div><div class="info"><span>Status</span>Aktywny</div>
+  ${e.startDate?`<div class="info"><span>Data zatrudnienia</span>${fmt(e.startDate)}</div>`:''}
+  ${e.pesel?`<div class="info"><span>PESEL</span>${e.pesel}</div>`:''}
+  ${e.bhp?`<div class="info"><span>BHP ważne do</span>${fmt(e.bhp)}</div>`:''}
+  ${e.contractType?`<div class="info"><span>Rodzaj umowy</span>${e.contractType}</div>`:''}
+ </div>`;
+}
+
+function showEmployeeTab(employeeId,tab,button){
+ document.querySelectorAll('.tabs .tab').forEach(b=>b.classList.remove('active'));
+ button.classList.add('active');
+ const e=employees.find(x=>x.id===employeeId);
+ const target=document.getElementById('employeeTabContent');
+ if(tab==='data') target.innerHTML=employeeDataSection(e);
+ if(tab==='leave') target.innerHTML=`<h3>Historia urlopów</h3>${employeeLeaveTable(employeeId)}`;
+ if(tab==='medicalDocs') target.innerHTML=employeeDocumentsSection(employeeId,'Badania lekarskie');
+ if(tab==='contractDocs') target.innerHTML=employeeDocumentsSection(employeeId,'Umowa o pracę');
+}
+
+function employeeDocumentsSection(employeeId,category){
+ const docs=employeeDocuments.filter(d=>d.employeeId===employeeId&&d.category===category);
+ const label=category==='Badania lekarskie'?'Dodaj skan lub zdjęcie badań':'Dodaj zeskanowaną umowę o pracę';
+ return `
+  <div class="upload-box">
+   <strong>${label}</strong>
+   <p style="color:var(--muted);font-size:13px;margin-top:6px">Obsługiwane: PDF, JPG, PNG</p>
+   <input type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/*" onchange="uploadEmployeeDocument(event,${employeeId},'${category}')">
+  </div>
+  <div style="height:16px"></div>
+  <div class="doc-list">
+   ${docs.length?docs.map(d=>`
+    <div class="doc-item">
+      <div class="doc-meta">
+       <strong>${d.name}</strong>
+       <small style="color:var(--muted)">${d.category} · dodano ${fmt(d.date)}</small>
+      </div>
+      <div class="doc-actions">
+       <button class="btn" onclick="previewEmployeeDocument(${d.id})">Podgląd</button>
+       <button class="btn danger" onclick="deleteEmployeeDocument(${d.id},${employeeId},'${category}')">Usuń</button>
+      </div>
+    </div>`).join(''):'<div class="empty">Nie dodano jeszcze żadnego dokumentu.</div>'}
+  </div>`;
+}
+
+function uploadEmployeeDocument(event,employeeId,category){
+ const file=event.target.files[0];
+ if(!file)return;
+ const allowed=['application/pdf','image/jpeg','image/png'];
+ if(!allowed.includes(file.type)){
+   showToast('Wybierz plik PDF, JPG lub PNG');
+   event.target.value='';
+   return;
+ }
+ const url=URL.createObjectURL(file);
+ employeeDocuments.unshift({
+   id:Date.now(),
+   employeeId,
+   category,
+   name:file.name,
+   date:new Date().toISOString().slice(0,10),
+   url,
+   type:file.type
+ });
+ showToast('Dokument został dodany do karty pracownika');
+ const activeButton=[...document.querySelectorAll('.tabs .tab')].find(b=>b.classList.contains('active'));
+ document.getElementById('employeeTabContent').innerHTML=employeeDocumentsSection(employeeId,category);
+ if(activeButton)activeButton.classList.add('active');
+}
+
+function previewEmployeeDocument(documentId){
+ const doc=employeeDocuments.find(d=>d.id===documentId);
+ if(!doc)return;
+ let preview='';
+ if(doc.url){
+   preview=doc.type==='application/pdf'
+     ? `<iframe class="preview-frame" src="${doc.url}"></iframe>`
+     : `<img class="preview-img" src="${doc.url}" alt="${doc.name}">`;
+ }else{
+   preview=`<div class="empty">To jest przykładowy dokument demonstracyjny. Dodaj własny plik, aby zobaczyć jego podgląd.</div>`;
+ }
+ openModal(doc.name,`${preview}<footer><button type="button" class="btn" onclick="closeModal()">Zamknij</button></footer>`,e=>e.preventDefault());
+}
+
+function deleteEmployeeDocument(documentId,employeeId,category){
+ const index=employeeDocuments.findIndex(d=>d.id===documentId);
+ if(index<0)return;
+ const doc=employeeDocuments[index];
+ if(doc.url)URL.revokeObjectURL(doc.url);
+ employeeDocuments.splice(index,1);
+ document.getElementById('employeeTabContent').innerHTML=employeeDocumentsSection(employeeId,category);
+ showToast('Dokument został usunięty');
+}
+
+function employeeLeaveTable(id){
+ const list=leaveRequests.filter(r=>r.employeeId===id);
+ return `<table><thead><tr><th>Rodzaj</th><th>Od</th><th>Do</th><th>Dni</th><th>Status</th></tr></thead><tbody>${list.length?list.map(r=>`<tr><td>${r.type}</td><td>${fmt(r.from)}</td><td>${fmt(r.to)}</td><td>${r.days}</td><td><span class="status ${statusClass(r.status)}">${r.status}</span></td></tr>`).join(''):'<tr><td colspan="5" class="empty">Brak wniosków</td></tr>'}</tbody></table>`;
+}
+
+function openEmployeePanel(id){selectedEmployeeId=id;employeeMode=true;renderEmployee()}
+
+function renderEmployee(view='employeeHome'){
+ document.getElementById('adminNav').classList.add('hidden');
+ document.getElementById('employeeNav').classList.remove('hidden');
+ const e=employees.find(x=>x.id===selectedEmployeeId)||employees[0];
+ document.getElementById('modeLabel').textContent='Pracownik';
+ document.getElementById('topAvatar').textContent=e.name.split(' ').map(x=>x[0]).join('');
+ document.querySelectorAll('[data-employee-view]').forEach(b=>b.classList.toggle('active',b.dataset.employeeView===view));
+ const views={employeeHome:employeeHomeView,employeeRequest:employeeRequestView,employeeHistory:employeeHistoryView,employeeProfile:employeeProfileView};
+ content.innerHTML=`<div class="employee-view">${views[view](e)}</div>`;
+}
+
+function employeeHomeView(e){return `<div class="hero"><div><h2>${e.name}</h2><p>${companyName(e.companyId)} · ${e.position}</p></div><button class="btn" onclick="renderEmployee('employeeRequest')">Złóż wniosek urlopowy</button></div>
+ <div class="leave-summary"><div class="leave-card"><small>Roczny limit</small><strong>${e.leaveTotal}</strong>dni</div><div class="leave-card"><small>Wykorzystano</small><strong>${e.leaveUsed}</strong>dni</div><div class="leave-card"><small>Pozostało</small><strong>${e.leaveTotal-e.leaveUsed}</strong>dni</div></div>
+ <div class="panel"><h3>Ostatnie wnioski</h3>${employeeLeaveTable(e.id)}</div>`}
+function employeeRequestView(e){return `<div class="page-header"><div><h2>Złóż wniosek urlopowy</h2><p>Wniosek zostanie przekazany do administratora.</p></div></div><div class="panel"><form onsubmit="submitLeave(event,${e.id})"><div class="form-grid">
+ <div class="field"><label>Rodzaj urlopu</label><select id="leaveType"><option>Urlop wypoczynkowy</option><option>Urlop na żądanie</option><option>Urlop bezpłatny</option><option>Opieka nad dzieckiem</option></select></div>
+ <div class="field"><label>Liczba dni roboczych</label><input id="leaveDays" type="number" min="1" readonly required></div>
+ <div class="field"><label>Data od</label><input id="leaveFrom" type="date" required onchange="calculateLeaveDays()"></div><div class="field"><label>Data do</label><input id="leaveTo" type="date" required onchange="calculateLeaveDays()"></div>
+ <div class="field full"><label>Uwagi</label><textarea id="leaveNotes" rows="4"></textarea></div>
+ <div class="field full"><div class="info"><span>Po zaakceptowaniu pozostanie</span><strong id="leaveRemaining">${e.leaveTotal-e.leaveUsed} dni</strong></div></div>
+ </div><footer><button class="btn primary">Wyślij wniosek</button></footer></form></div>`}
+function employeeHistoryView(e){return `<div class="page-header"><div><h2>Historia urlopów</h2><p>Wszystkie Twoje wcześniejsze wnioski.</p></div></div><div class="panel">${employeeLeaveTable(e.id)}</div>`}
+function employeeProfileView(e){return `<div class="page-header"><div><h2>Mój profil</h2><p>Podstawowe dane pracownika.</p></div></div><div class="panel"><div class="profile-data"><div class="info"><span>Imię i nazwisko</span>${e.name}</div><div class="info"><span>Firma</span>${companyName(e.companyId)}</div><div class="info"><span>Stanowisko</span>${e.position}</div><div class="info"><span>E-mail</span>${e.email}</div><div class="info"><span>Telefon</span>${e.phone}</div><div class="info"><span>Badania ważne do</span>${fmt(e.medical)}</div></div></div>`}
+
+function calculateLeaveDays(){
+ const from=document.getElementById('leaveFrom')?.value;
+ const to=document.getElementById('leaveTo')?.value;
+ if(!from||!to)return;
+ let start=new Date(from+'T00:00:00');
+ let end=new Date(to+'T00:00:00');
+ if(end<start){document.getElementById('leaveDays').value='';return}
+ let days=0;
+ for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1)){
+   const day=d.getDay();
+   if(day!==0&&day!==6)days++;
+ }
+ document.getElementById('leaveDays').value=days;
+ const e=employees.find(x=>x.id===selectedEmployeeId);
+ const remaining=Math.max(0,(e.leaveTotal-e.leaveUsed)-days);
+ document.getElementById('leaveRemaining').textContent=remaining+' dni';
+}
+
+function submitLeave(ev,id){
+ ev.preventDefault();
+ const e=employees.find(x=>x.id===id);
+ const days=Number(leaveDays.value);
+ if(!days){showToast('Wybierz prawidłowy zakres dat');return}
+ leaveRequests.push({id:Date.now(),employeeId:id,type:leaveType.value,from:leaveFrom.value,to:leaveTo.value,days,status:'Oczekuje'});
+ notifications.unshift({
+   id:Date.now(),
+   type:'urlop',
+   employeeId:id,
+   message:`${e.name} wysłał wniosek o urlop od ${fmt(leaveFrom.value)} do ${fmt(leaveTo.value)}. Oczekuje na zatwierdzenie kierownika.`,
+   created:new Date().toLocaleString('pl-PL'),
+   read:false
+ });
+ showToast('Wniosek został wysłany, a kierownik otrzymał powiadomienie');
+ renderEmployee('employeeHistory');
+}
+
+
+function openNotification(notificationId){
+ const n=notifications.find(x=>x.id===notificationId);
+ if(!n)return;
+ n.read=true;
+ const requests=leaveRequests.filter(r=>r.employeeId===n.employeeId);
+ const request=requests[requests.length-1];
+ if(request) openLeaveRequest(request.id);
+ else openEmployee(n.employeeId);
+}
+
+function openLeaveRequest(requestId){
+ const r=leaveRequests.find(x=>x.id===requestId);
+ if(!r)return;
+ const e=employees.find(x=>x.id===r.employeeId);
+ const decisionButtons=r.status==='Oczekuje'
+   ? `<button type="button" class="btn danger" onclick="rejectLeave(${r.id})">Odrzuć</button>
+      <button type="button" class="btn primary" onclick="approveLeave(${r.id})">Akceptuj</button>`
+   : `<span class="status ${statusClass(r.status)}">${r.status}</span>`;
+
+ openModal('Wniosek urlopowy',`
+   <div class="profile-data">
+     <div class="info"><span>Pracownik</span><strong>${e.name}</strong></div>
+     <div class="info"><span>Firma</span>${companyName(e.companyId)}</div>
+     <div class="info"><span>Rodzaj urlopu</span>${r.type}</div>
+     <div class="info"><span>Termin</span>${fmt(r.from)} – ${fmt(r.to)}</div>
+     <div class="info"><span>Liczba dni</span>${r.days} dni</div>
+     <div class="info"><span>Status</span><span class="status ${statusClass(r.status)}">${r.status}</span></div>
+     <div class="info"><span>Pozostało obecnie</span>${e.leaveTotal-e.leaveUsed} dni</div>
+     <div class="info"><span>Po akceptacji</span>${Math.max(0,e.leaveTotal-e.leaveUsed-r.days)} dni</div>
+   </div>
+   <footer>
+     <button type="button" class="btn" onclick="closeModal(); openEmployee(${e.id})">Karta pracownika</button>
+     ${decisionButtons}
+   </footer>`,ev=>ev.preventDefault());
+}
+
+function approveLeave(requestId){
+ const r=leaveRequests.find(x=>x.id===requestId);
+ if(!r || r.status!=='Oczekuje')return;
+ const e=employees.find(x=>x.id===r.employeeId);
+ r.status='Zaakceptowany';
+ e.leaveUsed+=r.days;
+ notifications.unshift({
+   id:Date.now(),
+   type:'decyzja',
+   employeeId:e.id,
+   message:`Wniosek urlopowy pracownika ${e.name} został zaakceptowany.`,
+   created:new Date().toLocaleString('pl-PL'),
+   read:true
+ });
+ closeModal();
+ showToast('Wniosek został zaakceptowany');
+ currentView='dashboard';
+ render();
+}
+
+function rejectLeave(requestId){
+ const r=leaveRequests.find(x=>x.id===requestId);
+ if(!r || r.status!=='Oczekuje')return;
+ const e=employees.find(x=>x.id===r.employeeId);
+ r.status='Odrzucony';
+ notifications.unshift({
+   id:Date.now(),
+   type:'decyzja',
+   employeeId:e.id,
+   message:`Wniosek urlopowy pracownika ${e.name} został odrzucony.`,
+   created:new Date().toLocaleString('pl-PL'),
+   read:true
+ });
+ closeModal();
+ showToast('Wniosek został odrzucony');
+ currentView='dashboard';
+ render();
+}
+
+function openCompanyForm(){openModal('Dodaj firmę',`
+ <div class="form-grid">
+   <div class="field"><label>Nazwa firmy</label><input id="cName" required></div>
+   <div class="field"><label>NIP</label><input id="cNip" required></div>
+   <div class="field"><label>REGON</label><input id="cRegon"></div>
+   <div class="field"><label>Osoba kontaktowa</label><input id="cContact" required></div>
+   <div class="field"><label>E-mail</label><input id="cEmail" type="email"></div>
+   <div class="field"><label>Telefon</label><input id="cPhone"></div>
+   <div class="field full"><label>Adres</label><input id="cAddress" placeholder="Ulica, kod pocztowy, miejscowość"></div>
+   <div class="field"><label>Status</label><select id="cStatus"><option>Aktywna</option><option>Wymaga uwagi</option><option>Nieaktywna</option></select></div>
+   <div class="field"><label>Opiekun księgowy</label><input id="cAccountant" placeholder="Np. Grażyna Zachwieja"></div>
+   <div class="field full"><label>Uwagi</label><textarea id="cNotes" rows="3"></textarea></div>
+ </div>
+ <footer><button class="btn" type="button" onclick="closeModal()">Anuluj</button><button class="btn primary">Zapisz firmę</button></footer>`,
+ e=>{
+   e.preventDefault();
+   companies.push({
+     id:Date.now(),
+     name:cName.value,
+     nip:cNip.value,
+     regon:cRegon.value,
+     contact:cContact.value,
+     email:cEmail.value,
+     phone:cPhone.value,
+     address:cAddress.value,
+     status:cStatus.value,
+     accountant:cAccountant.value,
+     notes:cNotes.value
+   });
+   closeModal();
+   showToast('Firma została dodana');
+   currentView='companies';
+   render();
+ })}
+
+function openEmployeeForm(companyId=''){openModal('Dodaj pracownika',`
+ <div class="form-grid">
+   <div class="field"><label>Imię i nazwisko</label><input id="eName" required></div>
+   <div class="field"><label>Firma</label><select id="eCompany">${companies.map(c=>`<option value="${c.id}" ${String(c.id)===String(companyId)?'selected':''}>${c.name}</option>`).join('')}</select></div>
+   <div class="field"><label>Stanowisko</label><input id="ePosition" required></div>
+   <div class="field"><label>Data zatrudnienia</label><input id="eStartDate" type="date"></div>
+   <div class="field"><label>E-mail</label><input id="eEmail" type="email"></div>
+   <div class="field"><label>Telefon</label><input id="ePhone"></div>
+   <div class="field"><label>PESEL</label><input id="ePesel" maxlength="11"></div>
+   <div class="field"><label>Limit urlopu</label><input id="eLeave" type="number" value="26" min="0"></div>
+   <div class="field"><label>Badania lekarskie ważne do</label><input id="eMedical" type="date" required></div>
+   <div class="field"><label>Rodzaj umowy</label><select id="eContractType"><option>Umowa o pracę</option><option>Umowa zlecenie</option><option>Umowa na okres próbny</option><option>B2B</option></select></div>
+   <div class="field"><label>Umowa ważna do</label><input id="eContractEnd" type="date"></div>
+   <div class="field"><label>Badanie BHP ważne do</label><input id="eBhp" type="date"></div>
+   <div class="field full"><label>Uwagi</label><textarea id="eNotes" rows="3" placeholder="Np. praca zmianowa, dodatkowe uprawnienia..."></textarea></div>
+ </div>
+ <footer><button class="btn" type="button" onclick="closeModal()">Anuluj</button><button class="btn primary">Zapisz pracownika</button></footer>`,
+ e=>{
+   e.preventDefault();
+   employees.push({
+     id:Date.now(),
+     companyId:Number(eCompany.value),
+     name:eName.value,
+     position:ePosition.value,
+     email:eEmail.value,
+     phone:ePhone.value,
+     pesel:ePesel.value,
+     startDate:eStartDate.value,
+     leaveTotal:Number(eLeave.value),
+     leaveUsed:0,
+     medical:eMedical.value,
+     contractType:eContractType.value,
+     contract:eContractEnd.value || 'Bezterminowa',
+     bhp:eBhp.value,
+     notes:eNotes.value
+   });
+   closeModal();
+   showToast('Pracownik został dodany wraz z badaniami i umową');
+   currentView='employees';
+   render();
+ })}
+
+function openModal(title,html,onSubmit){document.getElementById('modalTitle').textContent=title;const f=document.getElementById('modalForm');f.innerHTML=html;f.onsubmit=onSubmit;document.getElementById('modalBg').classList.add('open')}
+function closeModal(){document.getElementById('modalBg').classList.remove('open')}
+
+function bindDynamic(){}
+
+document.querySelectorAll('#adminNav [data-view]').forEach(btn=>btn.onclick=()=>{currentView=btn.dataset.view;document.querySelectorAll('#adminNav [data-view]').forEach(b=>b.classList.toggle('active',b===btn));render()})
+document.querySelectorAll('#employeeNav [data-employee-view]').forEach(btn=>btn.onclick=()=>renderEmployee(btn.dataset.employeeView))
+document.getElementById('employeeModeBtn').onclick=()=>{employeeMode=true;selectedEmployeeId=1;renderEmployee()}
+document.getElementById('adminModeBtn').onclick=()=>{employeeMode=false;currentView='dashboard';render()}
+document.getElementById('modalBg').onclick=e=>{if(e.target.id==='modalBg')closeModal()}
+document.getElementById('globalSearch').addEventListener('input',e=>{const q=e.target.value.toLowerCase();if(!q)return;const emp=employees.find(x=>x.name.toLowerCase().includes(q));const comp=companies.find(x=>x.name.toLowerCase().includes(q));if(emp)openEmployee(emp.id);else if(comp)openCompany(comp.id)})
+render();
+</script>
+</body>
+</html>
