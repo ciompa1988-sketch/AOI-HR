@@ -187,6 +187,1654 @@ tbody tr:hover td{background:#fafcff}
   background:#dcfce7;
   color:#166534;
 }
+
+.calendar-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.calendar-weekdays,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.calendar-weekdays div{text-align:center;font-weight:800;color:var(--muted);padding:8px}
+.calendar-day{min-height:92px;border:1px solid var(--border);border-radius:14px;padding:10px;text-align:left;display:flex;flex-direction:column;gap:8px;cursor:pointer;background:white}
+.calendar-day span{font-size:12px;line-height:1.25}
+.calendar-day.empty-day{border:none;background:transparent;cursor:default}
+.leave-day{background:#dcfce7!important}
+.sick-day{background:#fef3c7!important}
+.work-day{background:#ffffff!important}
+.holiday-day{background:#dbeafe!important}
+.weekend-day{background:#f3f4f6!important}
+.calendar-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
+.calendar-legend span{display:flex;align-items:center;gap:8px}
+.legend-box{width:18px;height:18px;border-radius:5px;border:1px solid var(--border);display:inline-block}
+.inbox-filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.inbox-filter-card{border:1px solid var(--border);border-radius:16px;padding:16px;background:white;text-align:left;cursor:pointer}
+.inbox-filter-card strong{display:block;font-size:28px;margin-top:8px}
+.inbox-filter-card.active{outline:3px solid rgba(37,99,235,.15);border-color:#2563eb}
+@media(max-width:800px){
+ .calendar-day{min-height:68px;padding:8px}
+ .calendar-day span{display:none}
+ .inbox-filters{grid-template-columns:repeat(2,1fr)}
+}
+
+
+.inbox-layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+.inbox-thread-list{padding:10px 20px}
+.inbox-thread{width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--border);padding:17px 8px;cursor:pointer}
+.inbox-thread.unread{background:rgba(37,99,235,.06)}
+.quick-contacts{position:sticky;top:18px;max-height:72vh;overflow:auto}
+.contact-section h4{margin-bottom:9px}
+.contact-list{display:flex;flex-direction:column;gap:7px}
+.contact-item{display:flex;align-items:center;gap:10px;width:100%;padding:10px;border:1px solid var(--border);border-radius:12px;background:white;text-align:left;cursor:pointer}
+.contact-item:hover{background:var(--bg)}
+.contact-item span:last-child{display:flex;flex-direction:column;min-width:0}
+.contact-item small{color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-avatar{width:36px;height:36px;border-radius:10px;background:rgba(37,99,235,.10);display:grid;place-items:center;font-weight:800;flex:0 0 auto}
+@media(max-width:1050px){.inbox-layout{grid-template-columns:1fr}.quick-contacts{position:static;max-height:none}}
+
+
+.row-actions{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.icon-btn{
+  position:relative;
+  width:36px;
+  height:36px;
+  min-width:36px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  display:inline-grid;
+  place-items:center;
+  padding:0;
+  font-size:16px;
+  line-height:1;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.icon-btn:hover{
+  transform:translateY(-1px);
+  background:var(--bg);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+.icon-btn:focus-visible{
+  outline:3px solid rgba(37,99,235,.22);
+  outline-offset:2px;
+}
+.icon-btn::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + 8px);
+  transform:translateX(-50%);
+  background:#111827;
+  color:#fff;
+  padding:6px 8px;
+  border-radius:7px;
+  font-size:12px;
+  font-weight:700;
+  line-height:1;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .15s ease, transform .15s ease;
+  z-index:50;
+}
+.icon-btn::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + 3px);
+  transform:translateX(-50%);
+  border:5px solid transparent;
+  border-top-color:#111827;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .15s ease;
+  z-index:50;
+}
+.icon-btn:hover::after,
+.icon-btn:focus-visible::after{
+  opacity:1;
+  transform:translateX(-50%) translateY(-2px);
+}
+.icon-btn:hover::before,
+.icon-btn:focus-visible::before{
+  opacity:1;
+}
+.danger-icon{
+  border-color:#fecaca;
+  background:#fff7f7;
+}
+.danger-icon:hover{
+  background:#fee2e2;
+}
+.medical-icon{
+  border-color:#bae6fd;
+  background:#f0f9ff;
+}
+.medical-icon:hover{
+  background:#e0f2fe;
+}
+.warning-icon{
+  border-color:#fde68a;
+  background:#fffbeb;
+}
+.warning-icon:hover{
+  background:#fef3c7;
+}
+.mobile-actions{
+  margin-top:10px;
+}
+@media(max-width:800px){
+  .icon-btn{
+    width:40px;
+    height:40px;
+    min-width:40px;
+  }
+}
+
+
+.employee-home-tabs{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:12px;
+  margin:18px 0;
+}
+.employee-home-card{
+  min-height:126px;
+  padding:16px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:7px;
+  text-align:left;
+  cursor:pointer;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+.employee-home-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(15,23,42,.08);
+}
+.employee-home-card.active{
+  border-color:#2563eb;
+  box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+.employee-home-card strong{
+  font-size:17px;
+}
+.employee-home-card small{
+  color:var(--muted);
+  line-height:1.35;
+}
+.employee-home-icon{
+  font-size:23px;
+}
+.employee-home-content{
+  min-height:310px;
+}
+.section-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.section-heading p{
+  color:var(--muted);
+  margin-top:5px;
+}
+.employee-summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.summary-box{
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:var(--bg);
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.summary-box span{
+  color:var(--muted);
+  font-size:13px;
+}
+.summary-box strong{
+  font-size:20px;
+}
+.compact-list{
+  margin-top:18px;
+  border-top:1px solid var(--border);
+}
+.compact-row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:center;
+  padding:14px 2px;
+  border-bottom:1px solid var(--border);
+}
+.compact-row div:first-child{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.compact-row small{
+  color:var(--muted);
+}
+@media(max-width:1050px){
+  .employee-home-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:700px){
+  .employee-home-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .employee-summary-grid{grid-template-columns:1fr}
+  .compact-row{align-items:flex-start;flex-direction:column}
+}
+
+
+.absence-category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.absence-category{border:1px solid var(--border);border-radius:999px;background:#fff;padding:9px 13px;font-weight:700;cursor:pointer}
+.absence-category.active{background:#eef2ff;border-color:#6366f1;color:#4338ca}
+.employee-summary-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+
+
+.premium-inbox-shell{
+ min-height:calc(100vh - 130px);
+ padding:28px;
+ border-radius:26px;
+ background:
+  radial-gradient(circle at 100% 0%,rgba(99,102,241,.16),transparent 34%),
+  radial-gradient(circle at 0% 100%,rgba(14,165,233,.10),transparent 30%),
+  linear-gradient(145deg,#f8faff 0%,#eef3fb 100%);
+}
+.premium-inbox-top{
+ display:flex;
+ justify-content:space-between;
+ gap:24px;
+ align-items:flex-start;
+ margin-bottom:22px;
+}
+.premium-inbox-top h2{
+ margin:4px 0 6px;
+ font-size:38px;
+ letter-spacing:-1.2px;
+}
+.premium-inbox-top p{color:#64748b}
+.premium-eyebrow{
+ font-size:12px;
+ font-weight:900;
+ letter-spacing:1.8px;
+ color:#4f46e5;
+}
+.premium-new-chat{
+ border:0;
+ border-radius:15px;
+ padding:13px 19px;
+ color:#fff;
+ font-weight:850;
+ background:linear-gradient(135deg,#4f46e5,#2563eb);
+ box-shadow:0 14px 34px rgba(79,70,229,.27);
+ cursor:pointer;
+}
+.premium-filter-grid{
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:14px;
+ margin-bottom:18px;
+}
+.premium-filter-card{
+ border:1px solid rgba(203,213,225,.82);
+ border-radius:18px;
+ padding:15px 16px;
+ background:rgba(255,255,255,.86);
+ backdrop-filter:blur(16px);
+ display:grid;
+ grid-template-columns:auto 1fr auto;
+ align-items:center;
+ gap:10px;
+ cursor:pointer;
+ color:#334155;
+}
+.premium-filter-card strong{
+ font-size:24px;
+ color:#0f172a;
+}
+.premium-filter-card.active{
+ border-color:#6366f1;
+ box-shadow:0 0 0 3px rgba(99,102,241,.13),0 12px 32px rgba(15,23,42,.08);
+ background:#fff;
+}
+.premium-filter-icon{font-size:20px}
+.premium-messenger-layout{
+ display:grid;
+ grid-template-columns:260px 330px minmax(0,1fr);
+ min-height:670px;
+ border:1px solid rgba(203,213,225,.9);
+ border-radius:24px;
+ overflow:hidden;
+ background:#fff;
+ box-shadow:0 25px 70px rgba(15,23,42,.12);
+}
+.premium-contacts-column,
+.premium-topics-column{
+ border-right:1px solid #e5eaf2;
+ background:#f8fafc;
+ overflow:auto;
+ max-height:75vh;
+}
+.premium-topics-column{background:#fff}
+.premium-search-box{
+ margin:16px;
+ border:1px solid #dbe3ef;
+ border-radius:13px;
+ background:#fff;
+ padding:10px 12px;
+ display:flex;
+ align-items:center;
+ gap:8px;
+}
+.premium-search-box input{
+ border:0;
+ outline:0;
+ width:100%;
+ background:transparent;
+}
+.premium-section-label{
+ padding:8px 18px;
+ font-size:11px;
+ letter-spacing:1.4px;
+ font-weight:900;
+ color:#94a3b8;
+}
+.premium-section-label.second{margin-top:14px}
+.premium-contact-list{
+ display:flex;
+ flex-direction:column;
+ gap:4px;
+ padding:0 10px;
+}
+.premium-contact{
+ width:100%;
+ border:0;
+ border-radius:14px;
+ background:transparent;
+ padding:10px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ text-align:left;
+ cursor:pointer;
+}
+.premium-contact:hover{background:#eef2ff}
+.premium-contact.active{
+ background:linear-gradient(135deg,#eef2ff,#e0e7ff);
+ box-shadow:inset 0 0 0 1px #c7d2fe;
+}
+.premium-avatar{
+ width:42px;
+ height:42px;
+ border-radius:14px;
+ display:grid;
+ place-items:center;
+ flex:0 0 auto;
+ font-weight:900;
+ color:#3730a3;
+ background:linear-gradient(145deg,#e0e7ff,#c7d2fe);
+}
+.premium-avatar.company{
+ color:#075985;
+ background:linear-gradient(145deg,#e0f2fe,#bae6fd);
+}
+.premium-avatar.large{width:48px;height:48px}
+.premium-contact-copy{
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+ gap:3px;
+ flex:1;
+}
+.premium-contact-copy strong,
+.premium-contact-copy small{
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+.premium-contact-copy small{color:#64748b}
+.premium-unread{
+ min-width:22px;
+ height:22px;
+ padding:0 6px;
+ border-radius:999px;
+ display:grid;
+ place-items:center;
+ color:#fff;
+ background:#4f46e5;
+ font-size:11px;
+ font-weight:900;
+}
+.premium-contact-header{
+ padding:18px;
+ display:flex;
+ gap:12px;
+ align-items:center;
+ border-bottom:1px solid #e5eaf2;
+}
+.premium-contact-header span:last-child{
+ display:flex;
+ flex-direction:column;
+ gap:3px;
+ min-width:0;
+}
+.premium-contact-header small{color:#64748b}
+.premium-topics-heading{
+ padding:14px 16px 9px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ color:#94a3b8;
+ font-size:11px;
+ letter-spacing:1.3px;
+ font-weight:900;
+}
+.premium-topics-heading button{
+ width:30px;
+ height:30px;
+ border:1px solid #dbe3ef;
+ border-radius:9px;
+ background:#fff;
+ cursor:pointer;
+}
+.premium-topic-list{
+ padding:8px;
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+}
+.premium-topic-card{
+ width:100%;
+ border:1px solid #e2e8f0;
+ border-radius:16px;
+ padding:13px;
+ background:#fff;
+ text-align:left;
+ cursor:pointer;
+ transition:.16s ease;
+}
+.premium-topic-card:hover{
+ transform:translateY(-1px);
+ box-shadow:0 10px 25px rgba(15,23,42,.07);
+}
+.premium-topic-card.active{
+ border-color:#6366f1;
+ background:linear-gradient(145deg,#f5f3ff,#eef2ff);
+ box-shadow:0 0 0 3px rgba(99,102,241,.10);
+}
+.premium-topic-card.unread{border-left:4px solid #4f46e5}
+.premium-topic-top{
+ display:flex;
+ justify-content:space-between;
+ gap:8px;
+ align-items:flex-start;
+}
+.premium-topic-category{
+ display:inline-block;
+ margin-top:7px;
+ color:#4f46e5;
+ font-size:11px;
+ font-weight:850;
+}
+.premium-topic-card p{
+ margin:8px 0;
+ color:#475569;
+ font-size:13px;
+ line-height:1.4;
+}
+.premium-topic-card small{color:#94a3b8}
+.premium-empty-topic,
+.premium-no-thread{
+ min-height:360px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ color:#64748b;
+ padding:30px;
+}
+.premium-empty-topic span,
+.premium-no-thread-icon{font-size:42px}
+.premium-chat-column{
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+ background:
+  radial-gradient(circle at 25% 10%,rgba(99,102,241,.06),transparent 24%),
+  #f8fafc;
+}
+.premium-chat-header{
+ padding:18px 22px;
+ display:flex;
+ justify-content:space-between;
+ gap:14px;
+ align-items:flex-start;
+ border-bottom:1px solid #e2e8f0;
+ background:rgba(255,255,255,.94);
+ backdrop-filter:blur(14px);
+}
+.premium-chat-header h3{
+ margin:4px 0;
+ font-size:22px;
+}
+.premium-chat-header p{color:#64748b}
+.premium-chat-category{
+ color:#4f46e5;
+ font-size:11px;
+ font-weight:900;
+ letter-spacing:1px;
+}
+.premium-chat-actions{
+ display:flex;
+ align-items:center;
+ gap:8px;
+}
+.premium-action{
+ border:1px solid #dbe3ef;
+ border-radius:11px;
+ padding:9px 12px;
+ background:#fff;
+ font-weight:800;
+ cursor:pointer;
+}
+.premium-round-action{
+ width:38px;
+ height:38px;
+ border:1px solid #dbe3ef;
+ border-radius:11px;
+ background:#fff;
+ cursor:pointer;
+}
+.premium-chat-body{
+ flex:1;
+ min-height:0;
+ display:flex;
+ flex-direction:column;
+}
+.premium-messages{
+ flex:1;
+ max-height:500px;
+ overflow:auto;
+ padding:24px;
+}
+.premium-message-row{
+ display:flex;
+ margin:12px 0;
+}
+.premium-message-row.mine{justify-content:flex-end}
+.premium-message-row.theirs{justify-content:flex-start}
+.premium-message-bubble{
+ max-width:75%;
+ border-radius:18px 18px 18px 6px;
+ padding:13px 15px;
+ background:#fff;
+ box-shadow:0 8px 22px rgba(15,23,42,.07);
+}
+.premium-message-row.mine .premium-message-bubble{
+ color:#fff;
+ border-radius:18px 18px 6px 18px;
+ background:linear-gradient(135deg,#4f46e5,#2563eb);
+}
+.premium-message-bubble>strong{
+ display:block;
+ margin-bottom:6px;
+}
+.premium-message-text{
+ white-space:pre-wrap;
+ line-height:1.48;
+}
+.premium-message-bubble>small{
+ display:block;
+ margin-top:8px;
+ opacity:.72;
+ text-align:right;
+}
+.premium-file-attachment,
+.premium-file-summary{
+ margin-top:10px;
+ padding:10px;
+ border-radius:13px;
+ display:flex;
+ gap:10px;
+ align-items:center;
+ background:rgba(255,255,255,.14);
+ border:1px solid rgba(255,255,255,.24);
+}
+.premium-message-row.theirs .premium-file-attachment{
+ background:#f1f5f9;
+ border-color:#e2e8f0;
+}
+.premium-file-attachment span:last-child,
+.premium-file-summary span:last-child{
+ display:flex;
+ flex-direction:column;
+ gap:3px;
+ min-width:0;
+}
+.premium-image-attachment{
+ margin-top:10px;
+ border:0;
+ border-radius:14px;
+ overflow:hidden;
+ padding:0;
+ background:transparent;
+ text-align:left;
+ cursor:pointer;
+}
+.premium-image-attachment img{
+ display:block;
+ width:100%;
+ max-width:300px;
+ max-height:230px;
+ object-fit:cover;
+}
+.premium-image-attachment span{
+ display:block;
+ padding:8px 2px 0;
+ font-size:12px;
+}
+.premium-closed-note{
+ margin:0 22px 14px;
+ padding:12px;
+ border-radius:12px;
+ color:#92400e;
+ background:#fffbeb;
+ border:1px solid #fde68a;
+}
+.premium-composer{
+ margin:0 18px 18px;
+ padding:10px;
+ border:1px solid #dbe3ef;
+ border-radius:16px;
+ background:#fff;
+ display:flex;
+ align-items:flex-end;
+ gap:8px;
+ box-shadow:0 12px 30px rgba(15,23,42,.07);
+}
+.premium-composer.disabled{opacity:.62}
+.premium-composer textarea{
+ flex:1;
+ min-height:42px;
+ max-height:120px;
+ resize:none;
+ border:0;
+ outline:0;
+ padding:10px;
+ background:transparent;
+}
+.premium-attach-button,
+.premium-send-button{
+ width:42px;
+ height:42px;
+ border:0;
+ border-radius:12px;
+ cursor:pointer;
+}
+.premium-attach-button{
+ background:#f1f5f9;
+}
+.premium-send-button{
+ color:#fff;
+ background:linear-gradient(135deg,#4f46e5,#2563eb);
+ box-shadow:0 8px 18px rgba(79,70,229,.25);
+}
+.premium-attachment-preview{
+ padding:0 18px 10px;
+}
+.premium-pending-file{
+ width:100%;
+ border:1px solid #dbe3ef;
+ border-radius:13px;
+ padding:10px;
+ display:flex;
+ gap:10px;
+ align-items:center;
+ background:#fff;
+}
+.premium-pending-file span:nth-child(2){
+ flex:1;
+ display:flex;
+ flex-direction:column;
+}
+.premium-pending-file button{
+ border:0;
+ background:transparent;
+ font-size:22px;
+ cursor:pointer;
+}
+.premium-thread-files{
+ margin:0 18px 18px;
+ padding:14px;
+ border-radius:16px;
+ background:rgba(255,255,255,.82);
+ border:1px solid #e2e8f0;
+}
+.premium-thread-files>span{
+ display:block;
+ margin-bottom:9px;
+ color:#94a3b8;
+ font-size:10px;
+ letter-spacing:1.2px;
+ font-weight:900;
+}
+.premium-thread-files>div{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+}
+.premium-file-summary{
+ margin:0;
+ background:#f8fafc;
+ border-color:#e2e8f0;
+}
+.premium-new-thread-recipient{
+ display:flex;
+ gap:12px;
+ align-items:center;
+ padding:12px;
+ margin-bottom:16px;
+ border-radius:15px;
+ background:#f8fafc;
+ border:1px solid #e2e8f0;
+}
+.premium-new-thread-recipient span:last-child{
+ display:flex;
+ flex-direction:column;
+ gap:3px;
+}
+@media(max-width:1200px){
+ .premium-messenger-layout{grid-template-columns:230px 300px minmax(0,1fr)}
+}
+@media(max-width:980px){
+ .premium-filter-grid{grid-template-columns:repeat(2,1fr)}
+ .premium-messenger-layout{grid-template-columns:220px minmax(0,1fr)}
+ .premium-topics-column{display:none}
+}
+@media(max-width:720px){
+ .premium-inbox-shell{padding:14px}
+ .premium-inbox-top{flex-direction:column}
+ .premium-messenger-layout{grid-template-columns:1fr}
+ .premium-contacts-column{display:none}
+ .premium-message-bubble{max-width:90%}
+}
+
+
+:root{
+ --premium-navy:#0f172a;
+ --premium-indigo:#4f46e5;
+ --premium-blue:#2563eb;
+ --premium-cyan:#0ea5e9;
+ --premium-soft:#f4f7fb;
+ --premium-card:#ffffff;
+ --premium-border:#dce4ef;
+ --premium-muted:#64748b;
+}
+body{
+ background:
+  radial-gradient(circle at 88% 8%,rgba(79,70,229,.12),transparent 24%),
+  radial-gradient(circle at 15% 92%,rgba(14,165,233,.10),transparent 26%),
+  linear-gradient(145deg,#eef3f9 0%,#f8fafc 48%,#edf3fa 100%);
+ color:var(--premium-navy);
+}
+.app{
+ background:transparent;
+}
+.sidebar{
+ background:
+  linear-gradient(180deg,rgba(255,255,255,.98),rgba(248,250,252,.97));
+ border-right:1px solid rgba(203,213,225,.75);
+ box-shadow:12px 0 38px rgba(15,23,42,.06);
+ backdrop-filter:blur(18px);
+}
+.brand{
+ border-bottom:1px solid rgba(203,213,225,.7);
+}
+.brand h1{
+ color:#111827;
+ letter-spacing:-.5px;
+}
+.brand p{
+ color:#64748b;
+ letter-spacing:1.5px;
+}
+.nav button{
+ margin:4px 10px;
+ width:calc(100% - 20px);
+ border-radius:13px;
+ color:#53627a;
+ transition:background .16s ease,color .16s ease,transform .16s ease,box-shadow .16s ease;
+}
+.nav button:hover{
+ background:#eef2ff;
+ color:#3730a3;
+ transform:translateX(2px);
+}
+.nav button.active{
+ color:#fff;
+ background:linear-gradient(135deg,#4f46e5,#2563eb);
+ box-shadow:0 12px 26px rgba(79,70,229,.22);
+}
+.nav .employee-switch{
+ background:#fff;
+ border:1px solid #dce4ef;
+ color:#334155;
+ box-shadow:none;
+}
+.nav .employee-switch:hover{
+ border-color:#a5b4fc;
+ background:#f5f3ff;
+ color:#4338ca;
+}
+.main{
+ background:transparent;
+}
+.topbar{
+ margin:14px 18px 0;
+ border:1px solid rgba(203,213,225,.75);
+ border-radius:18px;
+ background:rgba(255,255,255,.82);
+ box-shadow:0 12px 30px rgba(15,23,42,.06);
+ backdrop-filter:blur(18px);
+}
+.search input{
+ border:1px solid #dbe3ef;
+ border-radius:13px;
+ background:#f8fafc;
+}
+.avatar{
+ background:linear-gradient(135deg,#4f46e5,#2563eb);
+ box-shadow:0 10px 22px rgba(79,70,229,.24);
+}
+.content{
+ padding-top:24px;
+}
+.page-header h2{
+ font-size:36px;
+ letter-spacing:-1px;
+}
+.page-header p{
+ color:#64748b;
+}
+.grid4{
+ grid-template-columns:repeat(5,minmax(0,1fr));
+ gap:15px;
+}
+.card,
+.panel,
+.leave-year,
+.leave-balance,
+.employee-home-card,
+.info,
+.summary-box{
+ border-color:rgba(203,213,225,.82);
+ background:rgba(255,255,255,.92);
+ box-shadow:0 14px 36px rgba(15,23,42,.06);
+}
+.card{
+ border-radius:20px;
+ padding:19px;
+ position:relative;
+ overflow:hidden;
+}
+.card::after{
+ content:"";
+ position:absolute;
+ width:90px;
+ height:90px;
+ right:-38px;
+ top:-38px;
+ border-radius:50%;
+ background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(14,165,233,.08));
+}
+.card-clickable:hover{
+ transform:translateY(-3px);
+ border-color:#a5b4fc;
+ box-shadow:0 20px 42px rgba(15,23,42,.10);
+}
+.card small{
+ color:#64748b;
+ font-weight:800;
+}
+.card strong{
+ color:#111827;
+}
+.premium-message-dashboard-card{
+ background:
+  radial-gradient(circle at 100% 0%,rgba(255,255,255,.26),transparent 35%),
+  linear-gradient(135deg,#312e81,#4f46e5 55%,#2563eb);
+}
+.premium-message-dashboard-card small,
+.premium-message-dashboard-card strong,
+.premium-message-dashboard-card .card-hint{
+ color:#fff;
+}
+.premium-message-dashboard-card .badge{
+ background:rgba(255,255,255,.18);
+ color:#fff;
+ border-color:rgba(255,255,255,.28);
+}
+.panel{
+ border-radius:22px;
+}
+.btn{
+ border-radius:12px;
+ font-weight:800;
+ transition:transform .15s ease,box-shadow .15s ease;
+}
+.btn:hover{
+ transform:translateY(-1px);
+ box-shadow:0 8px 20px rgba(15,23,42,.08);
+}
+.btn.primary{
+ border:0;
+ color:#fff;
+ background:linear-gradient(135deg,#4f46e5,#2563eb);
+ box-shadow:0 10px 24px rgba(79,70,229,.22);
+}
+.btn.danger{
+ background:#fff5f5;
+ border-color:#fecaca;
+ color:#b91c1c;
+}
+table{
+ border-collapse:separate;
+ border-spacing:0;
+}
+thead th{
+ color:#64748b;
+ letter-spacing:.5px;
+}
+tbody tr{
+ transition:background .15s ease;
+}
+tbody tr:hover{
+ background:#f8faff;
+}
+.status,
+.badge{
+ border-radius:999px;
+ font-weight:850;
+}
+.modal-bg{
+ backdrop-filter:blur(8px);
+ background:rgba(15,23,42,.48);
+}
+.modal{
+ border:1px solid rgba(255,255,255,.55);
+ border-radius:24px;
+ box-shadow:0 32px 90px rgba(15,23,42,.28);
+}
+.modal header{
+ background:linear-gradient(180deg,#fff,#fbfdff);
+}
+.employee-home-card.active{
+ background:linear-gradient(145deg,#f5f3ff,#eef2ff);
+ border-color:#818cf8;
+}
+.calendar-day{
+ box-shadow:0 7px 18px rgba(15,23,42,.04);
+}
+.toast{
+ border-radius:14px;
+ box-shadow:0 18px 44px rgba(15,23,42,.22);
+}
+.premium-topics-column{
+ max-width:285px;
+}
+.premium-topic-list{
+ gap:5px;
+ padding:7px;
+}
+.premium-topic-card{
+ min-height:auto;
+ padding:9px 10px;
+ border-radius:12px;
+}
+.premium-topic-top{
+ align-items:center;
+}
+.premium-topic-top strong{
+ font-size:13px;
+ line-height:1.25;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+.premium-topic-card .status{
+ padding:4px 7px;
+ font-size:9px;
+ white-space:nowrap;
+}
+.premium-topic-card>small{
+ display:block;
+ margin-top:5px;
+ font-size:10px;
+}
+.premium-messenger-layout{
+ grid-template-columns:250px 285px minmax(0,1fr);
+}
+@media(max-width:1350px){
+ .grid4{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:900px){
+ .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .premium-messenger-layout{grid-template-columns:220px minmax(0,1fr)}
+}
+@media(max-width:620px){
+ .grid4{grid-template-columns:1fr}
+ .page-header h2{font-size:30px}
+}
+
+
+.premium-topic-person{
+ display:flex;
+ flex-direction:column;
+ gap:2px;
+ margin-bottom:7px;
+}
+.premium-topic-person strong{
+ font-size:14px;
+ line-height:1.25;
+ color:#111827;
+ font-weight:900;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+.premium-topic-person span{
+ font-size:10px;
+ color:#64748b;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+.premium-topic-subject{
+ font-size:12px;
+ font-weight:750;
+ color:#334155;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ min-width:0;
+}
+.premium-topic-card.unread .premium-topic-person strong{
+ color:#3730a3;
+}
+.premium-topic-card.unread .premium-topic-subject{
+ font-weight:900;
+ color:#111827;
+}
+
+
+.filter-company-layout{
+ grid-template-columns:310px 285px minmax(0,1fr);
+}
+.filtered-contact-column{
+ background:linear-gradient(180deg,#f8fafc,#f3f6fb);
+}
+.company-filter-header{
+ padding:3px 16px 8px;
+ display:flex;
+ align-items:flex-end;
+ justify-content:space-between;
+ gap:10px;
+}
+.company-filter-header>div{
+ display:flex;
+ flex-direction:column;
+ gap:2px;
+}
+.company-filter-header strong{
+ font-size:13px;
+}
+.company-filter-header small{
+ color:#94a3b8;
+ font-size:10px;
+}
+.clear-company-filter{
+ border:0;
+ background:transparent;
+ color:#4f46e5;
+ font-size:11px;
+ font-weight:850;
+ cursor:pointer;
+}
+.company-filter-list{
+ padding:0 10px 10px;
+ border-bottom:1px solid #e2e8f0;
+}
+.company-filter-all{
+ min-height:38px;
+ padding:7px 9px;
+ border-radius:11px;
+ display:flex;
+ align-items:center;
+ gap:9px;
+ color:#334155;
+ font-size:12px;
+ font-weight:850;
+ cursor:pointer;
+}
+.company-filter-all:hover{
+ background:#fff;
+}
+.company-filter-all input,
+.company-filter-checkbox input{
+ width:16px;
+ height:16px;
+ accent-color:#4f46e5;
+ cursor:pointer;
+}
+.company-filter-row{
+ display:grid;
+ grid-template-columns:28px minmax(0,1fr);
+ gap:4px;
+ align-items:center;
+ margin-top:3px;
+}
+.company-filter-checkbox{
+ width:28px;
+ height:42px;
+ display:grid;
+ place-items:center;
+ cursor:pointer;
+}
+.company-boss-link{
+ width:100%;
+ min-width:0;
+ border:1px solid transparent;
+ border-radius:12px;
+ background:transparent;
+ padding:6px 8px;
+ display:flex;
+ gap:8px;
+ align-items:center;
+ text-align:left;
+ cursor:pointer;
+}
+.company-boss-link:hover{
+ background:#fff;
+ border-color:#e2e8f0;
+}
+.company-boss-link.active{
+ background:linear-gradient(135deg,#fffbeb,#fef3c7);
+ border-color:#fcd34d;
+}
+.company-filter-avatar{
+ width:32px;
+ height:32px;
+ border-radius:10px;
+ display:grid;
+ place-items:center;
+ flex:0 0 auto;
+ color:#075985;
+ background:linear-gradient(145deg,#e0f2fe,#bae6fd);
+ font-size:10px;
+ font-weight:900;
+}
+.company-filter-copy{
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+ gap:2px;
+ flex:1;
+}
+.company-filter-copy strong,
+.company-filter-copy small{
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+.company-filter-copy strong{
+ font-size:11px;
+ color:#1e293b;
+}
+.company-filter-copy small{
+ color:#92400e;
+ font-size:9px;
+}
+.employee-list-heading{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+}
+.employee-list-heading span{
+ min-width:22px;
+ height:20px;
+ border-radius:999px;
+ display:grid;
+ place-items:center;
+ background:#e2e8f0;
+ color:#475569;
+ font-size:10px;
+}
+.filtered-employees-list{
+ padding-bottom:16px;
+}
+.filtered-employees-list .premium-contact{
+ padding:8px;
+}
+.filtered-employees-list .premium-avatar{
+ width:34px;
+ height:34px;
+ border-radius:11px;
+ font-size:11px;
+}
+.filtered-employees-list .premium-contact-copy strong{
+ font-size:12px;
+}
+.filtered-employees-list .premium-contact-copy small{
+ font-size:10px;
+}
+.filtered-empty{
+ margin:8px;
+ padding:18px 8px;
+ font-size:11px;
+}
+@media(max-width:1100px){
+ .filter-company-layout{
+  grid-template-columns:280px 260px minmax(0,1fr);
+ }
+}
+@media(max-width:900px){
+ .filter-company-layout{
+  grid-template-columns:280px minmax(0,1fr);
+ }
+ .premium-topics-column{display:none}
+}
+
+
+.nav button.nav-alert{
+ color:#b91c1c;
+ font-weight:900;
+ background:linear-gradient(135deg,#fff1f2,#fee2e2);
+ border:1px solid #fecaca;
+ animation:bhpNavPulse 1.8s ease-in-out infinite;
+}
+.nav button.nav-alert.active{
+ color:#fff;
+ background:linear-gradient(135deg,#b91c1c,#dc2626);
+ border-color:#dc2626;
+}
+@keyframes bhpNavPulse{
+ 0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}
+ 50%{box-shadow:0 0 0 5px rgba(220,38,38,.12)}
+}
+.bhp-dashboard-card.has-bhp-problems{
+ border-color:#fecaca;
+ background:linear-gradient(145deg,#fff,#fff1f2);
+}
+.bhp-dashboard-card.has-bhp-problems strong,
+.bhp-dashboard-card.has-bhp-problems small{
+ color:#b91c1c;
+}
+.bhp-problem-summary{
+ min-width:180px;
+ padding:13px 18px;
+ border-radius:16px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:18px;
+}
+.bhp-problem-summary.has-problems{
+ color:#fff;
+ background:linear-gradient(135deg,#991b1b,#dc2626);
+ box-shadow:0 14px 30px rgba(185,28,28,.22);
+ animation:bhpCounterPulse 1.8s ease-in-out infinite;
+}
+.bhp-problem-summary.all-good{
+ color:#065f46;
+ background:#d1fae5;
+}
+.bhp-problem-summary span{
+ font-size:12px;
+ font-weight:800;
+}
+.bhp-problem-summary strong{
+ font-size:28px;
+}
+.bhp-status-strip{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin:-4px 0 18px;
+}
+.bhp-name-alert{
+ color:#b91c1c!important;
+ font-weight:950;
+}
+.bhp-problem-row{
+ background:#fffafa;
+}
+@keyframes bhpCounterPulse{
+ 0%,100%{transform:scale(1)}
+ 50%{transform:scale(1.025)}
+}
+
+
+.archive-btn{
+ color:#92400e;
+ background:#fffbeb;
+ border-color:#fcd34d;
+}
+.archive-btn:hover{
+ background:#fef3c7;
+ border-color:#f59e0b;
+}
+.archive-toolbar{
+ display:flex;
+ align-items:center;
+ justify-content:flex-end;
+ gap:10px;
+ flex-wrap:wrap;
+}
+.archive-selected-count{
+ font-weight:850;
+ color:#334155;
+}
+.archive-selected-count.muted{
+ color:#94a3b8;
+ font-weight:700;
+}
+.archive-trash-button{
+ min-height:42px;
+ border:1px solid #e2e8f0;
+ border-radius:12px;
+ padding:0 14px;
+ display:flex;
+ align-items:center;
+ gap:8px;
+ color:#94a3b8;
+ background:#f8fafc;
+ font-weight:850;
+ cursor:not-allowed;
+}
+.archive-trash-button.enabled{
+ color:#b91c1c;
+ border-color:#fecaca;
+ background:#fff1f2;
+ cursor:pointer;
+}
+.archive-trash-button.enabled:hover{
+ background:#fee2e2;
+ border-color:#f87171;
+}
+.archive-check-column{
+ width:72px;
+ text-align:center;
+}
+.archive-checkbox{
+ width:19px;
+ height:19px;
+ accent-color:#dc2626;
+ cursor:pointer;
+}
+.archive-row-selected{
+ background:#fff1f2!important;
+}
+.archive-note{
+ margin-top:4px;
+ color:#64748b;
+ font-size:11px;
+}
+.archived-status{
+ color:#475569;
+ background:#e2e8f0;
+}
+.restore-btn{
+ color:#065f46;
+ background:#ecfdf5;
+ border-color:#a7f3d0;
+}
+.archive-safety-note{
+ margin-top:18px;
+ padding:16px 18px;
+ border:1px solid #fde68a;
+ border-radius:16px;
+ background:#fffbeb;
+ color:#78350f;
+}
+.archive-safety-note p{
+ margin-top:6px;
+ line-height:1.55;
+ color:#92400e;
+}
+.permanent-delete-warning{
+ padding:16px;
+ border:1px solid #fecaca;
+ border-radius:14px;
+ color:#991b1b;
+ background:#fff1f2;
+}
+.permanent-delete-warning strong{
+ font-size:17px;
+}
+.permanent-delete-warning p{
+ margin-top:8px;
+ line-height:1.5;
+}
+
+
+.dashboard-attention-banner{
+ margin-bottom:22px;
+ padding:20px 24px;
+ border-radius:22px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
+ border:1px solid #dbe3ef;
+ background:linear-gradient(135deg,#ffffff,#f8fafc);
+ box-shadow:0 16px 40px rgba(15,23,42,.07);
+}
+.dashboard-attention-banner.has-actions{
+ border-color:#fecaca;
+ background:
+  radial-gradient(circle at 95% 10%,rgba(220,38,38,.12),transparent 24%),
+  linear-gradient(135deg,#fff,#fff7f7);
+}
+.dashboard-attention-banner.has-actions h2{
+ color:#991b1b;
+}
+.dashboard-attention-banner.all-clear{
+ border-color:#a7f3d0;
+ background:linear-gradient(135deg,#fff,#ecfdf5);
+}
+.dashboard-attention-banner.all-clear h2{
+ color:#065f46;
+}
+.dashboard-attention-banner h2{
+ margin:3px 0 4px;
+ font-size:28px;
+ letter-spacing:-.7px;
+}
+.dashboard-attention-banner p{
+ color:#64748b;
+}
+.attention-total{
+ min-width:74px;
+ height:74px;
+ border-radius:22px;
+ display:grid;
+ place-items:center;
+ font-size:30px;
+ font-weight:950;
+ color:#fff;
+ background:linear-gradient(135deg,#991b1b,#ef4444);
+ box-shadow:0 16px 34px rgba(220,38,38,.24);
+}
+.dashboard-attention-banner.all-clear .attention-total{
+ background:linear-gradient(135deg,#047857,#10b981);
+ box-shadow:0 16px 34px rgba(16,185,129,.20);
+}
+.dashboard-alert-critical{
+ border-color:#fca5a5!important;
+ background:
+  radial-gradient(circle at 100% 0%,rgba(220,38,38,.13),transparent 36%),
+  linear-gradient(145deg,#fff,#fff5f5)!important;
+ box-shadow:0 18px 42px rgba(185,28,28,.12)!important;
+ animation:criticalCardPulse 2.1s ease-in-out infinite;
+}
+.dashboard-alert-critical small,
+.dashboard-alert-critical strong{
+ color:#b91c1c!important;
+}
+.dashboard-alert-warning{
+ border-color:#fcd34d!important;
+ background:
+  radial-gradient(circle at 100% 0%,rgba(245,158,11,.14),transparent 36%),
+  linear-gradient(145deg,#fff,#fffbeb)!important;
+ box-shadow:0 18px 42px rgba(217,119,6,.10)!important;
+}
+.dashboard-alert-warning small,
+.dashboard-alert-warning strong{
+ color:#92400e!important;
+}
+.dashboard-alert-info{
+ box-shadow:0 18px 44px rgba(79,70,229,.22)!important;
+ animation:infoCardPulse 2.4s ease-in-out infinite;
+}
+.alert-pulse-dot{
+ position:absolute;
+ top:14px;
+ right:14px;
+ width:11px;
+ height:11px;
+ border-radius:50%;
+ background:#dc2626;
+ box-shadow:0 0 0 0 rgba(220,38,38,.55);
+ animation:alertDotPulse 1.45s infinite;
+ z-index:2;
+}
+.alert-pulse-dot.warning-dot{
+ background:#f59e0b;
+ box-shadow:0 0 0 0 rgba(245,158,11,.52);
+}
+.alert-pulse-dot.info-dot{
+ background:#fff;
+ box-shadow:0 0 0 0 rgba(255,255,255,.52);
+}
+@keyframes criticalCardPulse{
+ 0%,100%{transform:translateY(0);box-shadow:0 18px 42px rgba(185,28,28,.11)}
+ 50%{transform:translateY(-2px);box-shadow:0 22px 50px rgba(185,28,28,.18)}
+}
+@keyframes infoCardPulse{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-2px)}
+}
+@keyframes alertDotPulse{
+ 0%{box-shadow:0 0 0 0 currentColor}
+ 70%{box-shadow:0 0 0 9px rgba(0,0,0,0)}
+ 100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}
+}
+
+
+/* Panel boczny pozostaje spokojny i biały */
+.sidebar{
+ background:#fff!important;
+}
+.nav button,
+.nav button.nav-alert{
+ background:transparent!important;
+ border-color:transparent!important;
+ color:#53627a!important;
+ animation:none!important;
+ box-shadow:none!important;
+}
+.nav button:hover{
+ background:#f8fafc!important;
+ color:#3730a3!important;
+}
+.nav button.active,
+.nav button.nav-alert.active{
+ color:#fff!important;
+ background:linear-gradient(135deg,#4f46e5,#2563eb)!important;
+ box-shadow:0 12px 26px rgba(79,70,229,.22)!important;
+}
+.nav button span{
+ margin-left:4px;
+ font-size:12px;
+ font-weight:900;
+ color:#64748b;
+}
+.nav button.active span{
+ color:#fff;
+}
+
+/* Kafelki alarmowe mają delikatnie mrugać, panel boczny nie */
+.dashboard-alert-critical{
+ animation:dashboardCriticalBlink 1.8s ease-in-out infinite!important;
+}
+.dashboard-alert-warning{
+ animation:dashboardWarningBlink 2.2s ease-in-out infinite!important;
+}
+.dashboard-alert-info{
+ animation:dashboardInfoBlink 2.4s ease-in-out infinite!important;
+}
+.bhp-dashboard-card.has-bhp-problems{
+ animation:dashboardCriticalBlink 1.8s ease-in-out infinite!important;
+}
+
+@keyframes dashboardCriticalBlink{
+ 0%,100%{
+  border-color:#fecaca;
+  box-shadow:0 16px 36px rgba(185,28,28,.08);
+  filter:brightness(1);
+ }
+ 50%{
+  border-color:#ef4444;
+  box-shadow:0 20px 48px rgba(220,38,38,.24);
+  filter:brightness(1.045);
+ }
+}
+@keyframes dashboardWarningBlink{
+ 0%,100%{
+  border-color:#fde68a;
+  box-shadow:0 16px 36px rgba(217,119,6,.06);
+  filter:brightness(1);
+ }
+ 50%{
+  border-color:#f59e0b;
+  box-shadow:0 20px 48px rgba(245,158,11,.20);
+  filter:brightness(1.035);
+ }
+}
+@keyframes dashboardInfoBlink{
+ 0%,100%{
+  box-shadow:0 16px 38px rgba(79,70,229,.16);
+  filter:brightness(1);
+ }
+ 50%{
+  box-shadow:0 22px 52px rgba(79,70,229,.34);
+  filter:brightness(1.06);
+ }
+}
+
+/* Nie przesadzamy z animacją przy ograniczeniu ruchu */
+@media (prefers-reduced-motion: reduce){
+ .dashboard-alert-critical,
+ .dashboard-alert-warning,
+ .dashboard-alert-info,
+ .bhp-dashboard-card.has-bhp-problems{
+  animation:none!important;
+ }
+}
+
 </style>
 </head>
 <body>
@@ -197,18 +1845,32 @@ tbody tr:hover td{background:#fafcff}
     <button class="active" data-view="dashboard">Dashboard</button>
     <button data-view="companies">Firmy</button>
     <button data-view="employees">Pracownicy</button>
-    <button data-view="leaves">Urlopy</button>
-    <button data-view="medical">Badania</button>
-    <button data-view="contracts">Umowy</button>
+    <button data-view="employeeArchive">Archiwum pracowników <span id="archiveCount"></span></button>
+    <button data-view="leaves">Urlopy <span id="adminLeaveCount"></span></button>
+    <button data-view="medical">Badania <span id="adminMedicalCount"></span></button>
+    <button data-view="bhp" id="adminBhpNav">BHP <span id="adminBhpCount"></span></button>
+    <button data-view="contracts">Umowy <span id="adminContractCount"></span></button>
     <button data-view="documents">Dokumenty</button>
-    <button data-view="notifications">Wnioski urlopowe</button>
+    <button data-view="inbox">Wiadomości <span id="adminInboxCount"></span></button>
+    <button class="employee-switch" id="managerModeBtn">Otwórz panel szefa firmy</button>
     <button class="employee-switch" id="employeeModeBtn">Otwórz panel pracownika</button>
+  </div>
+  <div class="nav hidden" id="managerNav">
+    <button class="active" data-manager-view="managerHome">Pulpit firmy</button>
+    <button data-manager-view="managerEmployees">Moi pracownicy</button>
+    <button data-manager-view="managerLeaves">Urlopy</button>
+    <button data-manager-view="managerMedical">Badania</button>
+    <button data-manager-view="managerContracts">Umowy</button>
+    <button data-manager-view="managerInbox">Wiadomości</button>
+    <button class="employee-switch" id="managerAdminModeBtn">Wróć do panelu administratora</button>
   </div>
   <div class="nav hidden" id="employeeNav">
     <button class="active" data-employee-view="employeeHome">Mój pulpit</button>
     <button data-employee-view="employeeRequest">Złóż wniosek</button>
     <button data-employee-view="employeeHistory">Historia urlopów</button>
+    <button data-employee-view="employeeCalendar">Kalendarz</button>
     <button data-employee-view="employeeProfile">Mój profil</button>
+    <button data-employee-view="employeeInbox">Wiadomości <span id="employeeInboxCount"></span></button>
     <button class="employee-switch" id="adminModeBtn">Wróć do panelu administratora</button>
   </div>
 </aside>
@@ -238,14 +1900,18 @@ const companies = [
  {id:4,name:'Omega Tech',nip:'5566778899',contact:'Maria Zielińska',status:'Zawieszona'}
 ];
 
-const employees = [
- {id:1,companyId:1,name:'Jan Kowalski',position:'Magazynier',email:'jan@abc.pl',phone:'600 111 222',leaveTotal:26,leaveUsed:12,medical:'2026-09-15',contract:'2026-12-31'},
+let employees = [
+ {id:1,companyId:1,name:'Jan Kowalski',position:'Magazynier',email:'jan@abc.pl',phone:'600 111 222',startDate:'2024-01-15',disabilityDegree:'Umiarkowany',disabilityFrom:'2024-02-01',leaveBase:26,leaveTotal:36,leaveUsed:12,medical:'2026-09-15',contract:'2026-12-31'},
  {id:2,companyId:1,name:'Anna Nowak',position:'Specjalista ds. sprzedaży',email:'anna@abc.pl',phone:'600 222 333',leaveTotal:26,leaveUsed:8,medical:'2027-03-20',contract:'Bezterminowa'},
- {id:3,companyId:2,name:'Piotr Wiśniewski',position:'Kierowca',email:'piotr@delta.pl',phone:'600 333 444',leaveTotal:20,leaveUsed:7,medical:'2026-08-10',contract:'2026-11-30'},
+ {id:3,companyId:2,name:'Piotr Wiśniewski',position:'Kierowca',email:'piotr@delta.pl',phone:'600 333 444',startDate:'2025-01-10',disabilityDegree:'Brak',disabilityFrom:'',leaveBase:20,leaveTotal:20,leaveUsed:7,medical:'2026-08-10',bhp:'2026-10-15',contract:'2026-11-30'},
  {id:4,companyId:3,name:'Tomasz Malinowski',position:'Brygadzista',email:'tomasz@profi.pl',phone:'600 444 555',leaveTotal:26,leaveUsed:16,medical:'2026-07-20',contract:'2026-08-18'},
  {id:5,companyId:3,name:'Ewa Król',position:'Administracja',email:'ewa@profi.pl',phone:'600 555 666',leaveTotal:26,leaveUsed:10,medical:'2027-01-14',contract:'Bezterminowa'},
  {id:6,companyId:4,name:'Maria Zielińska',position:'Programista',email:'maria@omega.pl',phone:'600 666 777',leaveTotal:26,leaveUsed:5,medical:'2027-05-08',contract:'2027-02-28'}
 ];
+
+let archivedEmployees = [];
+let selectedArchivedEmployeeIds = [];
+
 
 let medicalHistory = [
  {id:1,employeeId:1,completed:'2025-09-10',validTo:'2026-09-15',notes:'Badania okresowe'},
@@ -276,6 +1942,8 @@ let leaveBalances = [
 ];
 
 let leaveRequests = [
+ {id:99001,employeeId:3,type:'Urlop wypoczynkowy',from:'2026-08-17',to:'2026-08-21',days:5,status:'Oczekuje',managerApproval:false,accountantApproval:false,balanceApplied:false,notes:'Wniosek testowy do akceptacji przez szefa i księgową'},
+
  {id:1,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-05-12',to:'2026-05-16',days:5,status:'Zaakceptowany'},
  {id:2,employeeId:1,type:'Urlop wypoczynkowy',from:'2026-07-03',to:'2026-07-07',days:5,status:'Zaakceptowany'},
  {id:3,employeeId:1,type:'Urlop na żądanie',from:'2026-07-22',to:'2026-07-22',days:1,status:'Zaakceptowany'},
@@ -315,6 +1983,8 @@ let leaveRequests = [
  {id:31,employeeId:6,type:'Urlop wypoczynkowy',from:'2026-05-04',to:'2026-05-08',days:5,status:'Zaakceptowany'}
 ];
 
+leaveRequests.forEach(request=>ensureLeaveApprovalState(request));
+
 let notifications = [
  {id:1,type:'urlop',employeeId:1,requestId:4,message:'Jan Kowalski wysłał wniosek o urlop. Oczekuje na zatwierdzenie kierownika.',created:'30.07.2026, 10:15',read:false},
  {id:2,type:'umowa',employeeId:4,message:'Umowa pracownika Tomasz Malinowski kończy się 18.08.2026. Wymaga działania.',created:'30.07.2026, 09:00',read:false}
@@ -322,15 +1992,89 @@ let notifications = [
 
 
 
+
+let inboxThreads = [
+ {
+  id:1,
+  employeeId:1,
+  companyId:1,
+  subject:'Pytanie o wymiar urlopu',
+  category:'Urlop',
+  status:'Oczekuje na odpowiedź',
+  createdAt:'2026-07-30T09:42:00',
+  updatedAt:'2026-07-30T09:42:00',
+  readByAccountant:false,
+  readByEmployee:true,
+  messages:[
+   {id:1,senderRole:'employee',senderName:'Jan Kowalski',body:'Dzień dobry, nie zgadza mi się liczba pozostałych dni urlopu. Czy może Pani to sprawdzić?',createdAt:'2026-07-30T09:42:00'}
+  ]
+ },
+ {
+  id:2,
+  employeeId:3,
+  companyId:2,
+  subject:'Termin nowych badań',
+  category:'Badania',
+  status:'Odpowiedziano',
+  createdAt:'2026-07-28T13:15:00',
+  updatedAt:'2026-07-29T08:20:00',
+  readByAccountant:true,
+  readByEmployee:false,
+  messages:[
+   {id:1,senderRole:'employee',senderName:'Piotr Wiśniewski',body:'Czy mam już ustalony termin kolejnych badań?',createdAt:'2026-07-28T13:15:00'},
+   {id:2,senderRole:'accountant',senderName:'Grażyna Zachwieja',body:'Termin nie jest jeszcze ustalony. Skontaktuję się z firmą i wrócę z informacją.',createdAt:'2026-07-29T08:20:00'}
+  ]
+ }
+];
+
 let currentView='dashboard';
 let employeeMode=false;
+let managerMode=false;
+let managerCompanyId=2;
 let selectedEmployeeId=1;
 
 const content=document.getElementById('content');
 
 function companyName(id){return companies.find(c=>c.id===id)?.name||'-'}
+
+function addYearsToDate(dateString,years){
+ if(!dateString) return '';
+ const date=new Date(dateString+'T00:00:00');
+ date.setFullYear(date.getFullYear()+years);
+ return date.toISOString().slice(0,10);
+}
+
+function hasDisabilityExtraLeave(employee,referenceDate=new Date()){
+ if(!['Umiarkowany','Znaczny'].includes(employee.disabilityDegree)) return false;
+ if(!employee.disabilityFrom) return false;
+ const entitlementDate=new Date(addYearsToDate(employee.disabilityFrom,1)+'T00:00:00');
+ const checkDate=referenceDate instanceof Date?referenceDate:new Date(referenceDate+'T00:00:00');
+ return checkDate>=entitlementDate;
+}
+
+function disabilityExtraLeave(employee,referenceDate=new Date()){
+ return hasDisabilityExtraLeave(employee,referenceDate)?10:0;
+}
+
+function calculatedAnnualLeave(employee,referenceDate=new Date()){
+ const base=Number(employee.leaveBase??employee.leaveTotal??26);
+ return base+disabilityExtraLeave(employee,referenceDate);
+}
+
+function syncEmployeeLeaveEntitlement(employee){
+ if(employee.leaveBase===undefined){
+  const current=Number(employee.leaveTotal||26);
+  employee.leaveBase=Math.max(0,current-disabilityExtraLeave(employee));
+ }
+ employee.leaveTotal=calculatedAnnualLeave(employee);
+ return employee.leaveTotal;
+}
+
+employees.forEach(employee=>syncEmployeeLeaveEntitlement(employee));
+
+
 function fmt(d){if(!d||d==='Bezterminowa')return d; const [y,m,day]=d.split('-'); return `${day}.${m}.${y}`}
-function statusClass(s){return s==='Aktywna'||s==='Zaakceptowany'?'ok':s==='Nieaktywna'||s==='Odrzucony'?'danger':'warn'}
+function statusClass(s){return s==='Aktywna'||s==='Zaakceptowany'?'ok':s==='Nieaktywna'||s==='Odrzucony'||s==='Anulowany'?'danger':'warn'}
 
 
 function activeNotifications(){
@@ -358,11 +2102,39 @@ function activeNotifications(){
  });
 }
 
-function leaveStatusBadge(request){
- if(request.status==='Oczekuje'){
-  return `<button type="button" class="status warn status-action" onclick="openLeaveRequest(${request.id})" title="Otwórz wniosek i podejmij decyzję">${request.status}</button>`;
+function ensureLeaveApprovalState(request){
+ if(request.status==='Zaakceptowany'){
+  if(request.managerApproval===undefined) request.managerApproval=true;
+  if(request.accountantApproval===undefined) request.accountantApproval=true;
  }
- return `<span class="status ${statusClass(request.status)}">${request.status}</span>`;
+ if(request.status==='Odrzucony'){
+  if(request.managerApproval===undefined) request.managerApproval=false;
+  if(request.accountantApproval===undefined) request.accountantApproval=false;
+ }
+ if(request.status==='Oczekuje'){
+  if(request.managerApproval===undefined) request.managerApproval=false;
+  if(request.accountantApproval===undefined) request.accountantApproval=false;
+ }
+}
+
+function leaveDisplayStatus(request){
+ ensureLeaveApprovalState(request);
+
+ if(request.status==='Odrzucony') return 'Odrzucony';
+ if(request.managerApproval&&request.accountantApproval) return 'Zaakceptowany';
+ if(request.managerApproval&&!request.accountantApproval) return 'Czeka na księgową';
+ if(!request.managerApproval&&request.accountantApproval) return 'Czeka na szefa';
+ return 'Czeka na obie akceptacje';
+}
+
+function leaveStatusBadge(request){
+ const label=leaveDisplayStatus(request);
+
+ if(request.status==='Oczekuje'){
+  return `<button type="button" class="status warn status-action" onclick="openLeaveRequest(${request.id})" title="Otwórz wniosek">${label}</button>`;
+ }
+
+ return `<span class="status ${statusClass(request.status)}">${label}</span>`;
 }
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
 function navigateAdmin(view){
@@ -375,52 +2147,205 @@ function navigateAdmin(view){
 }
 
 function render(){
+ if(managerMode){renderManager();return}
  if(employeeMode){renderEmployee();return}
  document.getElementById('adminNav').classList.remove('hidden');
+ document.getElementById('managerNav').classList.add('hidden');
  document.getElementById('employeeNav').classList.add('hidden');
  document.getElementById('modeLabel').textContent='Administrator';
  document.getElementById('topAvatar').textContent='GZ';
- const views={dashboard:dashboardView,companies:companiesView,employees:employeesView,leaves:leavesView,medical:medicalView,contracts:contractsView,documents:documentsView,notifications:notificationsView};
+ const views={dashboard:dashboardView,companies:companiesView,employees:employeesView,employeeArchive:employeeArchiveView,leaves:leavesView,medical:medicalView,bhp:bhpView,contracts:contractsView,documents:documentsView,notifications:notificationsView,inbox:inboxView};
  content.innerHTML=(views[currentView]||dashboardView)();
  bindDynamic();
+ const adminCounter=document.getElementById('adminInboxCount');
+ if(adminCounter) adminCounter.textContent=unreadAdminThreads()?`(${unreadAdminThreads()})`:'';
+
+ const bhpCounter=document.getElementById('adminBhpCount');
+ const bhpNav=document.getElementById('adminBhpNav');
+ const bhpProblems=countBhpProblems();
+
+ if(bhpCounter) bhpCounter.textContent=bhpProblems?`(${bhpProblems})`:'';
+ if(bhpNav) bhpNav.classList.remove('nav-alert');
+
+ const archiveCounter=document.getElementById('archiveCount');
+ if(archiveCounter) archiveCounter.textContent=archivedEmployees.length?`(${archivedEmployees.length})`:'';
+
+ const medicalCounter=document.getElementById('adminMedicalCount');
+ if(medicalCounter) medicalCounter.textContent=dashboardMedicalCriticalCount()?`(${dashboardMedicalCriticalCount()})`:'';
+
+ const contractCounter=document.getElementById('adminContractCount');
+ if(contractCounter) contractCounter.textContent=dashboardContractCriticalCount()?`(${dashboardContractCriticalCount()})`:'';
+
+ const leaveCounter=document.getElementById('adminLeaveCount');
+ if(leaveCounter) leaveCounter.textContent=dashboardPendingLeaveCount()?`(${dashboardPendingLeaveCount()})`:'';
+}
+
+
+function dashboardMedicalCriticalCount(){
+ return employees.filter(employee=>{
+  const days=daysToDate(employee.medical);
+  return days===null || days<30;
+ }).length;
+}
+
+function dashboardMedicalWarningCount(){
+ return employees.filter(employee=>{
+  const days=daysToDate(employee.medical);
+  return days!==null && days>=30 && days<=60;
+ }).length;
+}
+
+function dashboardContractCriticalCount(){
+ return employees.filter(employee=>{
+  if(employee.contract==='Bezterminowa') return false;
+  const days=daysToDate(employee.contract);
+  return days===null || days<30;
+ }).length;
+}
+
+function dashboardContractWarningCount(){
+ return employees.filter(employee=>{
+  if(employee.contract==='Bezterminowa') return false;
+  const days=daysToDate(employee.contract);
+  return days!==null && days>=30 && days<=60;
+ }).length;
+}
+
+function dashboardPendingLeaveCount(){
+ return leaveRequests.filter(request=>request.status==='Oczekuje').length;
+}
+
+function dashboardUnreadMessageCount(){
+ return inboxThreads.filter(thread=>!thread.readByAccountant).length;
+}
+
+function dashboardActionCount(){
+ return dashboardMedicalCriticalCount()
+  + countBhpProblems()
+  + dashboardContractCriticalCount()
+  + dashboardPendingLeaveCount()
+  + dashboardUnreadMessageCount();
+}
+
+function dashboardAlertClass(level){
+ if(level==='critical') return 'dashboard-alert-critical';
+ if(level==='warning') return 'dashboard-alert-warning';
+ if(level==='info') return 'dashboard-alert-info';
+ return '';
 }
 
 function dashboardView(){
+ const medicalCritical=dashboardMedicalCriticalCount();
+ const medicalWarning=dashboardMedicalWarningCount();
+ const bhpProblems=countBhpProblems();
+ const contractCritical=dashboardContractCriticalCount();
+ const contractWarning=dashboardContractWarningCount();
+ const pendingLeaves=dashboardPendingLeaveCount();
+ const unreadMessages=dashboardUnreadMessageCount();
+ const totalActions=dashboardActionCount();
+
  return `
+ <div class="dashboard-attention-banner ${totalActions?'has-actions':'all-clear'}">
+  <div>
+   <span class="premium-eyebrow">CENTRUM UWAGI</span>
+   <h2>${totalActions?`Dzisiaj wymaga uwagi: ${totalActions}`:'Wszystko pod kontrolą'}</h2>
+   <p>${totalActions
+    ? 'Kliknij kafelek, aby od razu przejść do spraw wymagających działania.'
+    : 'Brak pilnych spraw do obsłużenia.'}</p>
+  </div>
+  <div class="attention-total">${totalActions}</div>
+ </div>
+
  <div class="page-header"><div><h2>Dashboard</h2><p>Najważniejsze informacje o firmach i pracownikach.</p></div></div>
+
  <div class="grid4">
-  <div class="card card-clickable" role="button" tabindex="0" onclick="navigateAdmin('companies')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('companies')}">
+  <div class="card card-clickable" role="button" tabindex="0"
+       onclick="navigateAdmin('companies')"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('companies')}">
    <small>Liczba firm</small><strong>${companies.length}</strong>
    <span class="badge ok">Aktywne: ${companies.filter(c=>c.status==='Aktywna').length}</span>
    <span class="card-hint">Pokaż firmy →</span>
   </div>
-  <div class="card card-clickable" role="button" tabindex="0" onclick="navigateAdmin('employees')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('employees')}">
+
+  <div class="card card-clickable" role="button" tabindex="0"
+       onclick="navigateAdmin('employees')"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('employees')}">
    <small>Liczba pracowników</small><strong>${employees.length}</strong>
    <span class="badge ok">W bazie</span>
-   <span class="card-hint">Pokaż pracowników →</span>
+   <span class="card-hint">${archivedEmployees.length} w archiwum · Pokaż →</span>
   </div>
-  <div class="card card-clickable" role="button" tabindex="0" onclick="navigateAdmin('medical')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('medical')}">
-   <small>Badania krytyczne</small><strong>${employees.filter(e=>daysToDate(e.medical)!==null&&daysToDate(e.medical)<30).length}</strong>
-   <span class="badge critical">Poniżej 30 dni</span>
-   <span class="card-hint">${employees.filter(e=>daysToDate(e.medical)>=30&&daysToDate(e.medical)<=60).length} do zaplanowania · Sprawdź →</span>
+
+  <div class="card card-clickable ${medicalCritical?dashboardAlertClass('critical'):medicalWarning?dashboardAlertClass('warning'):''}"
+       role="button" tabindex="0"
+       onclick="navigateAdmin('medical')"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('medical')}">
+   <small>Badania lekarskie</small>
+   <strong>${medicalCritical}</strong>
+   <span class="badge ${medicalCritical?'critical':medicalWarning?'warn':'ok'}">
+    ${medicalCritical?'Wymaga reakcji':medicalWarning?'Do zaplanowania':'Wszystko poprawne'}
+   </span>
+   <span class="card-hint">${medicalWarning} w przedziale 30–60 dni · Sprawdź →</span>
+   ${medicalCritical?'<span class="alert-pulse-dot"></span>':''}
   </div>
-  <div class="card card-clickable" role="button" tabindex="0" onclick="navigateAdmin('contracts')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('contracts')}">
-   <small>Umowy krytyczne</small><strong>${employees.filter(e=>e.contract!=='Bezterminowa'&&daysToDate(e.contract)!==null&&daysToDate(e.contract)<30).length}</strong>
-   <span class="badge critical">Poniżej 30 dni</span>
-   <span class="card-hint">${employees.filter(e=>e.contract!=='Bezterminowa'&&daysToDate(e.contract)>=30&&daysToDate(e.contract)<=60).length} do zaplanowania · Sprawdź →</span>
+
+  <div class="card card-clickable bhp-dashboard-card ${bhpProblems?'has-bhp-problems dashboard-alert-critical':''}"
+       role="button" tabindex="0"
+       onclick="navigateAdmin('bhp')"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('bhp')}">
+   <small>BHP — niespełnione wymogi</small>
+   <strong>${bhpProblems}</strong>
+   <span class="badge ${bhpProblems?'critical':'ok'}">${bhpProblems?'Wymaga reakcji':'Wszystko poprawne'}</span>
+   <span class="card-hint">${employees.filter(e=>!e.bhp).length} bez terminu · Sprawdź →</span>
+   ${bhpProblems?'<span class="alert-pulse-dot"></span>':''}
+  </div>
+
+  <div class="card card-clickable ${contractCritical?dashboardAlertClass('critical'):contractWarning?dashboardAlertClass('warning'):''}"
+       role="button" tabindex="0"
+       onclick="navigateAdmin('contracts')"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('contracts')}">
+   <small>Umowy</small>
+   <strong>${contractCritical}</strong>
+   <span class="badge ${contractCritical?'critical':contractWarning?'warn':'ok'}">
+    ${contractCritical?'Wymaga reakcji':contractWarning?'Do sprawdzenia':'Wszystko poprawne'}
+   </span>
+   <span class="card-hint">${contractWarning} w przedziale 30–60 dni · Sprawdź →</span>
+   ${contractCritical?'<span class="alert-pulse-dot"></span>':''}
+  </div>
+
+  <div class="card card-clickable ${pendingLeaves?dashboardAlertClass('warning'):''}"
+       role="button" tabindex="0"
+       onclick="navigateAdmin('notifications')"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('notifications')}">
+   <small>Wnioski urlopowe</small>
+   <strong>${pendingLeaves}</strong>
+   <span class="badge ${pendingLeaves?'warn':'ok'}">${pendingLeaves?'Czekają na decyzję':'Brak oczekujących'}</span>
+   <span class="card-hint">${pendingLeaves?'Rozpatrz wnioski':'Wszystko załatwione'} →</span>
+   ${pendingLeaves?'<span class="alert-pulse-dot warning-dot"></span>':''}
+  </div>
+
+  <div class="card card-clickable premium-message-dashboard-card ${unreadMessages?'dashboard-alert-info':''}"
+       role="button" tabindex="0"
+       onclick="navigateAdmin('inbox')"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('inbox')}">
+   <small>Wiadomości</small>
+   <strong>${unreadMessages}</strong>
+   <span class="badge ${unreadMessages?'warn':'ok'}">${unreadMessages?'Nieodczytane':'Wszystkie przeczytane'}</span>
+   <span class="card-hint">${inboxThreads.length} wszystkich rozmów · Otwórz →</span>
+   ${unreadMessages?'<span class="alert-pulse-dot info-dot"></span>':''}
   </div>
  </div>
+
  <div class="panel">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px">
    <div>
     <h3>Oczekujące wnioski urlopowe</h3>
     <p style="color:var(--muted);margin-top:5px">Wnioski, które czekają na decyzję.</p>
    </div>
-   <span class="badge warn">${leaveRequests.filter(r=>r.status==='Oczekuje').length}</span>
+   <span class="badge ${pendingLeaves?'warn':'ok'}">${pendingLeaves}</span>
   </div>
 
-  ${leaveRequests.filter(r=>r.status==='Oczekuje').length
-    ? leaveRequests.filter(r=>r.status==='Oczekuje').map(request=>{
+  ${pendingLeaves
+    ? leaveRequests.filter(request=>request.status==='Oczekuje').map(request=>{
        const employee=employees.find(e=>e.id===request.employeeId);
        if(!employee) return '';
        return `<div style="padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
@@ -435,87 +2360,91 @@ function dashboardView(){
     : '<div class="empty">Brak oczekujących wniosków urlopowych.</div>'}
  </div>`;
 }
-
-function taskTable(){
- const rows=[];
-
- employees.forEach(employee=>{
-  const medicalDays=daysToDate(employee.medical);
-  if(medicalDays!==null && medicalDays<30){
-   rows.push({
-    company:companyName(employee.companyId),
-    employee:employee.name,
-    task:'Badania lekarskie',
-    date:employee.medical,
-    status:medicalDays<0?'Po terminie':'Pilne',
-    statusClass:'critical',
-    action:()=>openEmployeeTabDirect(employee.id,'medical')
-   });
-  }
-
-  if(employee.contract!=='Bezterminowa'){
-   const contractDays=daysToDate(employee.contract);
-   if(contractDays!==null && contractDays<30){
-    rows.push({
-     company:companyName(employee.companyId),
-     employee:employee.name,
-     task:'Kończąca się umowa',
-     date:employee.contract,
-     status:contractDays<0?'Po terminie':'Pilne',
-     statusClass:'critical',
-     action:()=>openEmployeeTabDirect(employee.id,'contract')
-    });
-   }
-  }
- });
-
- leaveRequests
-  .filter(request=>request.status==='Oczekuje')
-  .forEach(request=>{
-   const employee=employees.find(e=>e.id===request.employeeId);
-   if(!employee) return;
-
-   rows.push({
-    company:companyName(employee.companyId),
-    employee:employee.name,
-    task:'Wniosek urlopowy',
-    date:request.from,
-    status:'Oczekuje',
-    statusClass:'attention',
-    action:()=>openLeaveRequest(request.id)
-   });
-  });
-
- rows.sort((a,b)=>String(a.date).localeCompare(String(b.date)));
-
- if(!rows.length) return '<div class="empty">Brak pilnych spraw.</div>';
-
- window.dashboardTaskActions=rows.map(row=>row.action);
-
- return `<table>
-  <thead>
-   <tr><th>Firma</th><th>Pracownik</th><th>Zadanie</th><th>Termin</th><th>Status</th></tr>
-  </thead>
-  <tbody>
-   ${rows.map((row,index)=>`
-    <tr onclick="dashboardTaskActions[${index}]()" style="cursor:pointer">
-     <td>${row.company}</td>
-     <td><span class="link">${row.employee}</span></td>
-     <td>${row.task}</td>
-     <td>${fmt(row.date)}</td>
-     <td><span class="status ${row.statusClass}">${row.status}</span></td>
-    </tr>
-   `).join('')}
-  </tbody>
- </table>`;
-}
-
 function companiesView(){
  return `
  <div class="page-header"><div><h2>Firmy</h2><p>Zarządzaj firmami oraz przypisanymi pracownikami.</p></div><div class="actions"><button class="btn primary" onclick="openCompanyForm()">Dodaj firmę</button></div></div>
  <div class="panel"><table><thead><tr><th>Nazwa</th><th>NIP</th><th>Kontakt</th><th>Pracownicy</th><th>Status</th><th></th></tr></thead><tbody>
  ${companies.map(c=>`<tr><td><span class="link" onclick="openCompany(${c.id})">${c.name}</span></td><td>${c.nip}</td><td>${c.contact}</td><td>${employees.filter(e=>e.companyId===c.id).length}</td><td><span class="status ${statusClass(c.status)}">${c.status}</span></td><td><button class="btn" onclick="openCompany(${c.id})">Otwórz</button></td></tr>`).join('')}
  </tbody></table></div>`;
+}
+
+
+function employeeArchiveView(){
+ const selectedCount=selectedArchivedEmployeeIds.length;
+
+ return `
+  <div class="page-header">
+   <div>
+    <h2>Archiwum pracowników</h2>
+    <p>Zarchiwizowane osoby można przywrócić. Trwałe usuwanie jest dostępne tylko po zaznaczeniu pracownika.</p>
+   </div>
+
+   <div class="archive-toolbar">
+    ${selectedCount
+      ? `<span class="archive-selected-count">Zaznaczono: ${selectedCount}</span>
+         <button class="btn" onclick="clearArchivedSelection()">Odznacz</button>`
+      : '<span class="archive-selected-count muted">Nie zaznaczono żadnej osoby</span>'}
+
+    <button class="archive-trash-button ${selectedCount?'enabled':''}"
+            onclick="openPermanentDeleteSelectedModal()"
+            ${selectedCount?'':'disabled'}
+            title="Trwale usuń zaznaczone osoby">
+     🗑️
+     <span>Usuń zaznaczone</span>
+    </button>
+   </div>
+  </div>
+
+  <div class="panel archive-panel">
+   ${archivedEmployees.length?`
+    <table>
+     <thead>
+      <tr>
+       <th class="archive-check-column">Wybierz</th>
+       <th>Pracownik</th>
+       <th>Firma</th>
+       <th>Stanowisko</th>
+       <th>Data archiwizacji</th>
+       <th>Powód</th>
+       <th>Akcja</th>
+      </tr>
+     </thead>
+     <tbody>
+      ${archivedEmployees.map(employee=>`
+       <tr class="${selectedArchivedEmployeeIds.includes(employee.id)?'archive-row-selected':''}">
+        <td class="archive-check-column">
+         <input type="checkbox"
+                class="archive-checkbox"
+                ${selectedArchivedEmployeeIds.includes(employee.id)?'checked':''}
+                onchange="toggleArchivedEmployeeSelection(${employee.id},this.checked)">
+        </td>
+        <td>
+         <strong>${employee.name}</strong>
+         ${employee.archiveNotes?`<div class="archive-note">${employee.archiveNotes}</div>`:''}
+        </td>
+        <td>${companyName(employee.companyId)}</td>
+        <td>${employee.position||'-'}</td>
+        <td>${employee.archivedAt?new Date(employee.archivedAt).toLocaleDateString('pl-PL'):'-'}</td>
+        <td><span class="status archived-status">${employee.archiveReason||'Inny'}</span></td>
+        <td>
+         <button class="btn restore-btn" onclick="restoreArchivedEmployee(${employee.id})">↩ Przywróć</button>
+        </td>
+       </tr>
+      `).join('')}
+     </tbody>
+    </table>
+   `:`
+    <div class="empty archive-empty">
+     <strong>Archiwum jest puste</strong>
+     <p style="margin-top:6px">Zarchiwizowani pracownicy pojawią się tutaj.</p>
+    </div>
+   `}
+  </div>
+
+  <div class="archive-safety-note">
+   <strong>Bezpieczne usuwanie</strong>
+   <p>Nie można usunąć pracownika bezpośrednio z jego karty. Najpierw musi zostać zarchiwizowany, następnie zaznaczony w tabeli, a trwałe usunięcie wymaga dodatkowego potwierdzenia tekstem „USUŃ”.</p>
+  </div>`;
 }
 
 function employeesView(companyId=null){
@@ -570,6 +2499,122 @@ function leavesView(){
    `}
   </div>`;
 }
+
+function bhpProblemEmployees(){
+ return employees.filter(employee=>{
+  if(!employee.bhp) return true;
+  const days=daysToDate(employee.bhp);
+  return days===null||days<=60;
+ });
+}
+
+function countBhpProblems(){
+ return bhpProblemEmployees().length;
+}
+
+function bhpRequirementLabel(employee){
+ if(!employee.bhp) return 'Brak terminu';
+ const days=daysToDate(employee.bhp);
+ if(days===null) return 'Nieprawidłowa data';
+ if(days<0) return `Po terminie ${Math.abs(days)} dni`;
+ if(days<30) return `Pilne: ${days} dni`;
+ if(days<=60) return `Do odnowienia: ${days} dni`;
+ return `Ważne: ${days} dni`;
+}
+
+function bhpRequirementClass(employee){
+ if(!employee.bhp) return 'critical-expired';
+ const days=daysToDate(employee.bhp);
+ if(days===null||days<0) return 'critical-expired';
+ if(days<30) return 'urgent';
+ if(days<=60) return 'important';
+ return 'safe';
+}
+
+function bhpView(){
+ const missing=employees.filter(employee=>!employee.bhp);
+ const expired=employees
+  .filter(employee=>employee.bhp&&daysToDate(employee.bhp)!==null&&daysToDate(employee.bhp)<0)
+  .sort((a,b)=>a.bhp.localeCompare(b.bhp));
+ const urgent=employees
+  .filter(employee=>employee.bhp&&daysToDate(employee.bhp)>=0&&daysToDate(employee.bhp)<30)
+  .sort((a,b)=>a.bhp.localeCompare(b.bhp));
+ const important=employees
+  .filter(employee=>employee.bhp&&daysToDate(employee.bhp)>=30&&daysToDate(employee.bhp)<=60)
+  .sort((a,b)=>a.bhp.localeCompare(b.bhp));
+ const safe=employees
+  .filter(employee=>employee.bhp&&daysToDate(employee.bhp)>60)
+  .sort((a,b)=>a.bhp.localeCompare(b.bhp));
+
+ const problemCount=missing.length+expired.length+urgent.length+important.length;
+
+ const row=employee=>`
+  <tr class="${bhpRequirementClass(employee)==='critical-expired'?'bhp-problem-row':''}">
+   <td>
+    <span class="link ${bhpRequirementClass(employee)==='critical-expired'?'bhp-name-alert':''}"
+          onclick="openEmployeeTabDirect(${employee.id},'bhp')">
+     ${employee.name}
+    </span>
+   </td>
+   <td>${companyName(employee.companyId)}</td>
+   <td>${employee.position||'-'}</td>
+   <td>${employee.bhp?fmt(employee.bhp):'<span class="status critical-expired">Brak terminu</span>'}</td>
+   <td><span class="status ${bhpRequirementClass(employee)}">${bhpRequirementLabel(employee)}</span></td>
+   <td><button class="btn primary" onclick="openEmployeeTabDirect(${employee.id},'bhp')">Otwórz BHP</button></td>
+  </tr>`;
+
+ const table=(items,emptyText)=>items.length
+  ? `<table>
+      <thead><tr><th>Pracownik</th><th>Firma</th><th>Stanowisko</th><th>Ważne do</th><th>Status</th><th>Akcja</th></tr></thead>
+      <tbody>${items.map(row).join('')}</tbody>
+     </table>`
+  : `<div class="empty">${emptyText}</div>`;
+
+ return `<div class="page-header">
+  <div>
+   <h2>Terminy szkoleń BHP</h2>
+   <p>System wskazuje brak terminu, przeterminowane szkolenia oraz terminy wymagające odnowienia.</p>
+  </div>
+  <div class="bhp-problem-summary ${problemCount?'has-problems':'all-good'}">
+   <span>Niespełnione wymogi</span>
+   <strong>${problemCount}</strong>
+  </div>
+ </div>
+
+ <div class="bhp-status-strip">
+  <span class="status critical-expired">${missing.length} brak terminu</span>
+  <span class="status critical-expired">${expired.length} po terminie</span>
+  <span class="status urgent">${urgent.length} pilne</span>
+  <span class="status important">${important.length} do odnowienia</span>
+  <span class="status safe">${safe.length} ważne</span>
+ </div>
+
+ <div class="panel">
+  <h3 style="margin-bottom:14px">Brak terminu BHP</h3>
+  ${table(missing,'Wszyscy pracownicy mają wpisany termin BHP.')}
+ </div>
+
+ <div class="panel">
+  <h3 style="margin-bottom:14px">Krytyczne — termin minął</h3>
+  ${table(expired,'Brak przeterminowanych szkoleń BHP.')}
+ </div>
+
+ <div class="panel">
+  <h3 style="margin-bottom:14px">Pilne — mniej niż 30 dni</h3>
+  ${table(urgent,'Brak pilnych terminów BHP.')}
+ </div>
+
+ <div class="panel">
+  <h3 style="margin-bottom:14px">Do odnowienia — 30 do 60 dni</h3>
+  ${table(important,'Brak terminów BHP do odnowienia.')}
+ </div>
+
+ <div class="panel">
+  <h3 style="margin-bottom:14px">Ważne — ponad 60 dni</h3>
+  ${table(safe,'Brak ważnych terminów BHP.')}
+ </div>`;
+}
+
 function medicalView(){
  const expired=employees
   .filter(e=>{const d=daysToDate(e.medical);return d!==null&&d<0})
@@ -667,7 +2712,7 @@ function deadlineView(title,sub,key,expired,urgent,important,safe,tabLabel){
  </div>`;
 }
 
-function documentsView(){return `<div class="page-header"><div><h2>Terminy dokumentów</h2><p>System przechowuje daty ważności badań, umów i BHP — bez przesyłania skanów.</p></div></div><div class="panel empty">Terminy można edytować bezpośrednio w karcie każdego pracownika w zakładkach Badania i Umowy.</div>`}
+function documentsView(){return `<div class="page-header"><div><h2>Terminy dokumentów</h2><p>System przechowuje daty ważności badań, umów i BHP — bez przesyłania skanów.</p></div></div><div class="panel empty">Terminy można edytować bezpośrednio w karcie każdego pracownika w zakładkach Badania, BHP i Umowy.</div>`}
 function notificationsView(){
  const pending=leaveRequests.filter(r=>r.status==='Oczekuje');
 
@@ -806,7 +2851,7 @@ function openEmployee(id){
    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:15px">
     <button class="btn primary" onclick="openEmployeePanel(${e.id})">Pokaż panel pracownika</button>
     <button class="btn" onclick="openEditEmployeeForm(${e.id})">Edytuj dane</button>
-    <button class="btn danger" onclick="confirmDeleteEmployee(${e.id})">Usuń pracownika</button>
+    <button class="btn archive-btn" onclick="openArchiveEmployeeModal(${e.id})">Archiwizuj pracownika</button>
    </div>
   </div>
   <div class="panel">
@@ -814,6 +2859,7 @@ function openEmployee(id){
     <button class="tab active" onclick="showEmployeeTab(${e.id},'data',this)">Dane</button>
     <button class="tab" onclick="showEmployeeTab(${e.id},'leave',this)">Urlopy</button>
     <button class="tab" onclick="showEmployeeTab(${e.id},'medical',this)">Badania</button>
+    <button class="tab" onclick="showEmployeeTab(${e.id},'bhp',this)">BHP</button>
     <button class="tab" onclick="showEmployeeTab(${e.id},'contract',this)">Umowy</button>
    </div>
    <div id="employeeTabContent">
@@ -827,7 +2873,7 @@ function openEmployee(id){
 function openEmployeeTabDirect(employeeId,tab){
  openEmployee(employeeId);
  requestAnimationFrame(()=>{
-  const labels={medical:'Badania',contract:'Umowy',leave:'Urlopy',data:'Dane'};
+  const labels={medical:'Badania',bhp:'BHP',contract:'Umowy',leave:'Urlopy',data:'Dane'};
   const button=[...document.querySelectorAll('.tabs .tab')].find(item=>item.textContent.trim()===labels[tab]);
   if(button)showEmployeeTab(employeeId,tab,button);
  });
@@ -842,7 +2888,16 @@ function employeeDataSection(e){
   <div class="info"><span>Umowa do</span>${fmt(e.contract)}</div><div class="info"><span>Status</span>Aktywny</div>
   ${e.startDate?`<div class="info"><span>Data zatrudnienia</span>${fmt(e.startDate)}</div>`:''}
   ${e.pesel?`<div class="info"><span>PESEL</span>${e.pesel}</div>`:''}
-  ${e.bhp?`<div class="info"><span>BHP ważne do</span>${fmt(e.bhp)}</div>`:''}
+  <div class="info"><span>BHP ważne do</span>${e.bhp?fmt(e.bhp):'Brak terminu'}</div>
+  <div class="info"><span>Stopień niepełnosprawności</span>${e.disabilityDegree||'Brak'}</div>
+  <div class="info"><span>Data zaliczenia do stopnia</span>${e.disabilityFrom?fmt(e.disabilityFrom):'-'}</div>
+  <div class="info"><span>Dodatkowy urlop</span>${
+   hasDisabilityExtraLeave(e)
+    ? '<strong>+10 dni rocznie</strong>'
+    : ['Umiarkowany','Znaczny'].includes(e.disabilityDegree)
+      ? `Prawo od ${e.disabilityFrom?fmt(addYearsToDate(e.disabilityFrom,1)):'uzupełnij datę'}`
+      : 'Nie przysługuje'
+  }</div>
   ${e.contractType?`<div class="info"><span>Rodzaj umowy</span>${e.contractType}</div>`:''}
  </div>`;
 }
@@ -855,6 +2910,7 @@ function showEmployeeTab(employeeId,tab,button){
  if(tab==='data') target.innerHTML=employeeDataSection(e);
  if(tab==='leave') target.innerHTML=employeeLeaveYearsView(employeeId);
  if(tab==='medical') target.innerHTML=employeeMedicalSection(e);
+ if(tab==='bhp') target.innerHTML=employeeBhpSection(e);
  if(tab==='contract') target.innerHTML=employeeContractSection(e);
 }
 
@@ -890,7 +2946,7 @@ function employeeMedicalSection(e){
      </div>
     </div>
     <footer>
-     <button type="submit" class="btn primary">Dodaj do historii</button>
+     <button type="submit" class="btn primary">Zapisz badanie</button>
     </footer>
    </form>
   </div>
@@ -909,6 +2965,55 @@ function employeeMedicalSection(e){
      <span class="status ${dateStatusClass(item.validTo)}">${dateStatusLabel(item.validTo)}</span>
     </div>`).join('') : '<div class="empty">Brak historii badań.</div>'}
   </div>`;
+}
+
+
+function employeeBhpSection(e){
+ return `
+  <div class="page-header" style="margin-bottom:16px">
+   <div>
+    <h3>Szkolenie BHP</h3>
+    <p>Termin ważności szkolenia BHP pracownika.</p>
+   </div>
+   <span class="status ${e.bhp?dateStatusClass(e.bhp):'attention'}">${e.bhp?dateStatusLabel(e.bhp):'Brak terminu'}</span>
+  </div>
+
+  <div class="panel" style="box-shadow:none;margin-bottom:18px">
+   <h3>Ustaw lub zmień termin BHP</h3>
+   <form onsubmit="saveEmployeeBhp(event,${e.id})">
+    <div class="form-grid">
+     <div class="field">
+      <label>BHP ważne do</label>
+      <input id="employeeBhpDate" type="date" value="${e.bhp||''}" required>
+     </div>
+     <div class="field full">
+      <label>Uwagi</label>
+      <textarea id="employeeBhpNotes" rows="3" placeholder="Np. szkolenie okresowe, instruktaż stanowiskowy...">${e.bhpNotes||''}</textarea>
+     </div>
+    </div>
+    <footer>
+     <button type="submit" class="btn primary">Zapisz termin BHP</button>
+    </footer>
+   </form>
+  </div>
+
+  <div class="profile-data">
+   <div class="info"><span>Aktualny termin</span>${e.bhp?fmt(e.bhp):'Brak terminu'}</div>
+   <div class="info"><span>Status</span>${e.bhp?dateStatusLabel(e.bhp):'Do uzupełnienia'}</div>
+   <div class="info"><span>Uwagi</span>${e.bhpNotes||'-'}</div>
+  </div>`;
+}
+
+function saveEmployeeBhp(event,employeeId){
+ event.preventDefault();
+ const employee=employees.find(item=>item.id===employeeId);
+ if(!employee) return;
+
+ employee.bhp=document.getElementById('employeeBhpDate').value;
+ employee.bhpNotes=document.getElementById('employeeBhpNotes').value.trim();
+
+ showToast('Termin BHP został zapisany');
+ openEmployeeTabDirect(employeeId,'bhp');
 }
 
 function employeeContractSection(e){
@@ -957,7 +3062,7 @@ function employeeContractSection(e){
      </div>
     </div>
     <footer>
-     <button type="submit" class="btn primary">Dodaj do historii</button>
+     <button type="submit" class="btn primary">Zapisz nieobecność</button>
     </footer>
    </form>
   </div>
@@ -1138,6 +3243,19 @@ function employeeLeaveYearsView(employeeId){
     </p>
    </div>
   </div>
+  ${!employeeMode&&!managerMode?`<div class="panel" style="box-shadow:none;margin:18px 0">
+   <div style="display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap">
+    <div>
+     <h3>Administracja urlopami i dane historyczne</h3>
+     <p style="color:var(--muted);margin-top:5px">Możesz uzupełniać bilanse oraz ręcznie dodawać urlopy, chorobowe i pozostałe nieobecności.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+     <button class="btn" onclick="openHistoricalBalanceForm(${employeeId})">Dodaj / popraw bilans roku</button>
+     <button class="btn primary" onclick="openHistoricalLeaveForm(${employeeId})">Dodaj nieobecność ręcznie</button>
+    </div>
+   </div>
+  </div>`:''}
+
   <div class="leave-years">
    ${balances.map((balance,index)=>leaveYearAccordion(employeeId,balance,index===0)).join('')}
   </div>`;
@@ -1159,6 +3277,9 @@ function leaveYearAccordion(employeeId,balance,isCurrent){
     </div>
    </summary>
    <div class="year-body">
+    ${!employeeMode&&!managerMode?`<div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+     <button class="btn" onclick="openHistoricalBalanceForm(${employeeId},${balance.year})">Edytuj bilans ${balance.year}</button>
+    </div>`:''}
     <div class="year-numbers">
      <div class="year-number"><span>Limit podstawowy</span><strong>${balance.base}</strong></div>
      <div class="year-number"><span>Przeniesione</span><strong>${balance.carried}</strong></div>
@@ -1167,16 +3288,369 @@ function leaveYearAccordion(employeeId,balance,isCurrent){
     </div>
     ${requests.length?`
      <table>
-      <thead><tr><th>Rodzaj</th><th>Od</th><th>Do</th><th>Dni</th><th>Status</th></tr></thead>
-      <tbody>${requests.map(r=>`<tr><td>${r.type}</td><td>${fmt(r.from)}</td><td>${fmt(r.to)}</td><td>${r.days}</td><td>${leaveStatusBadge(r)}</td></tr>`).join('')}</tbody>
+      <thead><tr><th>Rodzaj</th><th>Od</th><th>Do</th><th>Dni</th><th>Status</th><th>Akcja</th></tr></thead>
+      <tbody>${requests.map(r=>`<tr>
+       <td>${r.type}${r.interrupted?'<br><small style="color:var(--muted)">Przerwany przez chorobę</small>':''}</td>
+       <td>${fmt(r.from)}</td>
+       <td>${fmt(r.to)}</td>
+       <td>${r.days}</td>
+       <td>${leaveStatusBadge(r)}</td>
+       <td>
+        ${!employeeMode&&!managerMode?`<div class="row-actions">
+          <button type="button" class="icon-btn" data-tooltip="Edytuj" aria-label="Edytuj" onclick="editAbsenceRecord(${r.id})">✏️</button>
+          <button type="button" class="icon-btn danger-icon" data-tooltip="Usuń" aria-label="Usuń" onclick="deleteAbsenceRecord(${r.id})">🗑️</button>
+          ${canInterruptLeave(r)?`<button type="button" class="icon-btn medical-icon" data-tooltip="Przerwij chorobowym" aria-label="Przerwij chorobowym" onclick="openInterruptLeaveForm(${r.id})">🩺</button>`:''}
+          ${r.interrupted?`<button type="button" class="icon-btn" data-tooltip="Edytuj przerwanie" aria-label="Edytuj przerwanie" onclick="editInterruptedLeave(${r.id})">📝</button>
+          <button type="button" class="icon-btn warning-icon" data-tooltip="Cofnij przerwanie" aria-label="Cofnij przerwanie" onclick="undoLeaveInterruption(${r.id})">↩️</button>`:''}
+        </div>`:employeeMode&&r.status==='Oczekuje'&&r.employeeId===selectedEmployeeId?`<div class="row-actions">
+          <button type="button" class="icon-btn" data-tooltip="Edytuj wniosek" aria-label="Edytuj wniosek" onclick="editEmployeePendingLeave(${r.id})">✏️</button>
+          <button type="button" class="icon-btn danger-icon" data-tooltip="Usuń wniosek" aria-label="Usuń wniosek" onclick="deleteEmployeePendingLeave(${r.id})">🗑️</button>
+        </div>`:'—'}
+       </td>
+      </tr>`).join('')}</tbody>
      </table>
      <div class="leave-mobile-list">
-      ${requests.map(r=>`<div class="leave-mobile-item"><strong>${r.type} · ${r.days} ${r.days===1?'dzień':'dni'}</strong><span>${fmt(r.from)} – ${fmt(r.to)}</span><span style="display:inline-block;margin-top:8px">${leaveStatusBadge(r)}</span></div>`).join('')}
+      ${requests.map(r=>`<div class="leave-mobile-item">
+       <strong>${r.type} · ${r.days} ${r.days===1?'dzień':'dni'}</strong>
+       <span>${fmt(r.from)} – ${fmt(r.to)}</span>
+       ${r.interrupted?'<span style="color:var(--muted);margin-top:5px">Urlop przerwany przez chorobę</span>':''}
+       <span style="display:inline-block;margin-top:8px">${leaveStatusBadge(r)}</span>
+       ${!employeeMode&&!managerMode?`<div class="row-actions mobile-actions">
+        <button type="button" class="icon-btn" data-tooltip="Edytuj" aria-label="Edytuj" onclick="editAbsenceRecord(${r.id})">✏️</button>
+        <button type="button" class="icon-btn danger-icon" data-tooltip="Usuń" aria-label="Usuń" onclick="deleteAbsenceRecord(${r.id})">🗑️</button>
+        ${canInterruptLeave(r)?`<button type="button" class="icon-btn medical-icon" data-tooltip="Przerwij chorobowym" aria-label="Przerwij chorobowym" onclick="openInterruptLeaveForm(${r.id})">🩺</button>`:''}
+        ${r.interrupted?`<button type="button" class="icon-btn" data-tooltip="Edytuj przerwanie" aria-label="Edytuj przerwanie" onclick="editInterruptedLeave(${r.id})">📝</button>
+        <button type="button" class="icon-btn warning-icon" data-tooltip="Cofnij przerwanie" aria-label="Cofnij przerwanie" onclick="undoLeaveInterruption(${r.id})">↩️</button>`:''}
+       </div>`:employeeMode&&r.status==='Oczekuje'&&r.employeeId===selectedEmployeeId?`<div class="row-actions mobile-actions">
+        <button type="button" class="icon-btn" data-tooltip="Edytuj wniosek" aria-label="Edytuj wniosek" onclick="editEmployeePendingLeave(${r.id})">✏️</button>
+        <button type="button" class="icon-btn danger-icon" data-tooltip="Usuń wniosek" aria-label="Usuń wniosek" onclick="deleteEmployeePendingLeave(${r.id})">🗑️</button>
+       </div>`:''}
+      </div>`).join('')}
      </div>
     `:'<div class="empty">Brak zapisanych urlopów w tym roku.</div>'}
    </div>
   </details>`;
 }
+
+
+function renderManager(view='managerHome'){
+ document.getElementById('adminNav').classList.add('hidden');
+ document.getElementById('employeeNav').classList.add('hidden');
+ document.getElementById('managerNav').classList.remove('hidden');
+
+ const company=companies.find(c=>c.id===managerCompanyId)||companies[0];
+ const companyEmployees=employees.filter(e=>e.companyId===company.id);
+
+ document.getElementById('modeLabel').textContent=`Szef firmy · ${company.name}`;
+ document.getElementById('topAvatar').textContent=company.name.split(' ').map(x=>x[0]).join('').slice(0,2);
+
+ document.querySelectorAll('[data-manager-view]').forEach(button=>{
+  button.classList.toggle('active',button.dataset.managerView===view);
+ });
+
+ const views={
+  managerHome:()=>managerHomeView(company,companyEmployees),
+  managerEmployees:()=>managerEmployeesView(company,companyEmployees),
+  managerLeaves:()=>managerLeavesView(company,companyEmployees),
+  managerMedical:()=>managerMedicalView(company,companyEmployees),
+  managerContracts:()=>managerContractsView(company,companyEmployees),
+  managerInbox:()=>managerInboxView(company,companyEmployees)
+ };
+
+ content.innerHTML=`<div class="employee-view">${(views[view]||views.managerHome)()}</div>`;
+}
+
+function managerHomeView(company,companyEmployees){
+ const pending=leaveRequests.filter(r=>{
+  const employee=companyEmployees.find(e=>e.id===r.employeeId);
+  ensureLeaveApprovalState(r);
+  return employee && r.status==='Oczekuje' && !r.managerApproval;
+ });
+ const medicalUrgent=companyEmployees.filter(e=>{
+  const d=daysToDate(e.medical);
+  return d!==null&&d<30;
+ });
+ const contractUrgent=companyEmployees.filter(e=>{
+  const d=daysToDate(e.contract);
+  return e.contract!=='Bezterminowa'&&d!==null&&d<30;
+ });
+
+ return `<div class="page-header">
+  <div><h2>${company.name}</h2><p>Panel szefa firmy — tylko dane własnych pracowników.</p></div>
+ </div>
+
+ <div class="grid4">
+  <div class="card"><small>Pracownicy</small><strong>${companyEmployees.length}</strong></div>
+  <div class="card"><small>Wnioski oczekujące</small><strong>${pending.length}</strong></div>
+  <div class="card"><small>Badania pilne</small><strong>${medicalUrgent.length}</strong></div>
+  <div class="card"><small>Umowy pilne</small><strong>${contractUrgent.length}</strong></div>
+ </div>
+
+ <div class="panel">
+  <h3>Wnioski urlopowe do decyzji</h3>
+  ${pending.length?pending.map(r=>{
+   const e=companyEmployees.find(x=>x.id===r.employeeId);
+   return `<div style="padding:16px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap">
+    <div><strong>${e.name}</strong><div style="color:var(--muted);margin-top:5px">${r.type} · ${fmt(r.from)} – ${fmt(r.to)} · ${r.days} dni</div></div>
+    <button class="btn primary" onclick="openLeaveRequest(${r.id})">Rozpatrz</button>
+   </div>`;
+  }).join(''):'<div class="empty">Brak oczekujących wniosków.</div>'}
+ </div>`;
+}
+
+function managerEmployeesView(company,companyEmployees){
+ return `<div class="page-header"><div><h2>Moi pracownicy</h2><p>${company.name}</p></div></div>
+ <div class="panel">
+  <table><thead><tr><th>Pracownik</th><th>Stanowisko</th><th>Urlop pozostały</th><th>Badania</th><th>Umowa</th></tr></thead>
+  <tbody>${companyEmployees.map(e=>`<tr>
+   <td><span class="link" onclick="openEmployee(${e.id})">${e.name}</span></td>
+   <td>${e.position}</td>
+   <td>${e.leaveTotal-e.leaveUsed} dni</td>
+   <td>${fmt(e.medical)}</td>
+   <td>${fmt(e.contract)}</td>
+  </tr>`).join('')}</tbody></table>
+ </div>`;
+}
+
+function managerLeavesView(company,companyEmployees){
+ const requests=leaveRequests.filter(r=>companyEmployees.some(e=>e.id===r.employeeId));
+ return `<div class="page-header"><div><h2>Urlopy pracowników</h2><p>${company.name}</p></div></div>
+ <div class="panel">
+  ${requests.length?`<table><thead><tr><th>Pracownik</th><th>Rodzaj</th><th>Od</th><th>Do</th><th>Dni</th><th>Status</th></tr></thead>
+  <tbody>${requests.sort((a,b)=>b.from.localeCompare(a.from)).map(r=>{
+   const e=companyEmployees.find(x=>x.id===r.employeeId);
+   return `<tr><td>${e?.name||'-'}</td><td>${r.type}</td><td>${fmt(r.from)}</td><td>${fmt(r.to)}</td><td>${r.days}</td><td>${leaveStatusBadge(r)}</td></tr>`;
+  }).join('')}</tbody></table>`:'<div class="empty">Brak zapisanych urlopów.</div>'}
+ </div>`;
+}
+
+function managerMedicalView(company,companyEmployees){
+ return `<div class="page-header"><div><h2>Badania pracowników</h2><p>${company.name}</p></div></div>
+ <div class="panel"><table><thead><tr><th>Pracownik</th><th>Stanowisko</th><th>Ważne do</th><th>Status</th></tr></thead>
+ <tbody>${companyEmployees.map(e=>`<tr><td>${e.name}</td><td>${e.position}</td><td>${fmt(e.medical)}</td><td><span class="status ${dateStatusClass(e.medical)}">${dateStatusLabel(e.medical)}</span></td></tr>`).join('')}</tbody></table></div>`;
+}
+
+function managerContractsView(company,companyEmployees){
+ return `<div class="page-header"><div><h2>Umowy pracowników</h2><p>${company.name}</p></div></div>
+ <div class="panel"><table><thead><tr><th>Pracownik</th><th>Rodzaj</th><th>Termin</th><th>Status</th></tr></thead>
+ <tbody>${companyEmployees.map(e=>`<tr><td>${e.name}</td><td>${e.contractType||'-'}</td><td>${fmt(e.contract)}</td><td><span class="status ${e.contract==='Bezterminowa'?'safe':dateStatusClass(e.contract)}">${e.contract==='Bezterminowa'?'Bezterminowa':dateStatusLabel(e.contract)}</span></td></tr>`).join('')}</tbody></table></div>`;
+}
+
+
+
+function openHistoricalBalanceForm(employeeId,selectedYear=''){
+ const employee=employees.find(e=>e.id===employeeId);
+ if(!employee) return;
+
+ const existing=selectedYear
+  ? leaveBalances.find(item=>item.employeeId===employeeId&&item.year===Number(selectedYear))
+  : null;
+
+ openModal(existing?'Edytuj bilans urlopu':'Dodaj bilans poprzedniego roku',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Rok</label>
+    <input id="historyBalanceYear" type="number" min="2000" max="2100" value="${existing?.year||new Date().getFullYear()-1}" ${existing?'readonly':''} required>
+   </div>
+   <div class="field">
+    <label>Limit podstawowy</label>
+    <input id="historyBalanceBase" type="number" min="0" step="0.5" value="${existing?.base??26}" required>
+   </div>
+   <div class="field">
+    <label>Przeniesione z poprzedniego roku</label>
+    <input id="historyBalanceCarried" type="number" min="0" step="0.5" value="${existing?.carried??0}" required>
+   </div>
+   <div class="field">
+    <label>Wykorzystano w tym roku</label>
+    <input id="historyBalanceUsed" type="number" min="0" step="0.5" value="${existing?.used??0}" required>
+   </div>
+   <div class="field full">
+    <label>Uwagi migracyjne</label>
+    <textarea id="historyBalanceNotes" rows="3" placeholder="Np. dane przeniesione z poprzedniego programu">${existing?.notes||''}</textarea>
+   </div>
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz bilans</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const year=Number(historyBalanceYear.value);
+  const base=Number(historyBalanceBase.value);
+  const carried=Number(historyBalanceCarried.value);
+  const used=Number(historyBalanceUsed.value);
+
+  if(used>base+carried){
+   showToast('Wykorzystane dni nie mogą przekraczać dostępnego limitu');
+   return;
+  }
+
+  let balance=leaveBalances.find(item=>item.employeeId===employeeId&&item.year===year);
+
+  if(balance){
+   balance.base=base;
+   balance.carried=carried;
+   balance.used=used;
+   balance.notes=historyBalanceNotes.value.trim();
+  }else{
+   leaveBalances.push({
+    employeeId,
+    year,
+    base,
+    carried,
+    used,
+    notes:historyBalanceNotes.value.trim()
+   });
+  }
+
+  if(year===new Date().getFullYear()){
+   employee.leaveTotal=base+carried;
+   employee.leaveUsed=used;
+  }
+
+  closeModal();
+  showToast(`Bilans za ${year} został zapisany`);
+  openEmployeeTabDirect(employeeId,'leave');
+ });
+}
+
+function openHistoricalLeaveForm(employeeId){
+ const employee=employees.find(e=>e.id===employeeId);
+ if(!employee) return;
+
+ openModal('Dodaj nieobecność ręcznie',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Rodzaj nieobecności</label>
+    <select id="historyLeaveType" onchange="toggleHistoricalCustomLeaveType()">
+     <option>Urlop wypoczynkowy</option>
+     <option>Urlop na żądanie</option>
+     <option>Urlop okolicznościowy</option>
+     <option>Urlop macierzyński</option>
+     <option>Urlop rodzicielski</option>
+     <option>Urlop ojcowski</option>
+     <option>Urlop wychowawczy</option>
+     <option>Urlop bezpłatny</option>
+     <option>Urlop opiekuńczy</option>
+     <option>Opieka nad dzieckiem</option>
+     <option>Zwolnienie od pracy z powodu siły wyższej</option>
+     <option>Zwolnienie lekarskie</option>
+     <option>Inny</option>
+    </select>
+    <input id="historyCustomLeaveType" placeholder="Wpisz własny rodzaj" style="display:none;margin-top:10px">
+   </div>
+   <div class="field">
+    <label>Status</label>
+    <select id="historyLeaveStatus">
+     <option>Zaakceptowany</option>
+     <option>Odrzucony</option>
+    </select>
+   </div>
+   <div class="field">
+    <label>Data od</label>
+    <input id="historyLeaveFrom" type="date" required onchange="calculateHistoricalLeaveDays()">
+   </div>
+   <div class="field">
+    <label>Data do</label>
+    <input id="historyLeaveTo" type="date" required onchange="calculateHistoricalLeaveDays()">
+   </div>
+   <div class="field">
+    <label>Liczba dni</label>
+    <input id="historyLeaveDays" type="number" min="0.5" step="0.5" required>
+   </div>
+   <div class="field">
+    <label>Wpływ na bilans</label>
+    <label style="display:flex;align-items:center;gap:9px;padding:11px 0">
+     <input id="historyAffectsBalance" type="checkbox" style="width:auto">
+     Dodaj te dni do wykorzystania w bilansie roku
+    </label>
+   </div>
+  </div>
+  <div class="status important" style="display:block;padding:12px;margin-top:10px">
+   Jeśli wcześniej wpisano już łączną liczbę wykorzystanych dni za dany rok, pozostaw pole „Wpływ na bilans” odznaczone, aby nie policzyć urlopu podwójnie.
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz nieobecność</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  if(historyLeaveType.value==='Inny'&&!historyCustomLeaveType.value.trim()){
+   showToast('Wpisz własny rodzaj nieobecności');
+   return;
+  }
+
+  if(historyLeaveTo.value<historyLeaveFrom.value){
+   showToast('Data zakończenia nie może być wcześniejsza niż rozpoczęcie');
+   return;
+  }
+
+  const type=historyLeaveType.value==='Inny'
+   ? historyCustomLeaveType.value.trim()
+   : historyLeaveType.value;
+
+  const days=Number(historyLeaveDays.value);
+  const year=Number(historyLeaveFrom.value.slice(0,4));
+
+  leaveRequests.push({
+   id:Date.now(),
+   employeeId,
+   type,
+   from:historyLeaveFrom.value,
+   to:historyLeaveTo.value,
+   days,
+   status:historyLeaveStatus.value,
+   managerApproval:historyLeaveStatus.value==='Zaakceptowany',
+   accountantApproval:historyLeaveStatus.value==='Zaakceptowany',
+   balanceApplied:historyAffectsBalance.checked&&historyLeaveStatus.value==='Zaakceptowany',
+   historical:true
+  });
+
+  if(historyAffectsBalance.checked&&historyLeaveStatus.value==='Zaakceptowany'){
+   let balance=leaveBalances.find(item=>item.employeeId===employeeId&&item.year===year);
+   if(!balance){
+    balance={employeeId,year,base:26,carried:0,used:0};
+    leaveBalances.push(balance);
+   }
+   balance.used+=days;
+  }
+
+  closeModal();
+  showToast('Urlop historyczny został dodany');
+  openEmployeeTabDirect(employeeId,'leave');
+ });
+}
+
+function toggleHistoricalCustomLeaveType(){
+ const select=document.getElementById('historyLeaveType');
+ const input=document.getElementById('historyCustomLeaveType');
+ if(!select||!input) return;
+ input.style.display=select.value==='Inny'?'block':'none';
+ if(select.value!=='Inny') input.value='';
+}
+
+function calculateHistoricalLeaveDays(){
+ const from=document.getElementById('historyLeaveFrom')?.value;
+ const to=document.getElementById('historyLeaveTo')?.value;
+ const input=document.getElementById('historyLeaveDays');
+ if(!from||!to||!input) return;
+
+ const start=new Date(from+'T00:00:00');
+ const end=new Date(to+'T00:00:00');
+ if(end<start){input.value='';return}
+
+ let count=0;
+ const cursor=new Date(start);
+ while(cursor<=end){
+  const day=cursor.getDay();
+  if(day!==0&&day!==6) count++;
+  cursor.setDate(cursor.getDate()+1);
+ }
+ input.value=count;
+}
+
 
 function openEmployeePanel(id){selectedEmployeeId=id;employeeMode=true;renderEmployee()}
 
@@ -1187,21 +3661,1822 @@ function renderEmployee(view='employeeHome'){
  document.getElementById('modeLabel').textContent='Pracownik';
  document.getElementById('topAvatar').textContent=e.name.split(' ').map(x=>x[0]).join('');
  document.querySelectorAll('[data-employee-view]').forEach(b=>b.classList.toggle('active',b.dataset.employeeView===view));
- const views={employeeHome:employeeHomeView,employeeRequest:employeeRequestView,employeeHistory:employeeHistoryView,employeeProfile:employeeProfileView};
+ const views={employeeHome:employeeHomeView,employeeRequest:employeeRequestView,employeeHistory:employeeHistoryView,employeeCalendar:employeeCalendarView,employeeProfile:employeeProfileView,employeeInbox:employeeInboxView};
  content.innerHTML=`<div class="employee-view">${views[view](e)}</div>`;
+ const employeeCounter=document.getElementById('employeeInboxCount');
+ if(employeeCounter) employeeCounter.textContent=unreadEmployeeThreads(e.id)?`(${unreadEmployeeThreads(e.id)})`:'';
 }
 
-function employeeHomeView(e){return `<div class="hero"><div><h2>${e.name}</h2><p>${companyName(e.companyId)} · ${e.position}</p></div><button class="btn" onclick="renderEmployee('employeeRequest')">Złóż wniosek urlopowy</button></div>
- <div class="panel">${employeeLeaveYearsView(e.id)}</div>`}
+
+function formatMessageDate(value){
+ const date=new Date(value);
+ return date.toLocaleString('pl-PL',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+function threadEmployee(thread){
+ return employees.find(employee=>employee.id===thread.employeeId);
+}
+
+function unreadAdminThreads(){
+ return inboxThreads.filter(thread=>!thread.readByAccountant).length;
+}
+
+function unreadEmployeeThreads(employeeId){
+ return inboxThreads.filter(thread=>thread.employeeId===employeeId&&!thread.readByEmployee).length;
+}
+
+function messageStatusBadge(thread){
+ const cls=thread.status==='Zamknięte'?'safe':thread.status==='Odpowiedziano'?'ok':'warn';
+ return `<span class="status ${cls}">${thread.status}</span>`;
+}
+
+
+
+function editAbsenceRecord(requestId){
+ if(employeeMode||managerMode){
+  showToast('Tylko księgowa jako administrator może edytować nieobecności');
+  return;
+ }
+
+ const record=leaveRequests.find(r=>r.id===requestId);
+ if(!record) return;
+
+ openModal('Edytuj nieobecność',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Rodzaj</label>
+    <select id="editAbsenceType">
+     ${[
+      'Urlop wypoczynkowy','Urlop na żądanie','Urlop okolicznościowy',
+      'Urlop macierzyński','Urlop rodzicielski','Urlop ojcowski',
+      'Urlop wychowawczy','Urlop bezpłatny','Urlop opiekuńczy',
+      'Opieka nad dzieckiem','Zwolnienie od pracy z powodu siły wyższej',
+      'Zwolnienie lekarskie'
+     ].map(type=>`<option ${type===record.type?'selected':''}>${type}</option>`).join('')}
+    </select>
+   </div>
+   <div class="field">
+    <label>Status</label>
+    <select id="editAbsenceStatus">
+     ${['Oczekuje','Zaakceptowany','Odrzucony','Anulowany'].map(status=>`<option ${status===record.status?'selected':''}>${status}</option>`).join('')}
+    </select>
+   </div>
+   <div class="field">
+    <label>Od</label>
+    <input id="editAbsenceFrom" type="date" value="${record.from}" required>
+   </div>
+   <div class="field">
+    <label>Do</label>
+    <input id="editAbsenceTo" type="date" value="${record.to}" required>
+   </div>
+   <div class="field">
+    <label>Liczba dni</label>
+    <input id="editAbsenceDays" type="number" min="0" step="0.5" value="${record.days}" required>
+   </div>
+   <div class="field full">
+    <label>Uwagi</label>
+    <textarea id="editAbsenceNotes" rows="4">${record.notes||''}</textarea>
+   </div>
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz zmiany</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  if(editAbsenceTo.value<editAbsenceFrom.value){
+   showToast('Data zakończenia nie może być wcześniejsza niż data rozpoczęcia');
+   return;
+  }
+
+  record.type=editAbsenceType.value;
+  record.status=editAbsenceStatus.value;
+  record.from=editAbsenceFrom.value;
+  record.to=editAbsenceTo.value;
+  record.days=Number(editAbsenceDays.value);
+  record.notes=editAbsenceNotes.value.trim();
+
+  if(record.status==='Zaakceptowany'){
+   record.managerApproval=true;
+   record.accountantApproval=true;
+  }
+
+  closeModal();
+  showToast('Nieobecność została zaktualizowana');
+  openEmployeeTabDirect(record.employeeId,'leave');
+ });
+}
+
+function deleteAbsenceRecord(requestId){
+ if(employeeMode||managerMode){
+  showToast('Tylko księgowa jako administrator może usuwać nieobecności');
+  return;
+ }
+
+ const record=leaveRequests.find(r=>r.id===requestId);
+ if(!record) return;
+
+ openModal('Usuń nieobecność',`
+  <div class="status danger" style="display:block;padding:14px">
+   Czy na pewno usunąć wpis „${record.type}” z okresu ${fmt(record.from)} – ${fmt(record.to)}?
+  </div>
+  <p style="margin-top:14px;color:var(--muted)">
+   ${record.linkedLeaveId||record.linkedSickId?'Powiązane wpisy zostaną odpowiednio uporządkowane.':''}
+  </p>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="button" class="btn danger" onclick="confirmDeleteAbsenceRecord(${requestId})">Usuń wpis</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function confirmDeleteAbsenceRecord(requestId){
+ const record=leaveRequests.find(r=>r.id===requestId);
+ if(!record) return;
+
+ const employeeId=record.employeeId;
+
+ if(record.type==='Zwolnienie lekarskie'&&record.linkedLeaveId){
+  const linked=leaveRequests.find(r=>r.id===record.linkedLeaveId);
+  if(linked&&linked.originalSnapshot){
+   const snapshot=linked.originalSnapshot;
+   linked.from=snapshot.from;
+   linked.to=snapshot.to;
+   linked.days=snapshot.days;
+   linked.status='Zaakceptowany';
+   linked.interrupted=false;
+   linked.interruptedFrom=null;
+   linked.cancelReason='';
+   linked.linkedSickId=null;
+   linked.originalSnapshot=null;
+  }
+ }
+
+ if(record.interrupted&&record.linkedSickId){
+  leaveRequests=leaveRequests.filter(r=>r.id!==record.linkedSickId);
+ }
+
+ leaveRequests=leaveRequests.filter(r=>r.id!==requestId);
+ closeModal();
+ showToast('Nieobecność została usunięta');
+ openEmployeeTabDirect(employeeId,'leave');
+}
+
+function editSickLeave(requestId){
+ if(employeeMode||managerMode){
+  showToast('Tylko księgowa jako administrator może edytować chorobowe');
+  return;
+ }
+
+ const sick=leaveRequests.find(r=>r.id===requestId&&r.type==='Zwolnienie lekarskie');
+ if(!sick) return;
+
+ openModal('Edytuj zwolnienie lekarskie',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Chorobowe od</label>
+    <input id="adminSickFrom" type="date" value="${sick.from}" required>
+   </div>
+   <div class="field">
+    <label>Chorobowe do</label>
+    <input id="adminSickTo" type="date" value="${sick.to}" required>
+   </div>
+   <div class="field">
+    <label>Liczba dni roboczych</label>
+    <input id="adminSickDays" type="number" min="0" step="1" value="${sick.days}" required>
+   </div>
+   <div class="field full">
+    <label>Uwagi</label>
+    <textarea id="adminSickNotes" rows="4">${sick.notes||''}</textarea>
+   </div>
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz zmiany</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  if(adminSickTo.value<adminSickFrom.value){
+   showToast('Data zakończenia nie może być wcześniejsza niż data rozpoczęcia');
+   return;
+  }
+
+  sick.from=adminSickFrom.value;
+  sick.to=adminSickTo.value;
+  sick.days=Number(adminSickDays.value);
+  sick.notes=adminSickNotes.value.trim();
+
+  if(sick.linkedLeaveId){
+   const linked=leaveRequests.find(r=>r.id===sick.linkedLeaveId);
+   if(linked&&linked.interrupted) recalculateInterruptedLeave(linked,sick);
+  }
+
+  closeModal();
+  showToast('Chorobowe zostało poprawione');
+  openEmployeeTabDirect(sick.employeeId,'leave');
+ });
+}
+
+function recalculateInterruptedLeave(leave,sick){
+ const base=leave.originalSnapshot;
+ if(!base) return;
+
+ const employee=employees.find(e=>e.id===leave.employeeId);
+ const balance=leaveBalances.find(item=>item.employeeId===leave.employeeId&&item.year===Number(base.from.slice(0,4)));
+
+ // Przywróć bazowy bilans, a następnie policz nowy wpływ.
+ if(base.balanceApplied){
+  const previousOverlapEnd=leave.interruptedFrom&&leave.originalTo
+   ? (sick.to<base.to?sick.to:base.to)
+   : base.to;
+ }
+
+ const from=sick.from;
+ const to=sick.to;
+ const overlapTo=to<base.to?to:base.to;
+ const restored=from<=base.to?workingDaysBetween(from,overlapTo):0;
+ const remaining=from<=base.from?0:workingDaysBetween(base.from,previousCalendarDay(from));
+
+ leave.from=base.from;
+ leave.to=remaining===0?base.from:previousCalendarDay(from);
+ leave.days=remaining;
+ leave.status=remaining===0?'Anulowany':'Zaakceptowany';
+ leave.cancelReason=remaining===0?'Urlop w całości zastąpiony zwolnieniem lekarskim':'';
+ leave.interruptedFrom=from;
+
+ // Ustaw bilans na bazową wartość minus dni objęte chorobowym.
+ if(base.balanceApplied){
+  const originalUsedWithoutThisLeave=Math.max(0,(balance?.used??employee.leaveUsed)-leave.originalDays);
+  const newUsed=originalUsedWithoutThisLeave+remaining;
+  if(balance) balance.used=Math.max(0,newUsed);
+  employee.leaveUsed=Math.max(0,newUsed);
+ }
+}
+
+function deleteSickLeave(requestId){
+ if(employeeMode||managerMode){
+  showToast('Tylko księgowa jako administrator może usunąć chorobowe');
+  return;
+ }
+
+ const sick=leaveRequests.find(r=>r.id===requestId&&r.type==='Zwolnienie lekarskie');
+ if(!sick) return;
+
+ const linked=leaveRequests.find(r=>r.id===sick.linkedLeaveId);
+ const employee=employees.find(e=>e.id===sick.employeeId);
+
+ openModal('Usuń zwolnienie lekarskie',`
+  <div class="status danger" style="display:block;padding:14px">
+   Czy na pewno usunąć zwolnienie lekarskie ${fmt(sick.from)} – ${fmt(sick.to)}?
+  </div>
+  <p style="margin-top:14px;color:var(--muted)">
+   ${linked?'Powiązane przerwanie urlopu zostanie automatycznie cofnięte.':'Operacja usunie wpis z historii pracownika.'}
+  </p>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="button" class="btn danger" onclick="confirmDeleteSickLeave(${requestId})">Usuń chorobowe</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function confirmDeleteSickLeave(requestId){
+ const sick=leaveRequests.find(r=>r.id===requestId&&r.type==='Zwolnienie lekarskie');
+ if(!sick) return;
+
+ const linked=leaveRequests.find(r=>r.id===sick.linkedLeaveId);
+ const employeeId=sick.employeeId;
+
+ if(linked&&linked.originalSnapshot){
+  const employee=employees.find(e=>e.id===linked.employeeId);
+  const snapshot=linked.originalSnapshot;
+
+  linked.from=snapshot.from;
+  linked.to=snapshot.to;
+  linked.days=snapshot.days;
+  linked.status='Zaakceptowany';
+  linked.interrupted=false;
+  linked.interruptedFrom=null;
+  linked.cancelReason='';
+  linked.linkedSickId=null;
+  linked.originalSnapshot=null;
+
+  if(snapshot.balanceApplied){
+   const balance=leaveBalances.find(item=>item.employeeId===linked.employeeId&&item.year===Number(snapshot.from.slice(0,4)));
+   if(balance) balance.used+=Math.max(0,snapshot.days-linked.days);
+   employee.leaveUsed=Math.max(employee.leaveUsed,snapshot.days);
+  }
+ }
+
+ leaveRequests=leaveRequests.filter(r=>r.id!==requestId);
+ closeModal();
+ showToast('Chorobowe zostało usunięte');
+ openEmployeeTabDirect(employeeId,'leave');
+}
+
+let inboxFilter='all';
+
+function setInboxFilter(filter){
+ inboxFilter=filter;
+ selectedInboxContactOnly=false;
+ selectedInboxThreadId=null;
+ currentView='inbox';
+ render();
+}
+
+function threadDirectionForAccountant(thread){
+ const last=thread.messages[thread.messages.length-1];
+ return last?.senderRole==='accountant'?'sent':'incoming';
+}
+
+
+let selectedInboxContact={type:'employee',id:1};
+let selectedCompanyFilters=[];
+let selectedInboxContactOnly=false;
+let selectedInboxThreadId=1;
+let pendingChatAttachment=null;
+
+function contactMeta(type,id){
+ if(type==='employee'){
+  const employee=employees.find(item=>item.id===id);
+  return {
+   name:employee?.name||'Pracownik',
+   subtitle:employee?`${companyName(employee.companyId)} · ${employee.position||'Pracownik'}`:'',
+   initials:employee?.name.split(' ').map(part=>part[0]).join('').slice(0,2)||'PR',
+   companyId:employee?.companyId||null,
+   employeeId:employee?.id||null
+  };
+ }
+
+ const company=companies.find(item=>item.id===id);
+ return {
+  name:company?.contact||'Szef firmy',
+  subtitle:company?.name||'Firma',
+  initials:(company?.contact||company?.name||'SF').split(' ').map(part=>part[0]).join('').slice(0,2),
+  companyId:company?.id||null,
+  employeeId:null
+ };
+}
+
+function contactThreads(type,id){
+ return inboxThreads
+  .filter(thread=>{
+   if(type==='employee'){
+    return thread.employeeId===id && thread.recipientType!=='manager';
+   }
+   return thread.companyId===id && thread.recipientType==='manager';
+  })
+  .sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+}
+
+function ensureSelectedThread(){
+ const threads=filteredThreadsForContact();
+
+ if(!threads.length){
+  selectedInboxThreadId=null;
+  return;
+ }
+
+ const activeThread=threads.find(thread=>thread.id===selectedInboxThreadId);
+
+ if(!activeThread){
+  const firstThread=threads[0];
+  const contact=threadContactMeta(firstThread);
+
+  selectedInboxThreadId=firstThread.id;
+  selectedInboxContact={type:contact.type,id:contact.id};
+ }
+}
+
+
+
+function companyUnreadCount(companyId){
+ return inboxThreads.filter(thread=>thread.companyId===companyId&&!thread.readByAccountant).length;
+}
+
+function toggleCompanyFilter(companyId,checked){
+ if(checked){
+  if(!selectedCompanyFilters.includes(companyId)){
+   selectedCompanyFilters.push(companyId);
+  }
+ }else{
+  selectedCompanyFilters=selectedCompanyFilters.filter(id=>id!==companyId);
+ }
+
+ inboxFilter='all';
+ selectedInboxContactOnly=false;
+
+ const scopedThreads=threadsWithinSelectedCompanies();
+
+ if(scopedThreads.length){
+  const firstThread=scopedThreads[0];
+  const contact=threadContactMeta(firstThread);
+
+  selectedInboxThreadId=firstThread.id;
+  selectedInboxContact={type:contact.type,id:contact.id};
+ }else{
+  selectedInboxThreadId=null;
+
+  if(selectedCompanyFilters.length){
+   const firstCompanyId=selectedCompanyFilters[0];
+   const firstEmployee=employees.find(employee=>employee.companyId===firstCompanyId);
+
+   selectedInboxContact=firstEmployee
+    ? {type:'employee',id:firstEmployee.id}
+    : {type:'manager',id:firstCompanyId};
+  }
+ }
+
+ currentView='inbox';
+ render();
+ setTimeout(scrollMessengerToBottom,0);
+}
+
+function clearCompanyFilters(){
+ selectedCompanyFilters=[];
+ inboxFilter='all';
+ selectedInboxContactOnly=false;
+
+ const allThreads=[...inboxThreads].sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+
+ if(allThreads.length){
+  const firstThread=allThreads[0];
+  const contact=threadContactMeta(firstThread);
+
+  selectedInboxThreadId=firstThread.id;
+  selectedInboxContact={type:contact.type,id:contact.id};
+ }else{
+  selectedInboxThreadId=null;
+ }
+
+ currentView='inbox';
+ render();
+ setTimeout(scrollMessengerToBottom,0);
+}
+
+function filteredInboxEmployees(){
+ if(!selectedCompanyFilters.length) return employees;
+ return employees.filter(employee=>selectedCompanyFilters.includes(employee.companyId));
+}
+
+function openBossChat(companyId){
+ selectedInboxContact={type:'manager',id:companyId};
+ selectedInboxContactOnly=true;
+ inboxFilter='all';
+
+ const threads=contactThreads('manager',companyId);
+ selectedInboxThreadId=threads[0]?.id||null;
+
+ pendingChatAttachment=null;
+ currentView='inbox';
+ render();
+ setTimeout(scrollMessengerToBottom,0);
+}
+
+function companyFilterChecked(companyId){
+ return selectedCompanyFilters.includes(companyId);
+}
+
+function selectInboxContact(type,id){
+ let companyId=null;
+
+ if(type==='employee'){
+  const employee=employees.find(item=>item.id===id);
+  companyId=employee?.companyId||null;
+ }else{
+  companyId=id;
+ }
+
+ if(selectedCompanyFilters.length && !selectedCompanyFilters.includes(companyId)){
+  selectedCompanyFilters=[companyId];
+ }
+
+ selectedInboxContact={type,id};
+ selectedInboxContactOnly=true;
+ inboxFilter='all';
+
+ const threads=contactThreads(type,id)
+  .filter(thread=>!selectedCompanyFilters.length||selectedCompanyFilters.includes(thread.companyId));
+
+ selectedInboxThreadId=threads[0]?.id||null;
+ pendingChatAttachment=null;
+ currentView='inbox';
+ render();
+ setTimeout(scrollMessengerToBottom,0);
+}
+
+function selectInboxThread(threadId){
+ selectedInboxThreadId=threadId;
+ const thread=inboxThreads.find(item=>item.id===threadId);
+
+ if(thread){
+  const contact=threadContactMeta(thread);
+  selectedInboxContact={type:contact.type,id:contact.id};
+  thread.readByAccountant=true;
+ }
+
+ pendingChatAttachment=null;
+ currentView='inbox';
+ render();
+ setTimeout(scrollMessengerToBottom,0);
+}
+
+function unreadForContact(type,id){
+ return contactThreads(type,id).filter(thread=>!thread.readByAccountant).length;
+}
+
+
+function threadContactMeta(thread){
+ if(thread.recipientType==='manager'){
+  const company=companies.find(item=>item.id===thread.companyId);
+  return {
+   type:'manager',
+   id:thread.companyId,
+   name:thread.recipientName||company?.contact||'Szef firmy',
+   subtitle:company?.name||'Firma'
+  };
+ }
+
+ const employee=employees.find(item=>item.id===thread.employeeId);
+ return {
+  type:'employee',
+  id:thread.employeeId,
+  name:employee?.name||'Pracownik',
+  subtitle:employee?companyName(employee.companyId):companyName(thread.companyId)
+ };
+}
+
+
+function threadsWithinSelectedCompanies(){
+ const all=[...inboxThreads].sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+
+ if(!selectedCompanyFilters.length){
+  return all;
+ }
+
+ return all.filter(thread=>selectedCompanyFilters.includes(thread.companyId));
+}
+
+function filteredThreadsForContact(){
+ const scoped=threadsWithinSelectedCompanies();
+
+ if(inboxFilter==='unread'){
+  return scoped.filter(thread=>!thread.readByAccountant);
+ }
+
+ if(inboxFilter==='incoming'){
+  return scoped.filter(thread=>threadDirectionForAccountant(thread)==='incoming');
+ }
+
+ if(inboxFilter==='sent'){
+  return scoped.filter(thread=>threadDirectionForAccountant(thread)==='sent');
+ }
+
+ if(selectedInboxContactOnly){
+  return contactThreads(selectedInboxContact.type,selectedInboxContact.id)
+   .filter(thread=>!selectedCompanyFilters.length||selectedCompanyFilters.includes(thread.companyId));
+ }
+
+ return scoped;
+}
+
+function inboxView(){
+ ensureSelectedThread();
+
+ const all=threadsWithinSelectedCompanies();
+ const meta=contactMeta(selectedInboxContact.type,selectedInboxContact.id);
+ const threads=filteredThreadsForContact();
+ const selectedThread=filteredThreadsForContact().find(thread=>thread.id===selectedInboxThreadId)||null;
+ const visibleEmployees=filteredInboxEmployees();
+
+ const cards=[
+  {key:'all',label:'Wszystkie',value:all.length,icon:'💬'},
+  {key:'incoming',label:'Przychodzące',value:all.filter(thread=>threadDirectionForAccountant(thread)==='incoming').length,icon:'📥'},
+  {key:'unread',label:'Nieodczytane',value:all.filter(thread=>!thread.readByAccountant).length,icon:'🔔'},
+  {key:'sent',label:'Wysłane',value:all.filter(thread=>threadDirectionForAccountant(thread)==='sent').length,icon:'📤'}
+ ];
+
+ return `<div class="premium-inbox-shell">
+  <div class="premium-inbox-top">
+   <div>
+    <span class="premium-eyebrow">CENTRUM KOMUNIKACJI</span>
+    <h2>Wiadomości</h2>
+    <p>${
+     selectedCompanyFilters.length
+      ? `Pokazujesz wiadomości tylko z ${selectedCompanyFilters.length===1?'wybranej firmy':'wybranych firm'}.`
+      : 'Filtruj pracowników według firmy albo kliknij nazwę firmy, aby otworzyć rozmowę z jej szefem.'
+    }</p>
+   </div>
+
+   <button class="premium-new-chat" onclick="openNewPremiumThread()">
+    <span>＋</span> Nowa sprawa
+   </button>
+  </div>
+
+  <div class="premium-filter-grid">
+   ${cards.map(card=>`<button type="button" class="premium-filter-card ${inboxFilter===card.key?'active':''}" onclick="setInboxFilter('${card.key}')">
+    <span class="premium-filter-icon">${card.icon}</span>
+    <span>${card.label}</span>
+    <strong>${card.value}</strong>
+   </button>`).join('')}
+  </div>
+
+  <div class="premium-messenger-layout filter-company-layout">
+   <aside class="premium-contacts-column filtered-contact-column">
+    <div class="premium-search-box">
+     <span>⌕</span>
+     <input placeholder="Szukaj pracownika…" oninput="filterPremiumContacts(this.value)">
+    </div>
+
+    <div class="company-filter-header">
+     <div>
+      <strong>Firmy</strong>
+      <small>Checkbox filtruje pracowników</small>
+     </div>
+
+     ${selectedCompanyFilters.length
+      ? `<button type="button" class="clear-company-filter" onclick="clearCompanyFilters()">Wyczyść</button>`
+      : ''}
+    </div>
+
+    <div class="company-filter-list">
+     <label class="company-filter-all">
+      <input type="checkbox"
+       ${selectedCompanyFilters.length===0?'checked':''}
+       onchange="if(this.checked) clearCompanyFilters()">
+      <span>Wszyscy pracownicy</span>
+     </label>
+
+     ${companies.map(company=>{
+      const unread=companyUnreadCount(company.id);
+
+      return `<div class="company-filter-row">
+       <label class="company-filter-checkbox" title="Pokaż tylko pracowników tej firmy">
+        <input type="checkbox"
+         ${companyFilterChecked(company.id)?'checked':''}
+         onchange="toggleCompanyFilter(${company.id},this.checked)">
+       </label>
+
+       <button type="button"
+        class="company-boss-link ${selectedInboxContact.type==='manager'&&selectedInboxContact.id===company.id?'active':''}"
+        onclick="openBossChat(${company.id})"
+        title="Otwórz rozmowy z szefem firmy">
+
+        <span class="company-filter-avatar">${company.name.split(' ').map(part=>part[0]).join('').slice(0,2)}</span>
+
+        <span class="company-filter-copy">
+         <strong>${company.name}</strong>
+         <small>👑 ${company.contact||'Szef firmy'}</small>
+        </span>
+
+        ${unread?`<span class="premium-unread">${unread}</span>`:''}
+       </button>
+      </div>`;
+     }).join('')}
+    </div>
+
+    <div class="premium-section-label employee-list-heading">
+     PRACOWNICY
+     <span>${visibleEmployees.length}</span>
+    </div>
+
+    <div class="premium-contact-list filtered-employees-list">
+     ${visibleEmployees.length?visibleEmployees.map(employee=>{
+      const active=selectedInboxContact.type==='employee'&&selectedInboxContact.id===employee.id;
+      const unread=unreadForContact('employee',employee.id);
+
+      return `<button type="button"
+        class="premium-contact ${active?'active':''}"
+        data-search="${(employee.name+' '+companyName(employee.companyId)).toLowerCase()}"
+        onclick="selectInboxContact('employee',${employee.id})">
+
+       <span class="premium-avatar">${employee.name.split(' ').map(part=>part[0]).join('').slice(0,2)}</span>
+
+       <span class="premium-contact-copy">
+        <strong>${employee.name}</strong>
+        <small>${companyName(employee.companyId)}</small>
+       </span>
+
+       ${unread?`<span class="premium-unread">${unread}</span>`:''}
+      </button>`;
+     }).join(''):`<div class="empty filtered-empty">Brak pracowników dla wybranego filtra.</div>`}
+    </div>
+   </aside>
+
+   <aside class="premium-topics-column">
+    <div class="premium-contact-header">
+     <span class="premium-avatar large ${selectedInboxContact.type==='manager'?'company':''}">${meta.initials}</span>
+     <span>
+      <strong>${meta.name}</strong>
+      <small>${meta.subtitle}</small>
+     </span>
+    </div>
+
+    <div class="premium-topics-heading">
+     <span>${
+      inboxFilter==='unread'?'WSZYSTKIE NIEODCZYTANE':
+      inboxFilter==='incoming'?'WSZYSTKIE PRZYCHODZĄCE':
+      inboxFilter==='sent'?'WSZYSTKIE WYSŁANE':
+      selectedInboxContactOnly?'SPRAWY I TEMATY':'WSZYSTKIE SPRAWY'
+     }</span>
+     <button type="button" onclick="openNewPremiumThread()" data-tooltip="Nowy temat">＋</button>
+    </div>
+
+    <div class="premium-topic-list">
+     ${threads.length?threads.map(thread=>{
+      const active=thread.id===selectedInboxThreadId;
+      const contact=threadContactMeta(thread);
+
+      return `<button type="button"
+        class="premium-topic-card ${active?'active':''} ${thread.readByAccountant?'':'unread'}"
+        onclick="selectInboxThread(${thread.id})">
+
+       <div class="premium-topic-person">
+        <strong>${escapeHtml(contact.name)}</strong>
+        <span>${escapeHtml(contact.subtitle)}</span>
+       </div>
+
+       <div class="premium-topic-top">
+        <span class="premium-topic-subject">${escapeHtml(thread.subject)}</span>
+        ${messageStatusBadge(thread)}
+       </div>
+
+       <small>${formatMessageDate(thread.updatedAt)}</small>
+      </button>`;
+     }).join(''):`<div class="premium-empty-topic">
+      <span>🗂️</span>
+      <strong>Brak rozpoczętych spraw</strong>
+      <p>Utwórz pierwszy temat rozmowy.</p>
+     </div>`}
+    </div>
+   </aside>
+
+   <section class="premium-chat-column">
+    ${selectedThread?renderPremiumThread(selectedThread,meta):renderPremiumNoThread(meta)}
+   </section>
+  </div>
+ </div>`;
+}
+function renderPremiumNoThread(meta){
+ return `<div class="premium-no-thread">
+  <span class="premium-no-thread-icon">💬</span>
+  <h3>Rozpocznij nową sprawę</h3>
+  <p>Napisz do ${meta.name} i nadaj rozmowie osobny temat.</p>
+  <button class="premium-new-chat" onclick="openNewPremiumThread()">＋ Nowa sprawa</button>
+ </div>`;
+}
+
+function renderPremiumThread(thread,meta){
+ thread.readByAccountant=true;
+
+ const attachments=thread.messages.filter(message=>message.attachment);
+
+ return `<header class="premium-chat-header">
+   <div>
+    <span class="premium-chat-category">${thread.category}</span>
+    <h3>${thread.subject}</h3>
+    <p>${meta.name} · ${meta.subtitle}</p>
+   </div>
+
+   <div class="premium-chat-actions">
+    ${thread.status==='Zamknięte'
+     ?`<button class="premium-action secondary" onclick="restoreInboxThread(${thread.id})">Przywróć</button>`
+     :`<button class="premium-action secondary" onclick="closeInboxThread(${thread.id})">Zamknij sprawę</button>`}
+    <button class="premium-round-action" data-tooltip="Więcej opcji">⋯</button>
+   </div>
+  </header>
+
+  <div class="premium-chat-body">
+   <div class="premium-messages" id="premiumMessages">
+    ${thread.messages.map(message=>renderPremiumBubble(message)).join('')}
+   </div>
+
+   ${thread.status==='Zamknięte'?`<div class="premium-closed-note">
+    Ta sprawa jest zamknięta. Przywróć ją, aby kontynuować rozmowę.
+   </div>`:''}
+  </div>
+
+  <div class="premium-attachment-preview" id="premiumAttachmentPreview" style="display:none"></div>
+
+  <footer class="premium-composer ${thread.status==='Zamknięte'?'disabled':''}">
+   <input id="premiumFileInput"
+    type="file"
+    accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
+    style="display:none"
+    onchange="preparePremiumAttachment(this)">
+
+   <button type="button"
+    class="premium-attach-button"
+    data-tooltip="Dodaj fakturę, zdjęcie badań lub dokument"
+    ${thread.status==='Zamknięte'?'disabled':''}
+    onclick="document.getElementById('premiumFileInput').click()">📎</button>
+
+   <textarea id="premiumComposer"
+    rows="1"
+    placeholder="${thread.status==='Zamknięte'?'Sprawa zamknięta':'Napisz wiadomość…'}"
+    ${thread.status==='Zamknięte'?'disabled':''}
+    onkeydown="handlePremiumComposerKey(event)"></textarea>
+
+   <button type="button"
+    class="premium-send-button"
+    ${thread.status==='Zamknięte'?'disabled':''}
+    onclick="sendPremiumMessage()">➤</button>
+  </footer>
+
+  ${attachments.length?`<div class="premium-thread-files">
+   <span>DOKUMENTY W TEJ SPRAWIE</span>
+   <div>
+    ${attachments.slice(-4).reverse().map(message=>renderPremiumAttachmentSummary(message.attachment)).join('')}
+   </div>
+  </div>`:''}`;
+}
+
+function renderPremiumBubble(message){
+ const mine=message.senderRole==='accountant';
+
+ return `<div class="premium-message-row ${mine?'mine':'theirs'}">
+  <div class="premium-message-bubble">
+   <strong>${escapeHtml(message.senderName)}</strong>
+   ${message.body?`<div class="premium-message-text">${escapeHtml(message.body)}</div>`:''}
+   ${message.attachment?renderPremiumAttachment(message.attachment):''}
+   <small>${formatMessageDate(message.createdAt)}</small>
+  </div>
+ </div>`;
+}
+
+function renderPremiumAttachment(attachment){
+ if(attachment.type?.startsWith('image/')&&attachment.dataUrl){
+  return `<button type="button" class="premium-image-attachment"
+   onclick="openPremiumAttachmentPreview('${attachment.dataUrl}','${escapeHtml(attachment.name)}')">
+    <img src="${attachment.dataUrl}" alt="${escapeHtml(attachment.name)}">
+    <span>${escapeHtml(attachment.name)}</span>
+   </button>`;
+ }
+
+ return `<div class="premium-file-attachment">
+  <span>${attachment.name?.toLowerCase().endsWith('.pdf')?'📕':'📄'}</span>
+  <span>
+   <strong>${escapeHtml(attachment.name||'Załącznik')}</strong>
+   <small>${formatPremiumFileSize(attachment.size||0)}</small>
+  </span>
+ </div>`;
+}
+
+function renderPremiumAttachmentSummary(attachment){
+ return `<div class="premium-file-summary">
+  <span>${attachment.type?.startsWith('image/')?'🖼️':attachment.name?.toLowerCase().endsWith('.pdf')?'📕':'📄'}</span>
+  <span>
+   <strong>${escapeHtml(attachment.name||'Załącznik')}</strong>
+   <small>${formatPremiumFileSize(attachment.size||0)}</small>
+  </span>
+ </div>`;
+}
+
+function openNewPremiumThread(){
+ const meta=contactMeta(selectedInboxContact.type,selectedInboxContact.id);
+
+ openModal('Nowa sprawa',`
+  <div class="premium-new-thread-recipient">
+   <span class="premium-avatar large ${selectedInboxContact.type==='manager'?'company':''}">${meta.initials}</span>
+   <span><strong>${meta.name}</strong><small>${meta.subtitle}</small></span>
+  </div>
+
+  <div class="form-grid">
+   <div class="field">
+    <label>Kategoria</label>
+    <select id="premiumThreadCategory">
+     <option>Dokumenty</option>
+     <option>Faktury</option>
+     <option>Badania</option>
+     <option>Urlop</option>
+     <option>Umowa</option>
+     <option>PIT</option>
+     <option>ZUS</option>
+     <option>Inne</option>
+    </select>
+   </div>
+
+   <div class="field">
+    <label>Temat sprawy</label>
+    <input id="premiumThreadSubject" placeholder="Np. Faktury za lipiec" required>
+   </div>
+
+   <div class="field full">
+    <label>Pierwsza wiadomość</label>
+    <textarea id="premiumThreadBody" rows="6" placeholder="Napisz wiadomość…" required></textarea>
+   </div>
+
+   <div class="field full">
+    <label>Załącznik opcjonalny</label>
+    <input id="premiumThreadFile" type="file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx">
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Utwórz sprawę</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+  createPremiumThread();
+ });
+}
+
+function createPremiumThread(){
+ const meta=contactMeta(selectedInboxContact.type,selectedInboxContact.id);
+ const subject=document.getElementById('premiumThreadSubject').value.trim();
+ const body=document.getElementById('premiumThreadBody').value.trim();
+ const category=document.getElementById('premiumThreadCategory').value;
+ const file=document.getElementById('premiumThreadFile').files?.[0];
+
+ if(!subject||!body){
+  showToast('Wpisz temat i treść wiadomości');
+  return;
+ }
+
+ const createThreadWithAttachment=attachment=>{
+  const now=new Date().toISOString();
+  const thread={
+   id:Date.now(),
+   employeeId:meta.employeeId,
+   companyId:meta.companyId,
+   recipientType:selectedInboxContact.type,
+   recipientName:meta.name,
+   subject,
+   category,
+   status:'Odpowiedziano',
+   createdAt:now,
+   updatedAt:now,
+   readByAccountant:true,
+   readByEmployee:false,
+   readByManager:false,
+   messages:[{
+    id:Date.now()+1,
+    senderRole:'accountant',
+    senderName:'Grażyna Zachwieja',
+    body,
+    attachment,
+    createdAt:now
+   }]
+  };
+
+  inboxThreads.push(thread);
+  selectedInboxThreadId=thread.id;
+  closeModal();
+  currentView='inbox';
+  render();
+  setTimeout(scrollMessengerToBottom,0);
+  showToast('Nowa sprawa została utworzona');
+ };
+
+ if(!file){
+  createThreadWithAttachment(null);
+  return;
+ }
+
+ readPremiumFile(file,createThreadWithAttachment);
+}
+
+function preparePremiumAttachment(input){
+ const file=input.files?.[0];
+ if(!file) return;
+
+ readPremiumFile(file,attachment=>{
+  pendingChatAttachment=attachment;
+  showPremiumAttachmentPreview();
+ });
+}
+
+function readPremiumFile(file,callback){
+ if(file.size>8*1024*1024){
+  showToast('Załącznik może mieć maksymalnie 8 MB w prototypie');
+  return;
+ }
+
+ const attachment={
+  name:file.name,
+  type:file.type||'application/octet-stream',
+  size:file.size,
+  dataUrl:null
+ };
+
+ if(file.type.startsWith('image/')){
+  const reader=new FileReader();
+  reader.onload=()=>{
+   attachment.dataUrl=reader.result;
+   callback(attachment);
+  };
+  reader.readAsDataURL(file);
+ }else{
+  callback(attachment);
+ }
+}
+
+function showPremiumAttachmentPreview(){
+ const preview=document.getElementById('premiumAttachmentPreview');
+ if(!preview||!pendingChatAttachment) return;
+
+ preview.style.display='flex';
+ preview.innerHTML=`<div class="premium-pending-file">
+  <span>${pendingChatAttachment.type?.startsWith('image/')?'🖼️':'📎'}</span>
+  <span>
+   <strong>${escapeHtml(pendingChatAttachment.name)}</strong>
+   <small>${formatPremiumFileSize(pendingChatAttachment.size)}</small>
+  </span>
+  <button type="button" onclick="removePremiumAttachment()">×</button>
+ </div>`;
+}
+
+function removePremiumAttachment(){
+ pendingChatAttachment=null;
+
+ const input=document.getElementById('premiumFileInput');
+ if(input) input.value='';
+
+ const preview=document.getElementById('premiumAttachmentPreview');
+ if(preview){
+  preview.style.display='none';
+  preview.innerHTML='';
+ }
+}
+
+function sendPremiumMessage(){
+ const thread=inboxThreads.find(item=>item.id===selectedInboxThreadId);
+ const textarea=document.getElementById('premiumComposer');
+ const body=textarea?.value.trim()||'';
+
+ if(!thread||thread.status==='Zamknięte') return;
+
+ if(!body&&!pendingChatAttachment){
+  showToast('Napisz wiadomość lub dodaj załącznik');
+  return;
+ }
+
+ const now=new Date().toISOString();
+
+ thread.messages.push({
+  id:Date.now(),
+  senderRole:'accountant',
+  senderName:'Grażyna Zachwieja',
+  body,
+  attachment:pendingChatAttachment?{...pendingChatAttachment}:null,
+  createdAt:now
+ });
+
+ thread.updatedAt=now;
+ thread.status='Odpowiedziano';
+ thread.readByAccountant=true;
+ thread.readByEmployee=false;
+ thread.readByManager=false;
+
+ textarea.value='';
+ removePremiumAttachment();
+ currentView='inbox';
+ render();
+ setTimeout(scrollMessengerToBottom,0);
+}
+
+function handlePremiumComposerKey(event){
+ if(event.key==='Enter'&&!event.shiftKey){
+  event.preventDefault();
+  sendPremiumMessage();
+ }
+}
+
+function filterPremiumContacts(value){
+ const query=value.trim().toLowerCase();
+
+ document.querySelectorAll('.premium-contact').forEach(contact=>{
+  contact.style.display=!query||contact.dataset.search.includes(query)?'flex':'none';
+ });
+}
+
+function scrollMessengerToBottom(){
+ const box=document.getElementById('premiumMessages');
+ if(box) box.scrollTop=box.scrollHeight;
+}
+
+function openPremiumAttachmentPreview(dataUrl,name){
+ openModal(name,`
+  <div style="text-align:center">
+   <img src="${dataUrl}" alt="${escapeHtml(name)}"
+    style="max-width:100%;max-height:68vh;border-radius:18px;box-shadow:0 18px 50px rgba(15,23,42,.18)">
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Zamknij</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function escapeHtml(value){
+ return String(value||'')
+  .replaceAll('&','&amp;')
+  .replaceAll('<','&lt;')
+  .replaceAll('>','&gt;')
+  .replaceAll('"','&quot;')
+  .replaceAll("'",'&#039;');
+}
+
+function formatPremiumFileSize(bytes){
+ if(!bytes) return '';
+ if(bytes<1024) return `${bytes} B`;
+ if(bytes<1024*1024) return `${Math.round(bytes/1024)} KB`;
+ return `${(bytes/(1024*1024)).toFixed(1)} MB`;
+}
+
+function openAdminNewMessage(recipientType,recipientId){
+ const employee=recipientType==='employee'?employees.find(e=>e.id===recipientId):null;
+ const company=recipientType==='manager'
+  ? companies.find(c=>c.id===recipientId)
+  : companies.find(c=>c.id===employee?.companyId);
+
+ if(!company) return;
+
+ const recipientName=recipientType==='employee'?employee.name:`${company.contact||'Szef firmy'} — ${company.name}`;
+
+ openModal('Nowa wiadomość',`
+  <div class="info" style="margin-bottom:16px"><span>Odbiorca</span><strong>${recipientName}</strong></div>
+  <div class="form-grid">
+   <div class="field">
+    <label>Kategoria</label>
+    <select id="adminMessageCategory">
+     <option>Urlop</option>
+     <option>Badania</option>
+     <option>Umowa</option>
+     <option>Dokumenty</option>
+     <option>PIT</option>
+     <option>ZUS</option>
+     <option>Inne</option>
+    </select>
+   </div>
+   <div class="field">
+    <label>Temat</label>
+    <input id="adminMessageSubject" maxlength="120" required>
+   </div>
+   <div class="field full">
+    <label>Treść wiadomości</label>
+    <textarea id="adminMessageBody" rows="7" required></textarea>
+   </div>
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Wyślij wiadomość</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const subject=adminMessageSubject.value.trim();
+  const body=adminMessageBody.value.trim();
+  if(!subject||!body){
+   showToast('Wpisz temat i treść wiadomości');
+   return;
+  }
+
+  const now=new Date().toISOString();
+  inboxThreads.push({
+   id:Date.now(),
+   employeeId:employee?.id||null,
+   companyId:company.id,
+   recipientType,
+   recipientName,
+   subject,
+   category:adminMessageCategory.value,
+   status:'Odpowiedziano',
+   createdAt:now,
+   updatedAt:now,
+   readByAccountant:true,
+   readByEmployee:false,
+   readByManager:false,
+   messages:[{
+    id:Date.now()+1,
+    senderRole:'accountant',
+    senderName:'Grażyna Zachwieja',
+    body,
+    createdAt:now
+   }]
+  });
+
+  closeModal();
+  showToast(`Wiadomość wysłana do: ${recipientName}`);
+  inboxFilter='sent';
+  currentView='inbox';
+  render();
+ });
+}
+
+function employeeInboxView(employee){
+ const threads=inboxThreads
+  .filter(thread=>thread.employeeId===employee.id)
+  .sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+
+ return `<div class="page-header">
+  <div><h2>Moje wiadomości</h2><p>Wyślij pytanie do księgowej i sprawdzaj odpowiedzi.</p></div>
+  <button class="btn primary" onclick="openNewEmployeeMessage(${employee.id})">+ Nowa wiadomość</button>
+ </div>
+
+ <div class="panel">
+  ${threads.length?threads.map(thread=>{
+   const last=thread.messages[thread.messages.length-1];
+   return `<button type="button" onclick="openInboxThread(${thread.id},'employee')" style="width:100%;text-align:left;background:${thread.readByEmployee?'transparent':'rgba(37,99,235,.06)'};border:0;border-bottom:1px solid var(--border);padding:17px 8px;cursor:pointer">
+    <div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap">
+     <div>
+      <strong>${thread.readByEmployee?'':'● '}${thread.subject}</strong>
+      <div style="color:var(--muted);margin-top:5px">${thread.category}</div>
+      <div style="margin-top:9px">${last.body.length>110?last.body.slice(0,110)+'…':last.body}</div>
+     </div>
+     <div style="text-align:right">${messageStatusBadge(thread)}<div style="color:var(--muted);margin-top:7px">${formatMessageDate(thread.updatedAt)}</div></div>
+    </div>
+   </button>`;
+  }).join(''):'<div class="empty">Nie masz jeszcze żadnych wiadomości.</div>'}
+ </div>`;
+}
+
+function managerInboxView(company,companyEmployees){
+ const threads=inboxThreads
+  .filter(thread=>thread.companyId===company.id)
+  .sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+
+ return `<div class="page-header">
+  <div><h2>Wiadomości pracowników</h2><p>Podgląd korespondencji pracowników firmy ${company.name} z księgową.</p></div>
+ </div>
+ <div class="panel">
+  ${threads.length?threads.map(thread=>{
+   const employee=threadEmployee(thread);
+   return `<div style="padding:16px 8px;border-bottom:1px solid var(--border)">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+     <div><strong>${thread.subject}</strong><div style="color:var(--muted);margin-top:5px">${employee?.name||'-'} · ${thread.category}</div></div>
+     ${messageStatusBadge(thread)}
+    </div>
+    <div style="margin-top:10px;color:var(--muted)">Treść rozmowy jest dostępna księgowej i pracownikowi. Szef widzi temat i status zgłoszenia.</div>
+   </div>`;
+  }).join(''):'<div class="empty">Brak wiadomości pracowników tej firmy.</div>'}
+ </div>`;
+}
+
+function openNewEmployeeMessage(employeeId){
+ const employee=employees.find(item=>item.id===employeeId);
+ if(!employee)return;
+
+ openModal('Nowa wiadomość do księgowej',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Kategoria</label>
+    <select id="messageCategory">
+     <option>Urlop</option>
+     <option>Badania</option>
+     <option>Umowa</option>
+     <option>Wynagrodzenie</option>
+     <option>PIT</option>
+     <option>ZUS</option>
+     <option>Dane osobowe</option>
+     <option>Inne</option>
+    </select>
+   </div>
+   <div class="field">
+    <label>Temat</label>
+    <input id="messageSubject" maxlength="120" placeholder="Np. pytanie o urlop" required>
+   </div>
+   <div class="field full">
+    <label>Treść wiadomości</label>
+    <textarea id="messageBody" rows="7" placeholder="Napisz swoje pytanie..." required></textarea>
+   </div>
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Wyślij wiadomość</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const subject=messageSubject.value.trim();
+  const body=messageBody.value.trim();
+  if(!subject||!body){
+   showToast('Wpisz temat i treść wiadomości');
+   return;
+  }
+
+  const now=new Date().toISOString();
+  inboxThreads.push({
+   id:Date.now(),
+   employeeId:employee.id,
+   companyId:employee.companyId,
+   subject,
+   category:messageCategory.value,
+   status:'Oczekuje na odpowiedź',
+   createdAt:now,
+   updatedAt:now,
+   readByAccountant:false,
+   readByEmployee:true,
+   messages:[{
+    id:Date.now()+1,
+    senderRole:'employee',
+    senderName:employee.name,
+    body,
+    createdAt:now
+   }]
+  });
+
+  closeModal();
+  showToast('Wiadomość została wysłana do księgowej');
+  renderEmployee('employeeInbox');
+ });
+}
+
+function openInboxThread(threadId,viewerRole){
+ const thread=inboxThreads.find(item=>item.id===threadId);
+ if(!thread)return;
+
+ const employee=threadEmployee(thread);
+ const company=companies.find(c=>c.id===thread.companyId);
+ const contactName=thread.recipientType==='manager'
+  ? (thread.recipientName||company?.contact||'Szef firmy')
+  : (employee?.name||'Pracownik');
+ if(viewerRole==='accountant') thread.readByAccountant=true;
+ if(viewerRole==='employee') thread.readByEmployee=true;
+
+ const conversation=thread.messages.map(message=>`
+  <div style="display:flex;justify-content:${message.senderRole==='employee'?'flex-start':'flex-end'};margin:12px 0">
+   <div style="max-width:78%;padding:13px 15px;border-radius:14px;background:${message.senderRole==='employee'?'var(--bg)':'rgba(37,99,235,.10)'}">
+    <strong>${message.senderName}</strong>
+    <div style="margin-top:6px;white-space:pre-wrap">${message.body}</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:7px">${formatMessageDate(message.createdAt)}</div>
+   </div>
+  </div>`).join('');
+
+ const canReply=(viewerRole==='employee')||(viewerRole==='accountant'&&thread.status!=='Zamknięte');
+ const employeeReopens=viewerRole==='employee'&&thread.status==='Zamknięte';
+ const roleName=viewerRole==='accountant'?'Księgowa':employee?.name||'Pracownik';
+
+ openModal(thread.subject,`
+  <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
+   <div><strong>${contactName}</strong><div style="color:var(--muted);margin-top:4px">${companyName(thread.companyId)} · ${thread.category}</div></div>
+   ${messageStatusBadge(thread)}
+  </div>
+
+  <div style="max-height:390px;overflow:auto;padding:4px">${conversation}</div>
+
+  ${employeeReopens?`<div class="status important" style="display:block;padding:12px;margin-top:14px">
+   Ta rozmowa jest zamknięta. Wysłanie odpowiedzi automatycznie otworzy ją ponownie.
+  </div>`:''}
+  ${canReply?`<div class="field" style="margin-top:16px">
+   <label>Odpowiedź</label>
+   <textarea id="threadReply" rows="4" placeholder="Napisz odpowiedź..."></textarea>
+  </div>`:''}
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal();refreshInboxView('${viewerRole}')">Zamknij</button>
+   ${viewerRole==='accountant'&&thread.status!=='Zamknięte'?`<button type="button" class="btn" onclick="closeInboxThread(${thread.id})">Zamknij zgłoszenie</button>`:''}
+   ${viewerRole==='accountant'&&thread.status==='Zamknięte'?`<button type="button" class="btn primary" onclick="restoreInboxThread(${thread.id})">Przywróć rozmowę</button>`:''}
+   ${canReply?`<button type="button" class="btn primary" onclick="sendInboxReply(${thread.id},'${viewerRole}')">${employeeReopens?'Odpowiedz i otwórz rozmowę':'Wyślij odpowiedź'}</button>`:''}
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function sendInboxReply(threadId,viewerRole){
+ const thread=inboxThreads.find(item=>item.id===threadId);
+ const textarea=document.getElementById('threadReply');
+ const body=textarea?.value.trim();
+ if(!thread||!body){
+  showToast('Wpisz treść odpowiedzi');
+  return;
+ }
+
+ const employee=threadEmployee(thread);
+ const now=new Date().toISOString();
+ const accountant=viewerRole==='accountant';
+
+ thread.messages.push({
+  id:Date.now(),
+  senderRole:accountant?'accountant':'employee',
+  senderName:accountant?'Grażyna Zachwieja':(employee?.name||'Pracownik'),
+  body,
+  createdAt:now
+ });
+ thread.updatedAt=now;
+ thread.status=accountant?'Odpowiedziano':'Oczekuje na odpowiedź';
+ thread.readByAccountant=accountant;
+ thread.readByEmployee=!accountant;
+
+ closeModal();
+ showToast('Odpowiedź została wysłana');
+ refreshInboxView(viewerRole);
+}
+
+function closeInboxThread(threadId){
+ const thread=inboxThreads.find(item=>item.id===threadId);
+ if(!thread)return;
+ thread.status='Zamknięte';
+ thread.updatedAt=new Date().toISOString();
+ thread.readByAccountant=true;
+ closeModal();
+ showToast('Rozmowa została zamknięta');
+ currentView='inbox';
+ render();
+}
+
+
+function restoreInboxThread(threadId){
+ const thread=inboxThreads.find(item=>item.id===threadId);
+ if(!thread)return;
+
+ thread.status='Oczekuje na odpowiedź';
+ thread.updatedAt=new Date().toISOString();
+ thread.readByAccountant=true;
+
+ closeModal();
+ showToast('Rozmowa została przywrócona');
+ currentView='inbox';
+ render();
+}
+
+function refreshInboxView(viewerRole){
+ if(viewerRole==='accountant'){
+  currentView='inbox';
+  render();
+ }else{
+  renderEmployee('employeeInbox');
+ }
+}
+
+
+const polishHolidays2026 = {
+ '2026-01-01':'Nowy Rok',
+ '2026-01-06':'Trzech Króli',
+ '2026-04-05':'Wielkanoc',
+ '2026-04-06':'Poniedziałek Wielkanocny',
+ '2026-05-01':'Święto Pracy',
+ '2026-05-03':'Święto Konstytucji 3 Maja',
+ '2026-05-24':'Zielone Świątki',
+ '2026-06-04':'Boże Ciało',
+ '2026-08-15':'Wniebowzięcie NMP',
+ '2026-11-01':'Wszystkich Świętych',
+ '2026-11-11':'Święto Niepodległości',
+ '2026-12-25':'Boże Narodzenie',
+ '2026-12-26':'Drugi dzień Bożego Narodzenia'
+};
+
+function dateKey(year,month,day){
+ return `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+}
+
+function absenceForDay(employeeId,key){
+ return leaveRequests.find(request=>{
+  if(request.employeeId!==employeeId) return false;
+  if(!['Zaakceptowany','Anulowany'].includes(request.status)) return false;
+  if(request.status==='Anulowany') return false;
+  return request.from<=key&&request.to>=key;
+ });
+}
+
+function employeeCalendarView(employee){
+ const today=new Date();
+ const year=today.getFullYear();
+ const month=today.getMonth();
+ return `<div class="page-header">
+  <div><h2>Kalendarz nieobecności</h2><p>Urlopy, chorobowe, dni pracy i święta.</p></div>
+ </div>
+ <div class="panel">
+  ${renderEmployeeCalendar(employee.id,year,month)}
+ </div>`;
+}
+
+function renderEmployeeCalendar(employeeId,year,month){
+ const monthNames=['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+ const firstDay=new Date(year,month,1);
+ const daysInMonth=new Date(year,month+1,0).getDate();
+ const offset=(firstDay.getDay()+6)%7;
+ let cells='';
+
+ for(let i=0;i<offset;i++) cells+='<div class="calendar-day empty-day"></div>';
+
+ for(let day=1;day<=daysInMonth;day++){
+  const key=dateKey(year,month,day);
+  const date=new Date(year,month,day);
+  const weekend=date.getDay()===0||date.getDay()===6;
+  const holiday=polishHolidays2026[key];
+  const absence=absenceForDay(employeeId,key);
+
+  let cls='work-day';
+  let label='Dzień pracy';
+
+  if(holiday){
+   cls='holiday-day';
+   label=holiday;
+  }else if(absence?.type==='Zwolnienie lekarskie'){
+   cls='sick-day';
+   label='Zwolnienie lekarskie';
+  }else if(absence){
+   cls='leave-day';
+   label=absence.type;
+  }else if(weekend){
+   cls='weekend-day';
+   label='Weekend';
+  }
+
+  cells+=`<button type="button" class="calendar-day ${cls}" title="${label}" onclick="showCalendarDay('${key}',${employeeId})">
+    <strong>${day}</strong>
+    <span>${absence?absence.type:(holiday?holiday:'')}</span>
+  </button>`;
+ }
+
+ return `<div class="calendar-head">
+   <button class="btn" onclick="changeEmployeeCalendar(${employeeId},${year},${month},-1)">←</button>
+   <h3>${monthNames[month]} ${year}</h3>
+   <button class="btn" onclick="changeEmployeeCalendar(${employeeId},${year},${month},1)">→</button>
+  </div>
+  <div class="calendar-weekdays">${['Pn','Wt','Śr','Cz','Pt','So','Nd'].map(d=>`<div>${d}</div>`).join('')}</div>
+  <div class="calendar-grid">${cells}</div>
+  <div class="calendar-legend">
+   <span><i class="legend-box leave-day"></i> Urlop</span>
+   <span><i class="legend-box sick-day"></i> Chorobowe</span>
+   <span><i class="legend-box work-day"></i> Dzień pracy</span>
+   <span><i class="legend-box holiday-day"></i> Święto</span>
+  </div>`;
+}
+
+function changeEmployeeCalendar(employeeId,year,month,delta){
+ const date=new Date(year,month+delta,1);
+ const panel=document.querySelector('.employee-view .panel');
+ if(panel) panel.innerHTML=renderEmployeeCalendar(employeeId,date.getFullYear(),date.getMonth());
+}
+
+function showCalendarDay(key,employeeId){
+ const absence=absenceForDay(employeeId,key);
+ const holiday=polishHolidays2026[key];
+ let text='Normalny dzień pracy';
+ if(holiday) text=holiday;
+ if(absence) text=`${absence.type}: ${fmt(absence.from)} – ${fmt(absence.to)}`;
+
+ openModal(`Dzień ${fmt(key)}`,`
+  <div class="info"><span>Status dnia</span><strong>${text}</strong></div>
+  <footer><button type="button" class="btn" onclick="closeModal()">Zamknij</button></footer>
+ `,event=>event.preventDefault());
+}
+
+function employeeHomeView(e){
+ return `<div class="hero">
+  <div>
+   <h2>${e.name}</h2>
+   <p>${companyName(e.companyId)} · ${e.position}</p>
+  </div>
+  <button class="btn primary" onclick="renderEmployee('employeeRequest')">Złóż wniosek urlopowy</button>
+ </div>
+
+ <div class="employee-home-tabs">
+  <button class="employee-home-card active" data-home-section="data" onclick="showEmployeeHomeSection(${e.id},'data',this)">
+   <span class="employee-home-icon">👤</span>
+   <strong>Dane</strong>
+   <small>Moje dane osobowe</small>
+  </button>
+
+  <button class="employee-home-card" data-home-section="leave" onclick="showEmployeeHomeSection(${e.id},'leave',this)">
+   <span class="employee-home-icon">🏖️</span>
+   <strong>Urlopy</strong>
+   <small>${calculatedAnnualLeave(e)-e.leaveUsed} dni pozostało</small>
+  </button>
+
+  <button class="employee-home-card" data-home-section="medical" onclick="showEmployeeHomeSection(${e.id},'medical',this)">
+   <span class="employee-home-icon">🩺</span>
+   <strong>Badania</strong>
+   <small>${e.medical?`ważne do ${fmt(e.medical)}`:'brak terminu'}</small>
+  </button>
+
+  <button class="employee-home-card" data-home-section="bhp" onclick="showEmployeeHomeSection(${e.id},'bhp',this)">
+   <span class="employee-home-icon">🦺</span>
+   <strong>BHP</strong>
+   <small>${e.bhp?`ważne do ${fmt(e.bhp)}`:'brak terminu'}</small>
+  </button>
+
+  <button class="employee-home-card" data-home-section="contract" onclick="showEmployeeHomeSection(${e.id},'contract',this)">
+   <span class="employee-home-icon">📄</span>
+   <strong>Umowy</strong>
+   <small>${e.contract==='Bezterminowa'?'bezterminowa':`do ${fmt(e.contract)}`}</small>
+  </button>
+ </div>
+
+ <div class="panel employee-home-content" id="employeeHomeContent">
+  ${employeeHomeDataSection(e)}
+ </div>`;
+}
+
+function showEmployeeHomeSection(employeeId,section,button){
+ const employee=employees.find(item=>item.id===employeeId);
+ if(!employee) return;
+
+ document.querySelectorAll('.employee-home-card').forEach(item=>item.classList.remove('active'));
+ if(button) button.classList.add('active');
+
+ const target=document.getElementById('employeeHomeContent');
+ if(!target) return;
+
+ if(section==='data') target.innerHTML=employeeHomeDataSection(employee);
+ if(section==='leave') target.innerHTML=employeeHomeLeaveSection(employee);
+ if(section==='medical') target.innerHTML=employeeHomeMedicalSection(employee);
+ if(section==='bhp') target.innerHTML=employeeHomeBhpSection(employee);
+ if(section==='contract') target.innerHTML=employeeHomeContractSection(employee);
+}
+
+function employeeHomeDataSection(employee){
+ return `<div class="section-heading">
+  <div><h3>Moje dane</h3><p>Dane zapisane w systemie kadrowym.</p></div>
+ </div>
+ <div class="profile-data">
+  <div class="info"><span>Imię i nazwisko</span><strong>${employee.name}</strong></div>
+  <div class="info"><span>Firma</span>${companyName(employee.companyId)}</div>
+  <div class="info"><span>Stanowisko</span>${employee.position||'-'}</div>
+  <div class="info"><span>E-mail</span>${employee.email||'-'}</div>
+  <div class="info"><span>Telefon</span>${employee.phone||'-'}</div>
+  <div class="info"><span>Data zatrudnienia</span>${employee.startDate?fmt(employee.startDate):'-'}</div>
+  <div class="info"><span>Stopień niepełnosprawności</span>${employee.disabilityDegree||'Brak'}</div>
+  <div class="info"><span>Data zaliczenia do stopnia</span>${employee.disabilityFrom?fmt(employee.disabilityFrom):'-'}</div>
+  <div class="info"><span>Dodatkowy urlop</span>${
+   hasDisabilityExtraLeave(employee)
+    ? '<strong>+10 dni rocznie</strong>'
+    : ['Umiarkowany','Znaczny'].includes(employee.disabilityDegree)
+      ? `Prawo od ${employee.disabilityFrom?fmt(addYearsToDate(employee.disabilityFrom,1)):'uzupełnij datę'}`
+      : 'Nie przysługuje'
+  }</div>
+ </div>`;
+}
+
+function employeeHomeLeaveSection(employee){
+ const requests=leaveRequests
+  .filter(request=>request.employeeId===employee.id)
+  .sort((a,b)=>b.from.localeCompare(a.from))
+  .slice(0,5);
+
+ return `<div class="section-heading">
+  <div><h3>Moje urlopy i nieobecności</h3><p>Aktualny bilans i ostatnie wpisy.</p></div>
+  <button class="btn" onclick="renderEmployee('employeeHistory')">Pełna historia</button>
+ </div>
+
+ <div class="absence-category-tabs">
+  <button type="button" class="absence-category active" onclick="filterEmployeeAbsences('Wszystkie',this)">Wszystkie</button>
+  <button type="button" class="absence-category" onclick="filterEmployeeAbsences('Zwolnienie lekarskie',this)">Chorobowe</button>
+  <button type="button" class="absence-category" onclick="filterEmployeeAbsences('Urlop macierzyński',this)">Macierzyński</button>
+  <button type="button" class="absence-category" onclick="filterEmployeeAbsences('Urlop rodzicielski',this)">Rodzicielski</button>
+  <button type="button" class="absence-category" onclick="filterEmployeeAbsences('Urlop wychowawczy',this)">Wychowawczy</button>
+ </div>
+
+ <div class="employee-summary-grid">
+  <div class="summary-box"><span>Limit podstawowy</span><strong>${employee.leaveBase??26} dni</strong></div>
+  <div class="summary-box"><span>Dodatkowy</span><strong>${disabilityExtraLeave(employee)} dni</strong></div>
+  <div class="summary-box"><span>Łączny limit</span><strong>${calculatedAnnualLeave(employee)} dni</strong></div>
+  <div class="summary-box"><span>Wykorzystano</span><strong>${employee.leaveUsed} dni</strong></div>
+  <div class="summary-box"><span>Pozostało</span><strong>${calculatedAnnualLeave(employee)-employee.leaveUsed} dni</strong></div>
+ </div>
+
+ ${requests.length?`<div class="compact-list" id="employeeAbsenceList">
+  ${requests.map(request=>`<div class="compact-row" data-absence-type="${request.type}">
+   <div><strong>${request.type}</strong><small>${fmt(request.from)} – ${fmt(request.to)}</small></div>
+   <div>${leaveStatusBadge(request)}</div>
+  </div>`).join('')}
+ </div>`:'<div class="empty">Brak zapisanych nieobecności.</div>'}`;
+}
+
+
+function filterEmployeeAbsences(type,button){
+ document.querySelectorAll('.absence-category').forEach(item=>item.classList.remove('active'));
+ if(button) button.classList.add('active');
+ document.querySelectorAll('#employeeAbsenceList [data-absence-type]').forEach(row=>{
+  row.style.display=type==='Wszystkie'||row.dataset.absenceType===type?'flex':'none';
+ });
+}
+
+function employeeHomeMedicalSection(employee){
+ const history=medicalHistory
+  .filter(item=>item.employeeId===employee.id)
+  .sort((a,b)=>(b.validTo||'').localeCompare(a.validTo||''));
+
+ return `<div class="section-heading">
+  <div><h3>Badania lekarskie</h3><p>Informacje o aktualnych i wcześniejszych badaniach.</p></div>
+ </div>
+
+ <div class="employee-summary-grid">
+  <div class="summary-box">
+   <span>Aktualne badania</span>
+   <strong>${employee.medical?fmt(employee.medical):'Brak terminu'}</strong>
+  </div>
+  <div class="summary-box">
+   <span>Status</span>
+   <strong>${employee.medical?dateStatusLabel(employee.medical):'Brak danych'}</strong>
+  </div>
+ </div>
+
+ ${history.length?`<div class="compact-list">
+  ${history.slice(0,4).map(item=>`<div class="compact-row">
+   <div><strong>${item.notes||'Badania pracownicze'}</strong><small>Wykonano: ${fmt(item.completed)} · ważne do: ${fmt(item.validTo)}</small></div>
+  </div>`).join('')}
+ </div>`:'<div class="empty">Brak historii badań.</div>'}`;
+}
+
+function employeeHomeBhpSection(employee){
+ return `<div class="section-heading">
+  <div><h3>Szkolenia BHP</h3><p>Termin ważności szkolenia i podstawowe informacje.</p></div>
+ </div>
+
+ <div class="employee-summary-grid">
+  <div class="summary-box">
+   <span>BHP ważne do</span>
+   <strong>${employee.bhp?fmt(employee.bhp):'Brak terminu'}</strong>
+  </div>
+  <div class="summary-box">
+   <span>Status</span>
+   <strong>${employee.bhp?dateStatusLabel(employee.bhp):'Do uzupełnienia'}</strong>
+  </div>
+ </div>
+
+ <div class="info" style="margin-top:16px">
+  <span>Informacja</span>
+  ${employee.bhp
+   ? 'Termin szkolenia BHP jest zapisany w systemie. W razie niezgodności wyślij wiadomość do księgowej.'
+   : 'Termin szkolenia BHP nie został jeszcze uzupełniony. Możesz zapytać o niego księgową.'}
+ </div>`;
+}
+
+function employeeHomeContractSection(employee){
+ const history=contractHistory
+  .filter(item=>item.employeeId===employee.id)
+  .sort((a,b)=>(b.start||'').localeCompare(a.start||''));
+
+ return `<div class="section-heading">
+  <div><h3>Moje umowy</h3><p>Aktualna umowa i historia zatrudnienia.</p></div>
+ </div>
+
+ <div class="employee-summary-grid">
+  <div class="summary-box">
+   <span>Rodzaj umowy</span>
+   <strong>${employee.contractType||history[0]?.type||'Brak danych'}</strong>
+  </div>
+  <div class="summary-box">
+   <span>Umowa obowiązuje do</span>
+   <strong>${employee.contract==='Bezterminowa'?'Bezterminowo':fmt(employee.contract)}</strong>
+  </div>
+ </div>
+
+ ${history.length?`<div class="compact-list">
+  ${history.slice(0,4).map(item=>`<div class="compact-row">
+   <div><strong>${item.type}</strong><small>${fmt(item.start)} – ${item.end==='Bezterminowa'?'bezterminowo':fmt(item.end)}</small></div>
+  </div>`).join('')}
+ </div>`:'<div class="empty">Brak historii umów.</div>'}`;
+}
 function employeeRequestView(e){return `<div class="page-header"><div><h2>Złóż wniosek urlopowy</h2><p>Wniosek zostanie przekazany do administratora.</p></div></div><div class="panel"><form onsubmit="submitLeave(event,${e.id})"><div class="form-grid">
- <div class="field"><label>Rodzaj urlopu</label><select id="leaveType"><option>Urlop wypoczynkowy</option><option>Urlop na żądanie</option><option>Urlop bezpłatny</option><option>Opieka nad dzieckiem</option></select></div>
+ <div class="field">
+  <label>Rodzaj urlopu</label>
+  <select id="leaveType" onchange="toggleCustomLeaveType()">
+   <option>Urlop wypoczynkowy</option>
+   <option>Urlop na żądanie</option>
+   <option>Urlop okolicznościowy</option>
+   <option>Urlop macierzyński</option>
+   <option>Urlop rodzicielski</option>
+   <option>Urlop ojcowski</option>
+   <option>Urlop wychowawczy</option>
+   <option>Urlop bezpłatny</option>
+   <option>Urlop opiekuńczy</option>
+   <option>Opieka nad dzieckiem</option>
+   <option>Zwolnienie od pracy z powodu siły wyższej</option>
+   <option>Zwolnienie lekarskie</option>
+   <option>Inny</option>
+  </select>
+  <input id="customLeaveType"
+         type="text"
+         placeholder="Wpisz własny rodzaj nieobecności"
+         style="display:none;margin-top:10px">
+ </div>
  <div class="field"><label>Liczba dni roboczych</label><input id="leaveDays" type="number" min="1" readonly required></div>
  <div class="field"><label>Data od</label><input id="leaveFrom" type="date" required onchange="calculateLeaveDays()"></div><div class="field"><label>Data do</label><input id="leaveTo" type="date" required onchange="calculateLeaveDays()"></div>
  <div class="field full"><label>Uwagi</label><textarea id="leaveNotes" rows="4"></textarea></div>
  <div class="field full"><div class="info"><span>Po zaakceptowaniu pozostanie</span><strong id="leaveRemaining">${e.leaveTotal-e.leaveUsed} dni</strong></div></div>
  </div><footer><button class="btn primary">Wyślij wniosek</button></footer></form></div>`}
 function employeeHistoryView(e){return `<div class="page-header"><div><h2>Historia urlopów</h2><p>Wszystkie Twoje wcześniejsze wnioski.</p></div></div><div class="panel">${employeeLeaveTable(e.id)}</div>`}
-function employeeProfileView(e){return `<div class="page-header"><div><h2>Mój profil</h2><p>Podstawowe dane pracownika.</p></div></div><div class="panel"><div class="profile-data"><div class="info"><span>Imię i nazwisko</span>${e.name}</div><div class="info"><span>Firma</span>${companyName(e.companyId)}</div><div class="info"><span>Stanowisko</span>${e.position}</div><div class="info"><span>E-mail</span>${e.email}</div><div class="info"><span>Telefon</span>${e.phone}</div><div class="info"><span>Badania ważne do</span>${fmt(e.medical)}</div></div></div>`}
+function employeeProfileView(e){return `<div class="page-header"><div><h2>Mój profil</h2><p>Dane wyłącznie do podglądu. Zmiany wprowadza księgowa.</p></div></div><div class="panel"><div class="profile-data"><div class="info"><span>Imię i nazwisko</span>${e.name}</div><div class="info"><span>Firma</span>${companyName(e.companyId)}</div><div class="info"><span>Stanowisko</span>${e.position}</div><div class="info"><span>E-mail</span>${e.email}</div><div class="info"><span>Telefon</span>${e.phone}</div><div class="info"><span>Badania ważne do</span>${fmt(e.medical)}</div></div></div>`}
+
+
+function toggleCustomLeaveType(){
+ const select=document.getElementById('leaveType');
+ const input=document.getElementById('customLeaveType');
+ if(!select||!input) return;
+
+ const custom=select.value==='Inny';
+ input.style.display=custom?'block':'none';
+ input.required=custom;
+
+ if(!custom) input.value='';
+}
+
+function selectedLeaveType(){
+ const select=document.getElementById('leaveType');
+ const input=document.getElementById('customLeaveType');
+
+ if(!select) return 'Urlop wypoczynkowy';
+
+ if(select.value==='Inny'){
+  return input?.value.trim()||'Inny';
+ }
+
+ return select.value;
+}
 
 function calculateLeaveDays(){
  const from=document.getElementById('leaveFrom')?.value;
@@ -1225,9 +5500,32 @@ function submitLeave(ev,id){
  ev.preventDefault();
  const e=employees.find(x=>x.id===id);
  const days=Number(leaveDays.value);
- if(!days){showToast('Wybierz prawidłowy zakres dat');return}
+
+ if(!days){
+  showToast('Wybierz prawidłowy zakres dat');
+  return;
+ }
+
+ if(leaveType.value==='Inny'&&!customLeaveType.value.trim()){
+  showToast('Wpisz własny rodzaj nieobecności');
+  customLeaveType.focus();
+  return;
+ }
+
  const requestId=Date.now();
- leaveRequests.push({id:requestId,employeeId:id,type:leaveType.value,from:leaveFrom.value,to:leaveTo.value,days,status:'Oczekuje'});
+ leaveRequests.push({
+  id:requestId,
+  employeeId:id,
+  type:selectedLeaveType(),
+  from:leaveFrom.value,
+  to:leaveTo.value,
+  days,
+  status:'Oczekuje',
+  managerApproval:false,
+  accountantApproval:false,
+  balanceApplied:false,
+  notes:leaveNotes.value.trim()
+ });
  notifications.unshift({
    id:Date.now()+1,
    type:'urlop',
@@ -1241,6 +5539,160 @@ function submitLeave(ev,id){
  renderEmployee('employeeHistory');
 }
 
+
+
+function editEmployeePendingLeave(requestId){
+ const request=leaveRequests.find(item=>item.id===requestId);
+
+ if(!employeeMode||!request||request.employeeId!==selectedEmployeeId||request.status!=='Oczekuje'){
+  showToast('Tego wniosku nie można już edytować');
+  return;
+ }
+
+ openModal('Edytuj wniosek urlopowy',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Rodzaj urlopu</label>
+    <select id="editPendingLeaveType">
+     ${[
+      'Urlop wypoczynkowy','Urlop na żądanie','Urlop okolicznościowy',
+      'Urlop macierzyński','Urlop rodzicielski','Urlop ojcowski',
+      'Urlop wychowawczy','Urlop bezpłatny','Urlop opiekuńczy',
+      'Opieka nad dzieckiem','Zwolnienie od pracy z powodu siły wyższej',
+      'Zwolnienie lekarskie'
+     ].map(type=>`<option ${type===request.type?'selected':''}>${type}</option>`).join('')}
+    </select>
+   </div>
+
+   <div class="field">
+    <label>Liczba dni roboczych</label>
+    <input id="editPendingLeaveDays" type="number" min="1" value="${request.days}" readonly>
+   </div>
+
+   <div class="field">
+    <label>Data od</label>
+    <input id="editPendingLeaveFrom" type="date" value="${request.from}" required onchange="calculatePendingLeaveDays()">
+   </div>
+
+   <div class="field">
+    <label>Data do</label>
+    <input id="editPendingLeaveTo" type="date" value="${request.to}" required onchange="calculatePendingLeaveDays()">
+   </div>
+
+   <div class="field full">
+    <label>Uwagi</label>
+    <textarea id="editPendingLeaveNotes" rows="4">${request.notes||''}</textarea>
+   </div>
+  </div>
+
+  <div class="status important" style="display:block;padding:12px;margin-top:12px">
+   Po zmianie wniosek ponownie będzie oczekiwał na decyzję szefa i księgowej.
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz zmiany</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const from=document.getElementById('editPendingLeaveFrom').value;
+  const to=document.getElementById('editPendingLeaveTo').value;
+  const days=Number(document.getElementById('editPendingLeaveDays').value);
+
+  if(!from||!to||to<from||!days){
+   showToast('Wybierz prawidłowy zakres dat');
+   return;
+  }
+
+  request.type=document.getElementById('editPendingLeaveType').value;
+  request.from=from;
+  request.to=to;
+  request.days=days;
+  request.notes=document.getElementById('editPendingLeaveNotes').value.trim();
+  request.managerApproval=false;
+  request.accountantApproval=false;
+  request.status='Oczekuje';
+  request.balanceApplied=false;
+
+  const notification=notifications.find(item=>item.type==='urlop'&&item.requestId===request.id);
+  if(notification){
+   notification.message=`${employees.find(e=>e.id===request.employeeId)?.name||'Pracownik'} zmienił wniosek urlopowy: ${fmt(from)}–${fmt(to)}.`;
+   notification.read=false;
+  }
+
+  closeModal();
+  showToast('Wniosek został zaktualizowany');
+  renderEmployee('employeeHistory');
+ });
+}
+
+function calculatePendingLeaveDays(){
+ const from=document.getElementById('editPendingLeaveFrom')?.value;
+ const to=document.getElementById('editPendingLeaveTo')?.value;
+ const target=document.getElementById('editPendingLeaveDays');
+
+ if(!from||!to||!target) return;
+
+ const start=new Date(from+'T00:00:00');
+ const end=new Date(to+'T00:00:00');
+
+ if(end<start){
+  target.value='';
+  return;
+ }
+
+ let days=0;
+ for(let date=new Date(start);date<=end;date.setDate(date.getDate()+1)){
+  const day=date.getDay();
+  if(day!==0&&day!==6) days++;
+ }
+
+ target.value=days;
+}
+
+function deleteEmployeePendingLeave(requestId){
+ const request=leaveRequests.find(item=>item.id===requestId);
+
+ if(!employeeMode||!request||request.employeeId!==selectedEmployeeId||request.status!=='Oczekuje'){
+  showToast('Tego wniosku nie można już usunąć');
+  return;
+ }
+
+ openModal('Usuń wniosek urlopowy',`
+  <p style="font-size:16px;line-height:1.6">
+   Czy na pewno chcesz usunąć wniosek:
+   <strong>${request.type}</strong>,
+   ${fmt(request.from)}–${fmt(request.to)}?
+  </p>
+
+  <div class="status critical" style="display:block;padding:12px;margin-top:14px">
+   Po usunięciu wniosku nie będzie można go przywrócić.
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="button" class="btn danger" onclick="confirmDeleteEmployeePendingLeave(${requestId})">Usuń wniosek</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function confirmDeleteEmployeePendingLeave(requestId){
+ const request=leaveRequests.find(item=>item.id===requestId);
+
+ if(!employeeMode||!request||request.employeeId!==selectedEmployeeId||request.status!=='Oczekuje'){
+  closeModal();
+  showToast('Tego wniosku nie można już usunąć');
+  return;
+ }
+
+ leaveRequests=leaveRequests.filter(item=>item.id!==requestId);
+ notifications=notifications.filter(item=>!(item.type==='urlop'&&item.requestId===requestId));
+
+ closeModal();
+ showToast('Wniosek został usunięty');
+ renderEmployee('employeeHistory');
+}
 
 function openNotification(notificationId){
  const n=notifications.find(x=>x.id===notificationId);
@@ -1267,14 +5719,25 @@ function openNotification(notificationId){
  openEmployee(n.employeeId);
 }
 
+function approvalBadge(done,role){
+ return `<span class="status ${done?'ok':'warn'}">${role}: ${done?'zaakceptowano':'oczekuje'}</span>`;
+}
+
 function openLeaveRequest(requestId){
  const r=leaveRequests.find(x=>x.id===requestId);
  if(!r)return;
+
+ ensureLeaveApprovalState(r);
  const e=employees.find(x=>x.id===r.employeeId);
- const decisionButtons=r.status==='Oczekuje'
-   ? `<button type="button" class="btn danger" onclick="rejectLeave(${r.id})">Odrzuć</button>
-      <button type="button" class="btn primary" onclick="approveLeave(${r.id})">Akceptuj</button>`
-   : `<span class="status ${statusClass(r.status)}">${r.status}</span>`;
+ const isManager=managerMode;
+ const canApprove=r.status==='Oczekuje' && (isManager?!r.managerApproval:!r.accountantApproval);
+
+ const decisionButtons=canApprove
+   ? `<button type="button" class="btn danger" onclick="rejectLeave(${r.id})">Odrzuć wniosek</button>
+      <button type="button" class="btn primary" onclick="approveLeave(${r.id})">${isManager?'Akceptuję jako szef':'Akceptuję jako księgowa'}</button>`
+   : r.status==='Oczekuje'
+     ? `<span class="status warn">Twoja decyzja została już zapisana</span>`
+     : `<span class="status ${statusClass(r.status)}">${leaveDisplayStatus(r)}</span>`;
 
  openModal('Wniosek urlopowy',`
    <div class="profile-data">
@@ -1283,12 +5746,17 @@ function openLeaveRequest(requestId){
      <div class="info"><span>Rodzaj urlopu</span>${r.type}</div>
      <div class="info"><span>Termin</span>${fmt(r.from)} – ${fmt(r.to)}</div>
      <div class="info"><span>Liczba dni</span>${r.days} dni</div>
-     <div class="info"><span>Status</span><span class="status ${statusClass(r.status)}">${r.status}</span></div>
+     <div class="info"><span>Status całości</span><strong>${leaveDisplayStatus(r)}</strong></div>
+     <div class="info"><span>Decyzja szefa</span>${approvalBadge(r.managerApproval,'Szef')}</div>
+     <div class="info"><span>Decyzja księgowej</span>${approvalBadge(r.accountantApproval,'Księgowa')}</div>
      <div class="info"><span>Pozostało obecnie</span>${e.leaveTotal-e.leaveUsed} dni</div>
-     <div class="info"><span>Po akceptacji</span>${Math.max(0,e.leaveTotal-e.leaveUsed-r.days)} dni</div>
+     <div class="info"><span>Po pełnej akceptacji</span>${Math.max(0,e.leaveTotal-e.leaveUsed-r.days)} dni</div>
+   </div>
+   <div class="status important" style="display:block;padding:12px;margin-top:14px">
+    Urlop zostanie ostatecznie zaakceptowany dopiero po zgodzie szefa firmy i księgowej.
    </div>
    <footer>
-     <button type="button" class="btn" onclick="closeModal(); openEmployee(${e.id})">Karta pracownika</button>
+     <button type="button" class="btn" onclick="closeModal()">Zamknij</button>
      ${decisionButtons}
    </footer>`,ev=>ev.preventDefault());
 }
@@ -1296,26 +5764,309 @@ function openLeaveRequest(requestId){
 function approveLeave(requestId){
  const r=leaveRequests.find(x=>x.id===requestId);
  if(!r || r.status!=='Oczekuje')return;
+
+ ensureLeaveApprovalState(r);
  const e=employees.find(x=>x.id===r.employeeId);
- r.status='Zaakceptowany';
- e.leaveUsed+=r.days;
- notifications=notifications.filter(n=>!(n.type==='urlop'&&n.requestId===requestId));
- closeModal();
- showToast('Wniosek został zaakceptowany');
- currentView='dashboard';
- render();
+
+ if(managerMode){
+  r.managerApproval=true;
+ }else{
+  r.accountantApproval=true;
+ }
+
+ if(r.managerApproval&&r.accountantApproval){
+  r.status='Zaakceptowany';
+
+  if(!r.balanceApplied){
+   e.leaveUsed+=r.days;
+   const year=Number(r.from.slice(0,4));
+   const balance=leaveBalances.find(item=>item.employeeId===r.employeeId&&item.year===year);
+   if(balance) balance.used+=r.days;
+   r.balanceApplied=true;
+  }
+
+  notifications=notifications.filter(n=>!(n.type==='urlop'&&n.requestId===requestId));
+  closeModal();
+  showToast('Wniosek ma obie akceptacje i został zatwierdzony');
+ }else{
+  closeModal();
+  showToast(managerMode?'Zapisano zgodę szefa. Wniosek czeka na księgową.':'Zapisano zgodę księgowej. Wniosek czeka na szefa.');
+ }
+
+ if(managerMode){
+  renderManager();
+ }else{
+  currentView='dashboard';
+  render();
+ }
 }
 
 function rejectLeave(requestId){
  const r=leaveRequests.find(x=>x.id===requestId);
  if(!r || r.status!=='Oczekuje')return;
- const e=employees.find(x=>x.id===r.employeeId);
+
  r.status='Odrzucony';
+ r.rejectedBy=managerMode?'Szef firmy':'Księgowa';
  notifications=notifications.filter(n=>!(n.type==='urlop'&&n.requestId===requestId));
+
  closeModal();
- showToast('Wniosek został odrzucony');
- currentView='dashboard';
- render();
+ showToast(`Wniosek został odrzucony przez: ${r.rejectedBy}`);
+
+ if(managerMode){
+  renderManager();
+ }else{
+  currentView='dashboard';
+  render();
+ }
+}
+
+function workingDaysBetween(from,to){
+ if(!from||!to) return 0;
+ const start=new Date(from+'T00:00:00');
+ const end=new Date(to+'T00:00:00');
+ if(end<start) return 0;
+
+ let count=0;
+ const cursor=new Date(start);
+ while(cursor<=end){
+  const day=cursor.getDay();
+  if(day!==0&&day!==6) count++;
+  cursor.setDate(cursor.getDate()+1);
+ }
+ return count;
+}
+
+function previousCalendarDay(dateString){
+ const date=new Date(dateString+'T00:00:00');
+ date.setDate(date.getDate()-1);
+ return date.toISOString().slice(0,10);
+}
+
+function canInterruptLeave(request){
+ const leaveTypes=['Urlop wypoczynkowy','Urlop na żądanie'];
+ return request.status==='Zaakceptowany' &&
+        leaveTypes.includes(request.type) &&
+        !request.interrupted &&
+        !!request.from &&
+        !!request.to &&
+        request.to>=request.from &&
+        workingDaysBetween(request.from,request.to)>0;
+}
+
+function openInterruptLeaveForm(requestId){
+ const request=leaveRequests.find(r=>r.id===requestId);
+ if(!request||!canInterruptLeave(request)) return;
+
+ const employee=employees.find(e=>e.id===request.employeeId);
+
+ openModal('Przerwij urlop zwolnieniem lekarskim',`
+  <div class="status important" style="display:block;padding:12px;margin-bottom:16px">
+   Urlop: ${fmt(request.from)} – ${fmt(request.to)}. Wskaż okres choroby przypadający w czasie tego urlopu.
+  </div>
+  <div class="form-grid">
+   <div class="field">
+    <label>Chorobowe od</label>
+    <input id="sickFrom" type="date" min="${request.from}" max="${request.to}" value="${request.from}" required>
+   </div>
+   <div class="field">
+    <label>Chorobowe do</label>
+    <input id="sickTo" type="date" min="${request.from}" value="${request.to}" required>
+   </div>
+   <div class="field full">
+    <label>Uwagi</label>
+    <textarea id="sickNotes" rows="3" placeholder="Np. zwolnienie lekarskie dostarczone przez pracownika"></textarea>
+   </div>
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz przerwanie urlopu</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const from=sickFrom.value;
+  const to=sickTo.value;
+
+  if(from<request.from||from>request.to){
+   showToast('Początek chorobowego musi przypadać w okresie urlopu');
+   return;
+  }
+  if(to<from){
+   showToast('Data zakończenia chorobowego jest nieprawidłowa');
+   return;
+  }
+
+  const originalSnapshot={
+   from:request.from,
+   to:request.to,
+   days:request.days,
+   interrupted:request.interrupted||false,
+   balanceApplied:request.balanceApplied!==false
+  };
+
+  const originalTo=request.to;
+  const overlapTo=to<originalTo?to:originalTo;
+  const restoredDays=workingDaysBetween(from,overlapTo);
+  const dayBefore=previousCalendarDay(from);
+  const remainingLeaveDays=from===request.from?0:workingDaysBetween(request.from,dayBefore);
+
+  request.originalSnapshot=originalSnapshot;
+  request.interrupted=true;
+  request.interruptedFrom=from;
+  request.originalTo=originalTo;
+  request.originalDays=originalSnapshot.days;
+
+  if(remainingLeaveDays===0){
+   request.status='Anulowany';
+   request.to=request.from;
+   request.days=0;
+   request.cancelReason='Urlop w całości zastąpiony zwolnieniem lekarskim';
+  }else{
+   request.to=dayBefore;
+   request.days=remainingLeaveDays;
+   request.cancelReason='';
+  }
+
+  const sickId=Date.now();
+  request.linkedSickId=sickId;
+
+  leaveRequests.push({
+   id:sickId,
+   employeeId:request.employeeId,
+   type:'Zwolnienie lekarskie',
+   from,
+   to,
+   days:workingDaysBetween(from,to),
+   status:'Zaakceptowany',
+   managerApproval:true,
+   accountantApproval:true,
+   historical:false,
+   linkedLeaveId:request.id,
+   notes:sickNotes.value.trim()
+  });
+
+  if(originalSnapshot.balanceApplied){
+   employee.leaveUsed=Math.max(0,employee.leaveUsed-restoredDays);
+   const year=Number(originalSnapshot.from.slice(0,4));
+   const balance=leaveBalances.find(item=>item.employeeId===request.employeeId&&item.year===year);
+   if(balance) balance.used=Math.max(0,balance.used-restoredDays);
+  }
+
+  closeModal();
+  showToast(`Urlop przerwany. Przywrócono ${restoredDays} dni do limitu.`);
+  openEmployeeTabDirect(employee.id,'leave');
+ });
+}
+
+function undoLeaveInterruption(requestId){
+ const request=leaveRequests.find(r=>r.id===requestId);
+ if(!request||!request.originalSnapshot) return;
+
+ const employee=employees.find(e=>e.id===request.employeeId);
+ const sick=leaveRequests.find(r=>r.id===request.linkedSickId);
+
+ const snapshot=request.originalSnapshot;
+ const restoredDays=sick?workingDaysBetween(sick.from, sick.to<snapshot.to?sick.to:snapshot.to):0;
+
+ request.from=snapshot.from;
+ request.to=snapshot.to;
+ request.days=snapshot.days;
+ request.status='Zaakceptowany';
+ request.interrupted=false;
+ request.interruptedFrom=null;
+ request.cancelReason='';
+ request.linkedSickId=null;
+
+ if(snapshot.balanceApplied){
+  employee.leaveUsed+=restoredDays;
+  const year=Number(snapshot.from.slice(0,4));
+  const balance=leaveBalances.find(item=>item.employeeId===request.employeeId&&item.year===year);
+  if(balance) balance.used+=restoredDays;
+ }
+
+ if(sick){
+  leaveRequests=leaveRequests.filter(r=>r.id!==sick.id);
+ }
+
+ request.originalSnapshot=null;
+ showToast('Cofnięto przerwanie urlopu');
+ openEmployeeTabDirect(employee.id,'leave');
+}
+
+function editInterruptedLeave(requestId){
+ const request=leaveRequests.find(r=>r.id===requestId);
+ if(!request||!request.interrupted) return;
+
+ const sick=leaveRequests.find(r=>r.id===request.linkedSickId);
+ if(!sick) return;
+
+ openModal('Edytuj okres chorobowego',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Chorobowe od</label>
+    <input id="editSickFrom" type="date" value="${sick.from}" min="${request.originalSnapshot?.from||request.from}" max="${request.originalSnapshot?.to||sick.to}" required>
+   </div>
+   <div class="field">
+    <label>Chorobowe do</label>
+    <input id="editSickTo" type="date" value="${sick.to}" min="${sick.from}" required>
+   </div>
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="button" class="btn danger" onclick="closeModal();undoLeaveInterruption(${requestId})">Cofnij przerwanie</button>
+   <button type="submit" class="btn primary">Zapisz zmianę</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const base=request.originalSnapshot;
+  if(!base) return;
+
+  const from=editSickFrom.value;
+  const to=editSickTo.value;
+
+  if(from<base.from||from>base.to||to<from){
+   showToast('Nieprawidłowy okres chorobowego');
+   return;
+  }
+
+  // Cofnij poprzedni wpływ na bilans.
+  const oldOverlapTo=sick.to<base.to?sick.to:base.to;
+  const oldRestored=workingDaysBetween(sick.from,oldOverlapTo);
+  const employee=employees.find(e=>e.id===request.employeeId);
+  if(base.balanceApplied){
+   employee.leaveUsed+=oldRestored;
+   const balance=leaveBalances.find(item=>item.employeeId===request.employeeId&&item.year===Number(base.from.slice(0,4)));
+   if(balance) balance.used+=oldRestored;
+  }
+
+  // Ustaw nowy okres.
+  sick.from=from;
+  sick.to=to;
+  sick.days=workingDaysBetween(from,to);
+
+  const newOverlapTo=to<base.to?to:base.to;
+  const newRestored=workingDaysBetween(from,newOverlapTo);
+  const dayBefore=previousCalendarDay(from);
+  const remaining=from===base.from?0:workingDaysBetween(base.from,dayBefore);
+
+  request.from=base.from;
+  request.to=remaining===0?base.from:dayBefore;
+  request.days=remaining;
+  request.status=remaining===0?'Anulowany':'Zaakceptowany';
+  request.cancelReason=remaining===0?'Urlop w całości zastąpiony zwolnieniem lekarskim':'';
+  request.interruptedFrom=from;
+
+  if(base.balanceApplied){
+   employee.leaveUsed=Math.max(0,employee.leaveUsed-newRestored);
+   const balance=leaveBalances.find(item=>item.employeeId===request.employeeId&&item.year===Number(base.from.slice(0,4)));
+   if(balance) balance.used=Math.max(0,balance.used-newRestored);
+  }
+
+  closeModal();
+  showToast('Zmieniono okres chorobowego');
+  openEmployeeTabDirect(employee.id,'leave');
+ });
 }
 
 function openCompanyForm(){openModal('Dodaj firmę',`
@@ -1485,8 +6236,27 @@ function openEditEmployeeForm(employeeId){
    </div>
 
    <div class="field">
-    <label>Limit urlopu</label>
-    <input id="editEmployeeLeave" type="number" min="0" value="${employee.leaveTotal??26}">
+    <label>Stopień niepełnosprawności</label>
+    <select id="editEmployeeDisabilityDegree" onchange="toggleEditDisabilityDate()">
+     ${['Brak','Lekki','Umiarkowany','Znaczny'].map(degree=>`<option value="${degree}" ${degree===(employee.disabilityDegree||'Brak')?'selected':''}>${degree}</option>`).join('')}
+    </select>
+   </div>
+
+   <div class="field" id="editEmployeeDisabilityDateField" style="display:${employee.disabilityDegree&&employee.disabilityDegree!=='Brak'?'block':'none'}">
+    <label>Data zaliczenia do stopnia</label>
+    <input id="editEmployeeDisabilityFrom" type="date" value="${employee.disabilityFrom||''}">
+   </div>
+
+   <div class="field">
+    <label>Podstawowy limit urlopu</label>
+    <input id="editEmployeeLeave" type="number" min="0" value="${employee.leaveBase??employee.leaveTotal??26}">
+   </div>
+
+   <div class="field full">
+    <div class="info">
+     <span>Dodatkowy urlop</span>
+     <strong>Umiarkowany lub znaczny: +10 dni po roku od daty zaliczenia do stopnia.</strong>
+    </div>
    </div>
 
    <div class="field">
@@ -1514,7 +6284,12 @@ function openEditEmployeeForm(employeeId){
    employee.email=document.getElementById('editEmployeeEmail').value.trim();
    employee.phone=document.getElementById('editEmployeePhone').value.trim();
    employee.pesel=document.getElementById('editEmployeePesel').value.trim();
-   employee.leaveTotal=Number(document.getElementById('editEmployeeLeave').value)||0;
+   employee.disabilityDegree=document.getElementById('editEmployeeDisabilityDegree').value;
+   employee.disabilityFrom=employee.disabilityDegree==='Brak'
+    ? ''
+    : document.getElementById('editEmployeeDisabilityFrom').value;
+   employee.leaveBase=Number(document.getElementById('editEmployeeLeave').value)||0;
+   employee.leaveTotal=calculatedAnnualLeave(employee);
    employee.bhp=document.getElementById('editEmployeeBhp').value;
    employee.notes=document.getElementById('editEmployeeNotes').value.trim();
 
@@ -1524,41 +6299,167 @@ function openEditEmployeeForm(employeeId){
  });
 }
 
-function confirmDeleteEmployee(employeeId){
- const employee=employees.find(e=>e.id===employeeId);
+
+function toggleEditDisabilityDate(){
+ const degree=document.getElementById('editEmployeeDisabilityDegree');
+ const field=document.getElementById('editEmployeeDisabilityDateField');
+ const input=document.getElementById('editEmployeeDisabilityFrom');
+ if(!degree||!field||!input) return;
+
+ const visible=degree.value!=='Brak';
+ field.style.display=visible?'block':'none';
+ input.required=visible;
+
+ if(!visible) input.value='';
+}
+
+function openArchiveEmployeeModal(employeeId){
+ const employee=employees.find(item=>item.id===employeeId);
  if(!employee) return;
 
- openModal('Usuń pracownika',`
+ openModal('Archiwizuj pracownika',`
   <p style="font-size:16px;line-height:1.6;margin-bottom:14px">
-   Czy na pewno chcesz usunąć pracownika <strong>${employee.name}</strong>?
+   Pracownik <strong>${employee.name}</strong> zostanie przeniesiony do archiwum.
   </p>
 
-  <div class="status critical" style="display:block;padding:14px;margin-bottom:20px">
-   Usunięta zostanie również historia umów, badań, urlopów i powiadomień tego pracownika.
+  <div class="status important" style="display:block;padding:14px;margin-bottom:18px">
+   Dane, urlopy, badania, BHP, umowy i historia wiadomości nie zostaną usunięte.
+   Pracownika będzie można później przywrócić.
+  </div>
+
+  <div class="field">
+   <label>Powód archiwizacji</label>
+   <select id="archiveEmployeeReason">
+    <option>Rozwiązanie umowy</option>
+    <option>Rezygnacja pracownika</option>
+    <option>Emerytura</option>
+    <option>Zwolnienie dyscyplinarne</option>
+    <option>Przeniesienie do innej firmy</option>
+    <option>Inny</option>
+   </select>
+  </div>
+
+  <div class="field" style="margin-top:12px">
+   <label>Dodatkowa informacja</label>
+   <textarea id="archiveEmployeeNotes" rows="3" placeholder="Opcjonalnie..."></textarea>
   </div>
 
   <footer>
    <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
-   <button type="button" class="btn danger" onclick="deleteEmployee(${employeeId})">Usuń pracownika</button>
+   <button type="button" class="btn archive-btn" onclick="archiveEmployee(${employeeId})">Przenieś do archiwum</button>
   </footer>
  `,event=>event.preventDefault());
 }
 
-function deleteEmployee(employeeId){
- const index=employees.findIndex(e=>e.id===employeeId);
+function archiveEmployee(employeeId){
+ const index=employees.findIndex(item=>item.id===employeeId);
  if(index===-1) return;
 
+ const employee=employees[index];
+ employee.archivedAt=new Date().toISOString();
+ employee.archiveReason=document.getElementById('archiveEmployeeReason')?.value||'Inny';
+ employee.archiveNotes=document.getElementById('archiveEmployeeNotes')?.value.trim()||'';
+
+ archivedEmployees.unshift(employee);
  employees.splice(index,1);
- contractHistory=contractHistory.filter(item=>item.employeeId!==employeeId);
- medicalHistory=medicalHistory.filter(item=>item.employeeId!==employeeId);
- leaveBalances=leaveBalances.filter(item=>item.employeeId!==employeeId);
- leaveRequests=leaveRequests.filter(item=>item.employeeId!==employeeId);
- notifications=notifications.filter(item=>item.employeeId!==employeeId);
+
+ selectedArchivedEmployeeIds=selectedArchivedEmployeeIds.filter(id=>id!==employeeId);
+ selectedEmployeeId=employees[0]?.id||null;
 
  closeModal();
- showToast('Pracownik został usunięty');
+ showToast('Pracownik został przeniesiony do archiwum');
  currentView='employees';
- selectedEmployeeId=employees[0]?.id||null;
+ render();
+}
+
+function restoreArchivedEmployee(employeeId){
+ const index=archivedEmployees.findIndex(item=>item.id===employeeId);
+ if(index===-1) return;
+
+ const employee=archivedEmployees[index];
+ delete employee.archivedAt;
+ delete employee.archiveReason;
+ delete employee.archiveNotes;
+
+ employees.push(employee);
+ archivedEmployees.splice(index,1);
+ selectedArchivedEmployeeIds=selectedArchivedEmployeeIds.filter(id=>id!==employeeId);
+
+ showToast('Pracownik został przywrócony');
+ currentView='employeeArchive';
+ render();
+}
+
+function toggleArchivedEmployeeSelection(employeeId,checked){
+ if(checked){
+  if(!selectedArchivedEmployeeIds.includes(employeeId)){
+   selectedArchivedEmployeeIds.push(employeeId);
+  }
+ }else{
+  selectedArchivedEmployeeIds=selectedArchivedEmployeeIds.filter(id=>id!==employeeId);
+ }
+
+ currentView='employeeArchive';
+ render();
+}
+
+function clearArchivedSelection(){
+ selectedArchivedEmployeeIds=[];
+ currentView='employeeArchive';
+ render();
+}
+
+function openPermanentDeleteSelectedModal(){
+ if(!selectedArchivedEmployeeIds.length){
+  showToast('Najpierw zaznacz pracownika w archiwum');
+  return;
+ }
+
+ const selected=archivedEmployees.filter(item=>selectedArchivedEmployeeIds.includes(item.id));
+ const names=selected.map(item=>item.name).join(', ');
+
+ openModal('Trwale usuń zaznaczone osoby',`
+  <div class="permanent-delete-warning">
+   <strong>Ta operacja jest nieodwracalna</strong>
+   <p>Trwale usuniesz: ${names}</p>
+   <p>Usunięte zostaną również wszystkie powiązane dane historyczne.</p>
+  </div>
+
+  <div class="field" style="margin-top:16px">
+   <label>Aby potwierdzić, wpisz dokładnie: USUŃ</label>
+   <input id="permanentDeleteConfirmation" autocomplete="off" placeholder="USUŃ">
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="button" class="btn danger" onclick="permanentlyDeleteSelectedEmployees()">Trwale usuń</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function permanentlyDeleteSelectedEmployees(){
+ const confirmation=document.getElementById('permanentDeleteConfirmation')?.value.trim();
+
+ if(confirmation!=='USUŃ'){
+  showToast('Wpisz dokładnie: USUŃ');
+  return;
+ }
+
+ const ids=[...selectedArchivedEmployeeIds];
+
+ archivedEmployees=archivedEmployees.filter(item=>!ids.includes(item.id));
+ contractHistory=contractHistory.filter(item=>!ids.includes(item.employeeId));
+ medicalHistory=medicalHistory.filter(item=>!ids.includes(item.employeeId));
+ leaveBalances=leaveBalances.filter(item=>!ids.includes(item.employeeId));
+ leaveRequests=leaveRequests.filter(item=>!ids.includes(item.employeeId));
+ notifications=notifications.filter(item=>!ids.includes(item.employeeId));
+ inboxThreads=inboxThreads.filter(item=>!ids.includes(item.employeeId));
+
+ selectedArchivedEmployeeIds=[];
+
+ closeModal();
+ showToast('Zaznaczone osoby zostały trwale usunięte');
+ currentView='employeeArchive';
  render();
 }
 
@@ -1571,7 +6472,23 @@ function openEmployeeForm(companyId=''){openModal('Dodaj pracownika',`
    <div class="field"><label>E-mail</label><input id="eEmail" type="email"></div>
    <div class="field"><label>Telefon</label><input id="ePhone"></div>
    <div class="field"><label>PESEL</label><input id="ePesel" maxlength="11"></div>
-   <div class="field"><label>Limit urlopu</label><input id="eLeave" type="number" value="26" min="0"></div>
+   <div class="field">
+    <label>Stopień niepełnosprawności</label>
+    <select id="eDisabilityDegree" onchange="toggleDisabilityDate()">
+     <option value="Brak">Brak</option>
+     <option value="Lekki">Lekki</option>
+     <option value="Umiarkowany">Umiarkowany</option>
+     <option value="Znaczny">Znaczny</option>
+    </select>
+   </div>
+   <div class="field" id="eDisabilityDateField" style="display:none">
+    <label>Data zaliczenia do stopnia</label>
+    <input id="eDisabilityFrom" type="date">
+   </div>
+   <div class="field"><label>Podstawowy limit urlopu</label><input id="eLeave" type="number" value="26" min="0"></div>
+   <div class="field full">
+    <div class="info"><span>Dodatkowy urlop</span><strong>Umiarkowany lub znaczny: +10 dni po roku od daty zaliczenia do stopnia.</strong></div>
+   </div>
    <div class="field"><label>Badania lekarskie ważne do</label><input id="eMedical" type="date" required></div>
    <div class="field"><label>Rodzaj umowy</label><select id="eContractType"><option>Umowa o pracę</option><option>Umowa zlecenie</option><option>Umowa na okres próbny</option><option>B2B</option></select></div>
    <div class="field"><label>Umowa ważna do</label><input id="eContractEnd" type="date"></div>
@@ -1590,7 +6507,15 @@ function openEmployeeForm(companyId=''){openModal('Dodaj pracownika',`
      phone:ePhone.value,
      pesel:ePesel.value,
      startDate:eStartDate.value,
-     leaveTotal:Number(eLeave.value),
+     disabilityDegree:eDisabilityDegree.value,
+     disabilityFrom:eDisabilityDegree.value==='Brak'?'':eDisabilityFrom.value,
+     leaveBase:Number(eLeave.value),
+     leaveTotal:Number(eLeave.value)+(
+      ['Umiarkowany','Znaczny'].includes(eDisabilityDegree.value) &&
+      eDisabilityFrom.value &&
+      new Date()>=new Date(addYearsToDate(eDisabilityFrom.value,1)+'T00:00:00')
+       ?10:0
+     ),
      leaveUsed:0,
      medical:eMedical.value,
      contractType:eContractType.value,
@@ -1604,6 +6529,18 @@ function openEmployeeForm(companyId=''){openModal('Dodaj pracownika',`
    render();
  })}
 
+
+function toggleDisabilityDate(){
+ const degree=document.getElementById('eDisabilityDegree');
+ const field=document.getElementById('eDisabilityDateField');
+ const input=document.getElementById('eDisabilityFrom');
+ if(!degree||!field||!input) return;
+ const visible=degree.value!=='Brak';
+ field.style.display=visible?'block':'none';
+ input.required=visible;
+ if(!visible) input.value='';
+}
+
 function openModal(title,html,onSubmit){document.getElementById('modalTitle').textContent=title;const f=document.getElementById('modalForm');f.innerHTML=html;f.onsubmit=onSubmit;document.getElementById('modalBg').classList.add('open')}
 function closeModal(){document.getElementById('modalBg').classList.remove('open')}
 
@@ -1611,8 +6548,11 @@ function bindDynamic(){}
 
 document.querySelectorAll('#adminNav [data-view]').forEach(btn=>btn.onclick=()=>{currentView=btn.dataset.view;document.querySelectorAll('#adminNav [data-view]').forEach(b=>b.classList.toggle('active',b===btn));render()})
 document.querySelectorAll('#employeeNav [data-employee-view]').forEach(btn=>btn.onclick=()=>renderEmployee(btn.dataset.employeeView))
-document.getElementById('employeeModeBtn').onclick=()=>{employeeMode=true;selectedEmployeeId=1;renderEmployee()}
-document.getElementById('adminModeBtn').onclick=()=>{employeeMode=false;currentView='dashboard';render()}
+document.querySelectorAll('#managerNav [data-manager-view]').forEach(btn=>btn.onclick=()=>renderManager(btn.dataset.managerView))
+document.getElementById('managerModeBtn').onclick=()=>{managerMode=true;employeeMode=false;managerCompanyId=2;renderManager()}
+document.getElementById('employeeModeBtn').onclick=()=>{employeeMode=true;managerMode=false;selectedEmployeeId=1;renderEmployee()}
+document.getElementById('managerAdminModeBtn').onclick=()=>{managerMode=false;currentView='dashboard';render()}
+document.getElementById('adminModeBtn').onclick=()=>{employeeMode=false;managerMode=false;currentView='dashboard';render()}
 document.getElementById('modalBg').onclick=e=>{if(e.target.id==='modalBg')closeModal()}
 document.getElementById('globalSearch').addEventListener('input',e=>{const q=e.target.value.toLowerCase();if(!q)return;const emp=employees.find(x=>x.name.toLowerCase().includes(q));const comp=companies.find(x=>x.name.toLowerCase().includes(q));if(emp)openEmployee(emp.id);else if(comp)openCompany(comp.id)})
 render();
