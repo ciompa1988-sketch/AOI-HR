@@ -2183,6 +2183,19 @@ button.action-summary-card:hover{
  box-shadow:0 8px 18px rgba(79,70,229,.18);
 }
 
+
+.history-archive-label{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ padding:6px 10px;
+ border-radius:999px;
+ background:#eef2f7;
+ color:#64748b;
+ font-size:10px;
+ font-weight:850;
+ white-space:nowrap;
+}
 </style>
 </head>
 <body>
@@ -3762,6 +3775,14 @@ function employeeMedicalSection(e){
   <h3>Dodaj nowe badanie / przedłużenie</h3>
   <form onsubmit="saveMedicalDate(event,${e.id})">
    <div class="form-grid">
+    <div class="field">
+     <label>Rodzaj badania</label>
+     <select id="employeeMedicalType" required>
+      <option value="Wstępne">Wstępne</option>
+      <option value="Okresowe">Okresowe</option>
+      <option value="Kontrolne">Kontrolne</option>
+     </select>
+    </div>
     <div class="field"><label>Data wykonania badań</label><input id="employeeMedicalCompleted" type="date" required></div>
     <div class="field"><label>Badania ważne do</label><input id="employeeMedicalDate" type="date" required></div>
     <div class="field full"><label>Uwagi</label><textarea id="employeeMedicalNotes" rows="3"></textarea></div>
@@ -3771,27 +3792,28 @@ function employeeMedicalSection(e){
  </div>
  <h3 style="margin-bottom:12px">Aktualne badanie</h3>
  ${current?`<button type="button" class="editable-current-card" onclick="openEditMedicalRecord(${current.id})">
-  <div><span class="record-label">AKTUALNY WPIS</span><strong>${current.notes||'Badanie lekarskie'}</strong>
+  <div><span class="record-label">AKTUALNY WPIS</span><strong>${current.type?`Badanie ${current.type.toLowerCase()}`:(current.notes||'Badanie lekarskie')}</strong>
   <small>Wykonane: ${fmt(current.completed)} · ważne do: ${fmt(current.validTo)}</small></div>
   <div class="record-actions"><span class="status ${dateStatusClass(current.validTo)}">${dateStatusLabel(current.validTo)}</span><strong>Edytuj →</strong></div>
  </button>`:'<div class="empty">Brak aktualnego badania.</div>'}
  <h3 style="margin:22px 0 12px">Historia badań</h3>
  <div class="readonly-history-list">${archived.length?archived.map(x=>readonlyRecordCard(
-  x.notes||'Badanie lekarskie',
-  `Wykonane: ${fmt(x.completed)} · ważne do: ${fmt(x.validTo)}`,
-  `<span class="status ${dateStatusClass(x.validTo)}">${dateStatusLabel(x.validTo)}</span>`
+  x.type?`Badanie ${x.type.toLowerCase()}`:(x.notes||'Badanie lekarskie'),
+  `Wykonane: ${fmt(x.completed)} · ważne do: ${fmt(x.validTo)}${x.notes?` · ${escapeHtml(x.notes)}`:''}`,
+  `<span class="history-archive-label">Archiwalne</span>`
  )).join(''):'<div class="empty">Brak starszych badań.</div>'}</div>`;
 }
 
 function saveMedicalDate(event,employeeId){
  event.preventDefault();
  const employee=employees.find(x=>x.id===employeeId);
+ const type=document.getElementById('employeeMedicalType').value;
  const completed=document.getElementById('employeeMedicalCompleted').value;
  const validTo=document.getElementById('employeeMedicalDate').value;
  const notes=document.getElementById('employeeMedicalNotes').value.trim();
  if(!completed||!validTo){showToast('Uzupełnij obie daty');return}
  if(validTo<completed){showToast('Data ważności nie może być wcześniejsza niż data wykonania');return}
- medicalHistory.push({id:Date.now(),employeeId,completed,validTo,notes});
+ medicalHistory.push({id:Date.now(),employeeId,type,completed,validTo,notes});
  employee.medical=validTo; employee.medicalCompleted=completed; employee.medicalNotes=notes;
  showToast('Nowe badanie zostało zapisane'); openEmployeeTabDirect(employeeId,'medical');
 }
@@ -3799,6 +3821,12 @@ function saveMedicalDate(event,employeeId){
 function openEditMedicalRecord(recordId){
  const r=medicalHistory.find(x=>x.id===recordId); if(!r)return;
  openModal('Edytuj aktualne badanie',`<div class="form-grid">
+  <div class="field">
+   <label>Rodzaj badania</label>
+   <select id="emt">
+    ${['Wstępne','Okresowe','Kontrolne'].map(type=>`<option ${type===r.type?'selected':''}>${type}</option>`).join('')}
+   </select>
+  </div>
   <div class="field"><label>Data wykonania</label><input id="emc" type="date" value="${r.completed||''}" required></div>
   <div class="field"><label>Ważne do</label><input id="emv" type="date" value="${r.validTo||''}" required></div>
   <div class="field full"><label>Uwagi</label><textarea id="emn" rows="4">${r.notes||''}</textarea></div>
@@ -3807,7 +3835,7 @@ function openEditMedicalRecord(recordId){
  <button type="submit" class="btn primary">Zapisz zmiany</button></footer>`,event=>{
   event.preventDefault(); const a=document.getElementById('emc').value,b=document.getElementById('emv').value;
   if(!a||!b){showToast('Uzupełnij obie daty');return} if(b<a){showToast('Sprawdź kolejność dat');return}
-  r.completed=a;r.validTo=b;r.notes=document.getElementById('emn').value.trim();syncMedical(r.employeeId);closeModal();showToast('Badanie poprawione');openEmployeeTabDirect(r.employeeId,'medical');
+  r.type=document.getElementById('emt').value;r.completed=a;r.validTo=b;r.notes=document.getElementById('emn').value.trim();syncMedical(r.employeeId);closeModal();showToast('Badanie poprawione');openEmployeeTabDirect(r.employeeId,'medical');
  });
 }
 function deleteCurrentMedicalRecord(id){const r=medicalHistory.find(x=>x.id===id);if(!r)return;const eid=r.employeeId;medicalHistory=medicalHistory.filter(x=>x.id!==id);syncMedical(eid);closeModal();openEmployeeTabDirect(eid,'medical')}
@@ -3831,7 +3859,7 @@ function employeeBhpSection(e){
  <div class="record-actions"><span class="status ${dateStatusClass(current.validTo)}">${dateStatusLabel(current.validTo)}</span><strong>Edytuj →</strong></div></button>`:'<div class="empty">Brak aktualnego szkolenia BHP.</div>'}
  <h3 style="margin:22px 0 12px">Historia szkoleń BHP</h3><div class="readonly-history-list">${archived.length?archived.map(x=>readonlyRecordCard(
  x.type,`Od: ${fmt(x.completed)} · do: ${fmt(x.validTo)}${x.notes?` · ${escapeHtml(x.notes)}`:''}`,
- `<span class="status ${dateStatusClass(x.validTo)}">${dateStatusLabel(x.validTo)}</span>`)).join(''):'<div class="empty">Brak starszych szkoleń BHP.</div>'}</div>`;
+ `<span class="history-archive-label">Archiwalne</span>`)).join(''):'<div class="empty">Brak starszych szkoleń BHP.</div>'}</div>`;
 }
 function saveEmployeeBhp(event,employeeId){
  event.preventDefault();const emp=employees.find(x=>x.id===employeeId),type=document.getElementById('employeeBhpType').value,start=document.getElementById('employeeBhpCompleted').value,end=document.getElementById('employeeBhpDate').value,notes=document.getElementById('employeeBhpNotes').value.trim();
@@ -3866,7 +3894,11 @@ function employeeContractSection(e){
  <h3 style="margin-bottom:12px">Aktualna umowa</h3>${current?`<button type="button" class="editable-current-card" onclick="openEditCurrentContract(${e.id},${current.id})"><div><span class="record-label">AKTUALNY WPIS</span><strong>${current.type}</strong>
  <small>Od: ${fmt(current.start)} · do: ${current.end==='Bezterminowa'?'bezterminowo':fmt(current.end)}${current.notes?` · ${escapeHtml(current.notes)}`:''}</small></div>
  <div class="record-actions"><span class="status ${current.end==='Bezterminowa'?'ok':dateStatusClass(current.end)}">${current.end==='Bezterminowa'?'Bezterminowa':dateStatusLabel(current.end)}</span><strong>Edytuj →</strong></div></button>`:'<div class="empty">Brak aktualnej umowy.</div>'}
- <h3 style="margin:22px 0 12px">Historia umów</h3><div class="readonly-history-list">${archived.length?archived.map(x=>readonlyRecordCard(x.type,`Od: ${fmt(x.start)} · do: ${x.end==='Bezterminowa'?'bezterminowo':fmt(x.end)}`,`<span class="status ${x.end==='Bezterminowa'?'ok':dateStatusClass(x.end)}">${x.end==='Bezterminowa'?'Bezterminowa':dateStatusLabel(x.end)}</span>`)).join(''):'<div class="empty">Brak starszych umów.</div>'}</div>`;
+ <h3 style="margin:22px 0 12px">Historia umów</h3><div class="readonly-history-list">${archived.length?archived.map(x=>readonlyRecordCard(
+ x.type,
+ `Od: ${fmt(x.start)} · do: ${x.end==='Bezterminowa'?'bezterminowo':fmt(x.end)}${x.notes?` · ${escapeHtml(x.notes)}`:''}`,
+ `<span class="history-archive-label">Archiwalna</span>`
+ )).join(''):'<div class="empty">Brak starszych umów.</div>'}</div>`;
 }
 function saveContractDates(event,employeeId){event.preventDefault();const emp=employees.find(x=>x.id===employeeId),type=document.getElementById('employeeContractType').value,start=document.getElementById('employeeContractStart').value,indef=document.getElementById('employeeContractIndefinite').checked,end=indef?'Bezterminowa':document.getElementById('employeeContractEnd').value,notes=document.getElementById('employeeContractNotes').value.trim();if(!start||(!indef&&!end)){showToast('Uzupełnij daty');return}if(!indef&&end<start){showToast('Sprawdź kolejność dat');return}contractHistory.push({id:Date.now(),employeeId,type,start,end,notes});emp.contractType=type;emp.startDate=start;emp.contract=end;emp.contractNotes=notes;showToast('Umowa zapisana');openEmployeeTabDirect(employeeId,'contract')}
 function openEditCurrentContract(eid,id){const r=contractHistory.find(x=>x.id===id&&x.employeeId===eid);if(!r)return;openModal('Edytuj aktualną umowę',`<div class="form-grid">
