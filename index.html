@@ -2196,6 +2196,592 @@ button.action-summary-card:hover{
  font-weight:850;
  white-space:nowrap;
 }
+
+.userbox-button{
+ border:0;
+ cursor:pointer;
+ font:inherit;
+}
+.userbox-button>span{
+ display:flex;
+ flex-direction:column;
+ align-items:flex-end;
+}
+.userbox-button strong{
+ font-size:12px;
+ color:#0f172a;
+}
+.userbox-button small{
+ font-size:10px;
+ color:#64748b;
+}
+.checklist-summary-grid{
+ display:grid;
+ grid-template-columns:repeat(5,minmax(130px,1fr));
+ gap:12px;
+ margin-bottom:18px;
+}
+.checklist-summary-card{
+ border:1px solid #dbe3ef;
+ border-radius:17px;
+ padding:15px;
+ background:#fff;
+ text-align:left;
+ cursor:pointer;
+}
+div.checklist-summary-card{
+ cursor:default;
+}
+.checklist-summary-card span{
+ display:block;
+ color:#64748b;
+ font-size:11px;
+ font-weight:800;
+}
+.checklist-summary-card strong{
+ display:block;
+ margin-top:6px;
+ font-size:27px;
+ color:#0f172a;
+}
+.checklist-summary-card.pending{border-color:#fed7aa;background:#fff7ed}
+.checklist-summary-card.sent{border-color:#a7f3d0;background:#ecfdf5}
+.checklist-summary-card.reminded{border-color:#c7d2fe;background:#eef2ff}
+.checklist-summary-card.overdue{border-color:#fecaca;background:#fff1f2}
+.checklist-filter-panel{
+ padding:16px;
+}
+.checklist-filters{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(180px,1fr));
+ gap:14px;
+}
+.checklist-table-panel{
+ overflow-x:auto;
+}
+.checklist-row-sent{
+ background:#f8fffb;
+}
+.checklist-type{
+ display:inline-flex;
+ padding:6px 10px;
+ border-radius:10px;
+ background:#eef2ff;
+ color:#4338ca;
+ font-weight:900;
+}
+.checklist-meta{
+ font-size:10px;
+ line-height:1.45;
+ color:#475569;
+}
+.checklist-actions{
+ display:flex;
+ gap:6px;
+}
+.icon-action{
+ width:34px;
+ height:34px;
+ border:1px solid #dbe3ef;
+ border-radius:10px;
+ background:#fff;
+ cursor:pointer;
+}
+.icon-action.success{
+ background:#ecfdf5;
+ border-color:#a7f3d0;
+ color:#047857;
+}
+.icon-action.reminder{
+ background:#fffbeb;
+ border-color:#fde68a;
+}
+.reminder-preview{
+ margin-bottom:15px;
+ padding:15px;
+ border-radius:15px;
+ background:#f8fafc;
+}
+.simple-activity-list{
+ display:flex;
+ flex-direction:column;
+ gap:9px;
+}
+.simple-activity-item{
+ border:1px solid #e2e8f0;
+ border-radius:13px;
+ padding:12px 14px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+ background:#fff;
+}
+.simple-activity-item strong,
+.simple-activity-item span{
+ display:block;
+}
+.simple-activity-item span{
+ margin-top:3px;
+ color:#64748b;
+ font-size:11px;
+}
+.simple-activity-item small{
+ text-align:right;
+ color:#64748b;
+ font-size:9px;
+ line-height:1.45;
+}
+.office-user-cell{
+ display:flex;
+ align-items:center;
+ gap:10px;
+}
+.avatar.small{
+ width:34px;
+ height:34px;
+ font-size:11px;
+}
+.account-switch-list{
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+ margin-top:14px;
+}
+.account-switch-card{
+ width:100%;
+ border:1px solid #dbe3ef;
+ border-radius:15px;
+ padding:12px;
+ display:grid;
+ grid-template-columns:46px 1fr auto;
+ align-items:center;
+ gap:12px;
+ text-align:left;
+ background:#fff;
+ cursor:pointer;
+}
+.account-switch-card.active{
+ border-color:#6366f1;
+ background:#f7f7ff;
+}
+.account-switch-card span:nth-child(2) strong,
+.account-switch-card span:nth-child(2) small{
+ display:block;
+}
+.account-switch-card span:nth-child(2) small{
+ margin-top:3px;
+ color:#64748b;
+}
+.modal-intro{
+ color:#64748b;
+ line-height:1.55;
+}
+.page-header.compact{
+ margin-bottom:12px;
+}
+@media(max-width:1000px){
+ .checklist-summary-grid{grid-template-columns:repeat(2,minmax(130px,1fr))}
+ .checklist-filters{grid-template-columns:1fr}
+}
+
+
+.year-month-panel{display:flex;align-items:center;gap:20px;margin-bottom:18px;padding:14px 16px;border:1px solid #dbe3ef;border-radius:17px;background:#fff}
+.year-switcher{display:flex;align-items:center;gap:12px;white-space:nowrap}.year-switcher button{width:34px;height:34px;border:1px solid #dbe3ef;border-radius:10px;background:#fff;cursor:pointer}.year-switcher strong{font-size:18px}
+.month-tabs{display:grid;grid-template-columns:repeat(12,minmax(45px,1fr));gap:5px;flex:1}.month-tabs button{border:1px solid #dbe3ef;border-radius:9px;background:#fff;padding:9px 5px;cursor:pointer}.month-tabs button.active{background:linear-gradient(135deg,#4f46e5,#2563eb);color:#fff;border-color:transparent}
+.checklist-summary-grid.compact{grid-template-columns:repeat(5,minmax(110px,1fr))}
+.matrix-panel{padding:0;overflow:hidden}.matrix-scroll{overflow:auto;max-height:620px}.checklist-matrix{min-width:1350px;border-collapse:separate;border-spacing:0}.checklist-matrix th,.checklist-matrix td{border-bottom:1px solid #e2e8f0;border-right:1px solid #eef2f7;padding:10px;vertical-align:middle}.checklist-matrix th{position:sticky;top:0;background:#f8fafc;z-index:3}.checklist-matrix .sticky-col{position:sticky;left:0;background:#fff;z-index:2;min-width:180px}.checklist-matrix th.sticky-col{z-index:4;background:#f8fafc}
+.matrix-cell{width:100%;min-width:105px;border:1px solid transparent;border-radius:10px;padding:8px 7px;display:flex;align-items:center;gap:7px;justify-content:center;cursor:pointer}.matrix-cell small{font-size:9px}.matrix-cell.sent{background:#ecfdf5;border-color:#a7f3d0;color:#047857}.matrix-cell.reminded{background:#fffbeb;border-color:#fde68a;color:#92400e}.matrix-cell.pending,.matrix-cell.overdue{background:#fff1f2;border-color:#fecaca;color:#b91c1c}.matrix-cell.not-applicable{background:#f8fafc;border-color:#e2e8f0;color:#94a3b8}
+.matrix-legend{display:flex;gap:18px;flex-wrap:wrap;padding:12px 16px;background:#f8fafc;border-top:1px solid #e2e8f0;font-size:10px;color:#64748b}.legend{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}.legend.sent{background:#10b981}.legend.reminded{background:#f59e0b}.legend.pending{background:#ef4444}.legend.neutral{background:#cbd5e1}
+.checklist-action-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.checklist-action-summary>div{padding:12px;border-radius:12px;background:#f8fafc}.checklist-action-summary span,.checklist-action-summary strong{display:block}.checklist-action-summary span{font-size:10px;color:#64748b;margin-bottom:4px}.checklist-action-menu{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sent-info-box{padding:12px;border-radius:12px;background:#ecfdf5;color:#065f46;margin-bottom:14px}
+.btn.warning{background:#fff7ed;border-color:#fdba74;color:#9a3412}
+@media(max-width:1100px){.month-tabs{grid-template-columns:repeat(6,1fr)}.year-month-panel{align-items:flex-start;flex-direction:column}}
+
+
+.company-row-actions{
+ display:flex;
+ align-items:center;
+ gap:7px;
+}
+.archive-company-icon{
+ background:#fffbeb;
+ border-color:#fde68a;
+}
+.soft-warning{
+ background:#fffbeb;
+ border-color:#fde68a;
+ color:#92400e;
+}
+
+
+.checklist-scope-note{
+ margin-bottom:14px;
+ padding:12px 14px;
+ border:1px solid #c7d2fe;
+ border-radius:13px;
+ background:#eef2ff;
+ color:#3730a3;
+ font-size:11px;
+ line-height:1.5;
+}
+.checklist-company-heading{
+ margin-bottom:16px;
+ padding:13px;
+ border-radius:13px;
+ background:#f8fafc;
+}
+.checklist-company-heading strong,
+.checklist-company-heading span{
+ display:block;
+}
+.checklist-company-heading span{
+ margin-top:4px;
+ color:#64748b;
+ font-size:11px;
+}
+
+
+.matrix-cell.add-action{
+ background:#eef2ff;
+ border-color:#c7d2fe;
+ color:#4338ca;
+ font-weight:850;
+}
+.matrix-cell.add-action:hover{
+ background:#e0e7ff;
+ border-color:#6366f1;
+}
+.empty-cell-actions{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+.empty-action-card{
+ border:1px solid #dbe3ef;
+ border-radius:15px;
+ padding:15px;
+ display:grid;
+ grid-template-columns:34px 1fr;
+ column-gap:10px;
+ row-gap:3px;
+ text-align:left;
+ background:#fff;
+ cursor:pointer;
+}
+.empty-action-card>span{
+ grid-row:1/3;
+ font-size:22px;
+}
+.empty-action-card strong,
+.empty-action-card small{
+ display:block;
+}
+.empty-action-card small{
+ color:#64748b;
+ line-height:1.4;
+}
+.empty-action-card.pending{background:#fff1f2;border-color:#fecaca}
+.empty-action-card.reminded{background:#fffbeb;border-color:#fde68a}
+.empty-action-card.sent{background:#ecfdf5;border-color:#a7f3d0}
+.empty-action-card.neutral{background:#f8fafc;border-color:#e2e8f0}
+.reminder-info-box{
+ padding:12px;
+ border-radius:12px;
+ background:#fffbeb;
+ color:#92400e;
+ margin-bottom:14px;
+}
+.neutral-info-box{
+ padding:12px;
+ border-radius:12px;
+ background:#f8fafc;
+ color:#475569;
+ margin-bottom:14px;
+}
+.legend.add{background:#6366f1}
+@media(max-width:800px){
+ .empty-cell-actions{grid-template-columns:1fr}
+}
+
+
+.checklist-company-manager{
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+}
+.checklist-company-manager-row{
+ display:grid;
+ grid-template-columns:minmax(170px,1fr) 2fr auto;
+ gap:14px;
+ align-items:center;
+ padding:13px;
+ border:1px solid #e2e8f0;
+ border-radius:14px;
+ background:#fff;
+}
+.checklist-company-manager-row strong,
+.checklist-company-manager-row small{
+ display:block;
+}
+.checklist-company-manager-row small{
+ margin-top:4px;
+ color:#64748b;
+}
+.checklist-obligation-chips,
+.checklist-new-obligations{
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+}
+.obligation-chip{
+ display:inline-flex;
+ align-items:center;
+ gap:6px;
+ padding:7px 10px;
+ border:1px solid #dbe3ef;
+ border-radius:999px;
+ background:#f8fafc;
+ color:#475569;
+ font-size:10px;
+ font-weight:800;
+}
+.obligation-chip.selected{
+ border-color:#a7f3d0;
+ background:#ecfdf5;
+ color:#047857;
+}
+.obligation-chip input{
+ width:auto;
+}
+@media(max-width:900px){
+ .checklist-company-manager-row{
+  grid-template-columns:1fr;
+ }
+}
+
+
+.checklist-company-manager-actions{
+ display:flex;
+ flex-direction:column;
+ gap:7px;
+}
+.notification-contact-preview{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+}
+.notification-contact-preview span{
+ padding:5px 8px;
+ border-radius:999px;
+ background:#eef2ff;
+ color:#4338ca;
+ font-size:9px;
+ font-weight:800;
+}
+
+
+.checklist-matrix{
+ min-width:1550px;
+}
+.checklist-matrix .col-a1-period{
+ min-width:175px;
+ width:175px;
+ white-space:nowrap;
+}
+.checklist-matrix .col-zus-period{
+ min-width:190px;
+ width:190px;
+ white-space:nowrap;
+}
+.checklist-matrix .col-accounting-form{
+ min-width:170px;
+}
+.checklist-matrix .col-zus-code{
+ min-width:95px;
+ white-space:nowrap;
+}
+.period-value{
+ display:inline-block;
+ min-width:145px;
+ white-space:nowrap;
+ font-variant-numeric:tabular-nums;
+}
+
+
+.checklist-matrix{
+ min-width:1480px;
+}
+.checklist-matrix .col-monthly-action{
+ min-width:118px;
+ width:118px;
+ max-width:118px;
+}
+.checklist-matrix .col-monthly-action .matrix-cell{
+ min-width:96px;
+ padding:7px 5px;
+}
+.checklist-matrix .col-a1-period{
+ min-width:205px;
+ width:205px;
+}
+.checklist-matrix .col-zus-period{
+ min-width:205px;
+ width:205px;
+}
+.checklist-matrix .col-accounting-form{
+ min-width:185px;
+ width:185px;
+}
+.checklist-matrix .col-zus-code{
+ min-width:105px;
+ width:105px;
+}
+.checklist-matrix .col-tax-form{
+ min-width:185px;
+ width:185px;
+}
+.checklist-matrix .col-row-action{
+ min-width:105px;
+ width:105px;
+ text-align:center;
+}
+.compact-settings-btn{
+ padding:8px 10px;
+ min-width:auto;
+ white-space:nowrap;
+}
+.period-value{
+ min-width:170px;
+}
+
+
+.period-cell{
+ width:100%;
+ min-height:54px;
+ display:flex;
+ flex-direction:column;
+ align-items:flex-start;
+ justify-content:center;
+ gap:3px;
+ padding:8px 10px;
+ border:1px solid #dbe3ef;
+ border-radius:11px;
+ background:#fff;
+ cursor:pointer;
+ text-align:left;
+ white-space:nowrap;
+}
+.period-cell strong{
+ font-size:10px;
+ font-variant-numeric:tabular-nums;
+}
+.period-cell small{
+ font-size:8px;
+ color:#64748b;
+}
+.period-cell:hover{
+ border-color:#6366f1;
+ box-shadow:0 0 0 3px rgba(99,102,241,.08);
+}
+.period-cell.valid-period{
+ background:#ecfdf5;
+ border-color:#a7f3d0;
+}
+.period-cell.urgent-period{
+ background:#fffbeb;
+ border-color:#fde68a;
+}
+.period-cell.expired-period{
+ background:#fff1f2;
+ border-color:#fecaca;
+}
+.period-cell.empty-period{
+ background:#eef2ff;
+ border-color:#c7d2fe;
+ color:#4338ca;
+}
+.current-period-card{
+ padding:14px;
+ border:1px solid #dbe3ef;
+ border-radius:14px;
+ background:#f8fafc;
+}
+.current-period-card span,
+.current-period-card strong,
+.current-period-card small{
+ display:block;
+}
+.current-period-card span{
+ color:#64748b;
+ font-size:10px;
+ font-weight:800;
+}
+.current-period-card strong{
+ margin-top:5px;
+ font-size:18px;
+}
+.current-period-card small{
+ margin-top:5px;
+ color:#64748b;
+}
+.period-action-buttons{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+ margin-top:14px;
+}
+.period-history-list{
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+}
+.period-history-row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:14px;
+ padding:11px 13px;
+ border:1px solid #e2e8f0;
+ border-radius:12px;
+ background:#fff;
+}
+.period-history-row strong,
+.period-history-row small{
+ display:block;
+}
+.period-history-row small{
+ margin-top:4px;
+ color:#64748b;
+ font-size:9px;
+}
+@media(max-width:700px){
+ .period-action-buttons{
+  grid-template-columns:1fr;
+ }
+}
+
+
+.edit-company-period-note{
+ margin-top:14px;
+ padding:12px 14px;
+ border:1px solid #c7d2fe;
+ border-radius:12px;
+ background:#eef2ff;
+ color:#3730a3;
+}
+.edit-company-period-note strong,
+.edit-company-period-note span{
+ display:block;
+}
+.edit-company-period-note span{
+ margin-top:4px;
+ font-size:10px;
+ line-height:1.45;
+}
+.checklist-company-manager-actions{
+ min-width:145px;
+}
+
 </style>
 </head>
 <body>
@@ -2212,7 +2798,9 @@ button.action-summary-card:hover{
     <button data-view="bhp" id="adminBhpNav">BHP <span id="adminBhpCount"></span></button>
     <button data-view="contracts">Umowy <span id="adminContractCount"></span></button>
     <button data-view="documents">Dokumenty</button>
+    <button data-view="checklist">Lista kontrolna <span id="adminChecklistCount"></span></button>
     <button data-view="inbox">Wiadomości <span id="adminInboxCount"></span></button>
+    <button data-view="officeTeam">Zespół biura</button>
     <button class="employee-switch" id="managerModeBtn">Otwórz panel szefa firmy</button>
     <button class="employee-switch" id="employeeModeBtn">Otwórz panel pracownika</button>
   </div>
@@ -2239,7 +2827,13 @@ button.action-summary-card:hover{
 <section class="main">
   <div class="topbar">
     <div class="search"><input id="globalSearch" placeholder="Szukaj firm lub pracowników..."></div>
-    <div class="userbox"><span id="modeLabel">Administrator</span><div class="avatar" id="topAvatar">GZ</div></div>
+    <button type="button" class="userbox userbox-button" onclick="openAccountSwitcher()">
+ <span>
+  <strong id="currentOfficeUserName">Grażyna Zachwieja</strong>
+  <small id="modeLabel">Główny administrator</small>
+ </span>
+ <div class="avatar" id="topAvatar">GZ</div>
+</button>
   </div>
   <main class="content" id="content"></main>
 </section>
@@ -2254,7 +2848,7 @@ button.action-summary-card:hover{
 <div class="toast" id="toast"></div>
 
 <script>
-const companies = [
+let companies = [
  {id:1,name:'ABC Sp. z o.o.',nip:'1234567890',contact:'Jan Kowalski',status:'Aktywna'},
  {id:2,name:'Delta Transport',nip:'0987654321',contact:'Piotr Wiśniewski',status:'Aktywna'},
  {id:3,name:'Profi-Bud',nip:'1122334455',contact:'Tomasz Malinowski',status:'Zawieszona'},
@@ -2270,6 +2864,144 @@ let employees = [
  {id:6,companyId:4,name:'Maria Zielińska',position:'Programista',email:'maria@omega.pl',phone:'600 666 777',leaveTotal:26,leaveUsed:5,medical:'2027-05-08',contract:'2027-02-28'}
 ];
 
+
+let officeUsers = [
+ {id:1,name:'Grażyna Zachwieja',email:'grazyna@biuro.pl',role:'owner_admin',status:'Aktywne',initials:'GZ'},
+ {id:2,name:'Patrycja Kowalska',email:'patrycja@biuro.pl',role:'office_admin',status:'Aktywne',initials:'PK'},
+ {id:3,name:'Renata Nowak',email:'renata@biuro.pl',role:'office_admin',status:'Aktywne',initials:'RN'}
+];
+
+let currentOfficeUserId = 1;
+
+const checklistTypes = [
+ {key:'zus',label:'ZUS',defaultDay:15},
+ {key:'vat',label:'VAT',defaultDay:25},
+ {key:'pit',label:'PIT',defaultDay:20},
+ {key:'cit',label:'CIT',defaultDay:20},
+ {key:'kpir',label:'KPiR',defaultDay:20}
+];
+
+let checklistMonth = '2026-08';
+let checklistCompanyFilter = 'all';
+let checklistStatusFilter = 'all';
+let checklistSection = 'active';
+let archivedChecklistItems = [];
+let checklistYear = 2026;
+let checklistSelectedMonth = 8;
+
+let checklistItems = [];
+
+let checklistCompanyProfiles = [
+ {companyId:1,active:true,enabledTypes:['zus','vat','kpir'],defaultDeadlines:{zus:15,vat:25,kpir:20},notificationChannels:['email','whatsapp'],email:'biuro@abc.pl',phone:'600111222'},
+ {companyId:2,active:true,enabledTypes:['zus','vat'],defaultDeadlines:{zus:15,vat:25},notificationChannels:['sms'],email:'',phone:'600222333'},
+ {companyId:3,active:true,enabledTypes:['pit','cit'],defaultDeadlines:{pit:20,cit:20},notificationChannels:['email'],email:'profi@firma.pl',phone:''},
+ {companyId:4,active:true,enabledTypes:[],defaultDeadlines:{},notificationChannels:[],email:'',phone:''}
+];
+
+let archivedChecklistCompanies = [];
+
+let checklistPeriodHistory = [];
+
+function ensureCompanyPeriodHistory(companyId,kind){
+ const company=companies.find(item=>item.id===companyId);
+ if(!company) return [];
+
+ const existing=checklistPeriodHistory.filter(item=>item.companyId===companyId&&item.kind===kind);
+
+ if(!existing.length){
+  const currentValue=kind==='a1'?company.a1Range:company.zusCodeRange;
+
+  if(currentValue){
+   checklistPeriodHistory.push({
+    id:Date.now()+Math.random(),
+    companyId,
+    kind,
+    from:'',
+    to:'',
+    label:currentValue,
+    current:true,
+    createdAt:new Date().toISOString(),
+    createdBy:currentOfficeUserId
+   });
+  }
+ }
+
+ return checklistPeriodHistory
+  .filter(item=>item.companyId===companyId&&item.kind===kind)
+  .sort((a,b)=>Number(b.current)-Number(a.current)||String(b.createdAt).localeCompare(String(a.createdAt)));
+}
+
+function periodKindLabel(kind){
+ return kind==='a1'?'A1':'Kod ZUS';
+}
+
+function periodDisplay(company,kind){
+ return kind==='a1'?(company.a1Range||'Dodaj okres'):(company.zusCodeRange||'Dodaj okres');
+}
+
+function periodEndDate(item){
+ if(item?.to) return item.to;
+ if(!item?.label) return null;
+
+ const matches=item.label.match(/(\d{2})[.\-/](\d{2})[.\-/](\d{4})\s*[–—-]\s*(\d{2})[.\-/](\d{2})[.\-/](\d{4})/);
+ if(!matches) return null;
+
+ return `${matches[6]}-${matches[5]}-${matches[4]}`;
+}
+
+function periodStatus(companyId,kind){
+ const current=ensureCompanyPeriodHistory(companyId,kind).find(item=>item.current);
+ const end=periodEndDate(current);
+
+ if(!current) return {className:'empty-period',label:'Brak okresu'};
+ if(!end) return {className:'neutral-period',label:'Kliknij, aby edytować'};
+
+ const days=daysToDate(end);
+
+ if(days<0) return {className:'expired-period',label:`Po terminie ${Math.abs(days)} dni`};
+ if(days<=30) return {className:'urgent-period',label:`Wygasa za ${days} dni`};
+ return {className:'valid-period',label:`Ważne jeszcze ${days} dni`};
+}
+
+function formatPeriodDates(from,to){
+ if(!from&&!to) return '';
+ if(!from) return `do ${fmt(to)}`;
+ if(!to) return `od ${fmt(from)}`;
+ return `${fmt(from)} – ${fmt(to)}`;
+}
+
+
+
+let officeActivityLog = [
+ {id:1,userId:1,createdAt:'2026-08-05T09:15:00',action:'Oznaczono jako wysłane',module:'Lista kontrolna',details:'ABC Sp. z o.o. — ZUS za 08.2026'},
+ {id:2,userId:2,createdAt:'2026-08-05T08:40:00',action:'Oznaczono jako wysłane',module:'Lista kontrolna',details:'Delta Transport — VAT za 08.2026'}
+];
+
+function currentOfficeUser(){
+ return officeUsers.find(user=>user.id===currentOfficeUserId)||officeUsers[0];
+}
+
+function officeUserName(userId){
+ return officeUsers.find(user=>user.id===userId)?.name||'Nieznany użytkownik';
+}
+
+function roleLabel(role){
+ return role==='owner_admin'?'Główny administrator':'Administrator biura';
+}
+
+function addOfficeActivity(action,module,details){
+ officeActivityLog.unshift({
+  id:Date.now(),
+  userId:currentOfficeUserId,
+  createdAt:new Date().toISOString(),
+  action,
+  module,
+  details
+ });
+}
+
+
+let archivedCompanies = [];
 let archivedEmployees = [];
 let selectedArchivedEmployeeIds = [];
 
@@ -2517,9 +3249,11 @@ function render(){
  document.getElementById('adminNav').classList.remove('hidden');
  document.getElementById('managerNav').classList.add('hidden');
  document.getElementById('employeeNav').classList.add('hidden');
- document.getElementById('modeLabel').textContent='Administrator';
- document.getElementById('topAvatar').textContent='GZ';
- const views={dashboard:dashboardView,companies:companiesView,employees:employeesView,employeeArchive:employeeArchiveView,leaves:leavesView,medical:medicalView,bhp:bhpView,contracts:contractsView,documents:documentsView,notifications:notificationsView,inbox:inboxView};
+ const officeUser=currentOfficeUser();
+ document.getElementById('currentOfficeUserName').textContent=officeUser.name;
+ document.getElementById('modeLabel').textContent=roleLabel(officeUser.role);
+ document.getElementById('topAvatar').textContent=officeUser.initials;
+ const views={dashboard:dashboardView,companies:companiesView,companyArchive:companyArchiveView,employees:employeesView,employeeArchive:employeeArchiveView,leaves:leavesView,medical:medicalView,bhp:bhpView,contracts:contractsView,documents:documentsView,checklist:checklistView,notifications:notificationsView,inbox:inboxView,officeTeam:officeTeamView};
  content.innerHTML=(views[currentView]||dashboardView)();
  bindDynamic();
  const adminCounter=document.getElementById('adminInboxCount');
@@ -2543,6 +3277,10 @@ function render(){
 
  const leaveCounter=document.getElementById('adminLeaveCount');
  if(leaveCounter) leaveCounter.textContent=dashboardPendingLeaveCount()?`(${dashboardPendingLeaveCount()})`:'';
+
+ const checklistCounter=document.getElementById('adminChecklistCount');
+ const pendingChecklist=checklistPendingCount();
+ if(checklistCounter) checklistCounter.textContent=pendingChecklist?`(${pendingChecklist})`:'';
 }
 
 
@@ -2725,6 +3463,17 @@ function dashboardView(){
    ${pendingLeaves?'<span class="alert-pulse-dot warning-dot"></span>':''}
   </div>
 
+  <div class="card card-clickable ${checklistPendingCount()?'dashboard-alert-warning':''}"
+       role="button" tabindex="0"
+       onclick="navigateAdmin('checklist')"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateAdmin('checklist')}">
+   <small>Lista kontrolna</small>
+   <strong>${checklistPendingCount()}</strong>
+   <span class="badge ${checklistPendingCount()?'warn':'ok'}">${checklistPendingCount()?'Do wysłania':'Wszystko wysłane'}</span>
+   <span class="card-hint">ZUS, VAT, PIT i pozostałe terminy →</span>
+   ${checklistPendingCount()?'<span class="alert-pulse-dot warning-dot"></span>':''}
+  </div>
+
   <div class="card card-clickable premium-message-dashboard-card ${unreadMessages?'dashboard-alert-info':''}"
        role="button" tabindex="0"
        onclick="navigateAdmin('inbox')"
@@ -2879,6 +3628,7 @@ function companiesView(){
    <p>Przy każdej firmie od razu widać sprawy wymagające działania.</p>
   </div>
   <div class="actions">
+   <button class="btn" onclick="navigateAdmin('companyArchive')">Archiwum firm (${archivedCompanies.length})</button>
    <button class="btn primary" onclick="openCompanyForm()">Dodaj firmę</button>
   </div>
  </div>
@@ -2923,15 +3673,242 @@ function companiesView(){
        `:'<span class="status safe">Brak problemów</span>'}
       </td>
       <td>
-       <button class="btn ${issues.length?'primary':''}" onclick="openCompany(${company.id})">
-        ${issues.length?'Sprawdź':'Otwórz'}
-       </button>
+       <div class="company-row-actions">
+        <button class="btn ${issues.length?'primary':''}" onclick="openCompany(${company.id})">
+         ${issues.length?'Sprawdź':'Otwórz'}
+        </button>
+        <button class="icon-action archive-company-icon" onclick="openArchiveCompanyModal(${company.id})" data-tooltip="Archiwizuj firmę">📦</button>
+       </div>
       </td>
      </tr>`;
     }).join('')}
    </tbody>
   </table>
  </div>`;
+}
+
+
+function companyArchiveView(){
+ return `<div class="page-header">
+  <div>
+   <h2>Archiwum firm</h2>
+   <p>Zarchiwizowane firmy nie są widoczne na aktywnej liście, ale wszystkie dane pozostają zachowane.</p>
+  </div>
+  <button class="btn" onclick="navigateAdmin('companies')">← Wróć do firm</button>
+ </div>
+
+ <div class="panel">
+  ${archivedCompanies.length?`
+   <table>
+    <thead>
+     <tr>
+      <th>Firma</th>
+      <th>NIP</th>
+      <th>Kontakt</th>
+      <th>Zarchiwizowano</th>
+      <th>Przez</th>
+      <th>Powód</th>
+      <th>Akcja</th>
+     </tr>
+    </thead>
+    <tbody>
+     ${archivedCompanies.map(company=>`
+      <tr>
+       <td><strong>${company.name}</strong></td>
+       <td>${company.nip||'-'}</td>
+       <td>${company.contact||'-'}</td>
+       <td>${company.archivedAt?new Date(company.archivedAt).toLocaleString('pl-PL'):'-'}</td>
+       <td>${company.archivedByName||'-'}</td>
+       <td>${company.archiveReason||'Zakończenie współpracy'}</td>
+       <td>
+        <button class="btn" onclick="restoreArchivedCompany(${company.id})">↩ Przywróć</button>
+        <button class="btn danger" onclick="openPermanentDeleteCompanyModal(${company.id})">Usuń trwale</button>
+       </td>
+      </tr>
+     `).join('')}
+    </tbody>
+   </table>
+  `:'<div class="empty"><strong>Archiwum firm jest puste</strong><p style="margin-top:6px">Zarchiwizowane firmy pojawią się tutaj.</p></div>'}
+ </div>
+
+ <div class="archive-safety-note">
+  <strong>Bezpieczne zarządzanie firmami</strong>
+  <p>Firma najpierw trafia do archiwum. Dopiero stąd można ją przywrócić albo trwale usunąć po dodatkowym potwierdzeniu.</p>
+ </div>`;
+}
+
+function openArchiveCompanyModal(companyId){
+ const company=companies.find(item=>item.id===companyId);
+ if(!company) return;
+
+ const employeeCount=employees.filter(employee=>employee.companyId===companyId).length;
+
+ openModal('Archiwizuj firmę',`
+  <div class="permanent-delete-warning soft-warning">
+   <strong>${company.name}</strong>
+   <p>Firma zniknie z aktywnej listy. Jej pracownicy (${employeeCount}) oraz pozycje listy kontrolnej zostaną przeniesione do odpowiednich archiwów.</p>
+  </div>
+
+  <div class="field" style="margin-top:16px">
+   <label>Powód archiwizacji</label>
+   <select id="archiveCompanyReason">
+    <option>Zakończenie współpracy</option>
+    <option>Firma zawieszona</option>
+    <option>Firma zamknięta</option>
+    <option>Duplikat</option>
+    <option>Inny</option>
+   </select>
+  </div>
+
+  <div class="field" style="margin-top:12px">
+   <label>Uwagi</label>
+   <textarea id="archiveCompanyNotes" rows="3"></textarea>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="button" class="btn warning" onclick="archiveCompany(${companyId})">Archiwizuj firmę</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function archiveCompany(companyId){
+ const index=companies.findIndex(item=>item.id===companyId);
+ if(index===-1) return;
+
+ const company=companies[index];
+ const archivedAt=new Date().toISOString();
+ const officeUser=currentOfficeUser();
+
+ company.archivedAt=archivedAt;
+ company.archivedBy=currentOfficeUserId;
+ company.archivedByName=officeUser.name;
+ company.archiveReason=document.getElementById('archiveCompanyReason')?.value||'Zakończenie współpracy';
+ company.archiveNotes=document.getElementById('archiveCompanyNotes')?.value.trim()||'';
+
+ const companyEmployees=employees.filter(employee=>employee.companyId===companyId);
+ companyEmployees.forEach(employee=>{
+  employee.archivedAt=archivedAt;
+  employee.archiveReason='Archiwizacja firmy';
+  employee.archiveNotes=`Firma ${company.name} została zarchiwizowana`;
+  employee.archivedWithCompanyId=companyId;
+  archivedEmployees.unshift(employee);
+ });
+ employees=employees.filter(employee=>employee.companyId!==companyId);
+
+ const companyChecklist=checklistItems.filter(item=>item.companyId===companyId);
+ companyChecklist.forEach(item=>{
+  item.archivedAt=archivedAt;
+  item.archivedBy=currentOfficeUserId;
+  item.archivedWithCompanyId=companyId;
+  archivedChecklistItems.unshift(item);
+ });
+ checklistItems=checklistItems.filter(item=>item.companyId!==companyId);
+
+ archivedCompanies.unshift(company);
+ companies.splice(index,1);
+
+ addOfficeActivity('Zarchiwizowano firmę','Firmy',`${company.name}; pracownicy: ${companyEmployees.length}`);
+ closeModal();
+ showToast('Firma została przeniesiona do archiwum');
+ currentView='companies';
+ render();
+}
+
+function restoreArchivedCompany(companyId){
+ const index=archivedCompanies.findIndex(item=>item.id===companyId);
+ if(index===-1) return;
+
+ const company=archivedCompanies[index];
+ delete company.archivedAt;
+ delete company.archivedBy;
+ delete company.archivedByName;
+ delete company.archiveReason;
+ delete company.archiveNotes;
+
+ companies.push(company);
+ archivedCompanies.splice(index,1);
+
+ const employeeIds=archivedEmployees
+  .filter(employee=>employee.archivedWithCompanyId===companyId)
+  .map(employee=>employee.id);
+
+ const restoredEmployees=archivedEmployees.filter(employee=>employee.archivedWithCompanyId===companyId);
+ restoredEmployees.forEach(employee=>{
+  delete employee.archivedAt;
+  delete employee.archiveReason;
+  delete employee.archiveNotes;
+  delete employee.archivedWithCompanyId;
+  employees.push(employee);
+ });
+ archivedEmployees=archivedEmployees.filter(employee=>!employeeIds.includes(employee.id));
+
+ const restoredChecklist=archivedChecklistItems.filter(item=>item.archivedWithCompanyId===companyId);
+ restoredChecklist.forEach(item=>{
+  delete item.archivedAt;
+  delete item.archivedBy;
+  delete item.archivedWithCompanyId;
+  checklistItems.push(item);
+ });
+ archivedChecklistItems=archivedChecklistItems.filter(item=>item.archivedWithCompanyId!==companyId);
+
+ addOfficeActivity('Przywrócono firmę','Firmy',company.name);
+ showToast('Firma została przywrócona');
+ currentView='companyArchive';
+ render();
+}
+
+function openPermanentDeleteCompanyModal(companyId){
+ const company=archivedCompanies.find(item=>item.id===companyId);
+ if(!company) return;
+
+ openModal('Trwale usuń firmę',`
+  <div class="permanent-delete-warning">
+   <strong>Ta operacja jest nieodwracalna</strong>
+   <p>Firma: ${company.name}</p>
+   <p>Usunięte zostaną również zarchiwizowani pracownicy i powiązane dane tej firmy.</p>
+  </div>
+
+  <div class="field" style="margin-top:16px">
+   <label>Aby potwierdzić, wpisz dokładnie: USUŃ FIRMĘ</label>
+   <input id="deleteCompanyConfirmation" autocomplete="off" placeholder="USUŃ FIRMĘ">
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="button" class="btn danger" onclick="permanentlyDeleteCompany(${companyId})">Trwale usuń</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function permanentlyDeleteCompany(companyId){
+ const confirmation=document.getElementById('deleteCompanyConfirmation')?.value.trim();
+ if(confirmation!=='USUŃ FIRMĘ'){
+  showToast('Wpisz dokładnie: USUŃ FIRMĘ');
+  return;
+ }
+
+ const employeeIds=archivedEmployees
+  .filter(employee=>employee.companyId===companyId)
+  .map(employee=>employee.id);
+
+ archivedCompanies=archivedCompanies.filter(company=>company.id!==companyId);
+ archivedEmployees=archivedEmployees.filter(employee=>employee.companyId!==companyId);
+ archivedChecklistItems=archivedChecklistItems.filter(item=>item.companyId!==companyId);
+
+ contractHistory=contractHistory.filter(item=>!employeeIds.includes(item.employeeId));
+ medicalHistory=medicalHistory.filter(item=>!employeeIds.includes(item.employeeId));
+ bhpHistory=bhpHistory.filter(item=>!employeeIds.includes(item.employeeId));
+ leaveBalances=leaveBalances.filter(item=>!employeeIds.includes(item.employeeId));
+ leaveRequests=leaveRequests.filter(item=>!employeeIds.includes(item.employeeId));
+ notifications=notifications.filter(item=>!employeeIds.includes(item.employeeId));
+ inboxThreads=inboxThreads.filter(item=>!employeeIds.includes(item.employeeId));
+
+ addOfficeActivity('Trwale usunięto firmę','Firmy',`ID firmy: ${companyId}`);
+ closeModal();
+ showToast('Firma została trwale usunięta');
+ currentView='companyArchive';
+ render();
 }
 
 function employeeArchiveView(){
@@ -3379,6 +4356,1766 @@ function openCurrentDeadlineModal(title,key,tabLabel){
  `,event=>event.preventDefault());
 }
 
+
+
+
+function checklistProfile(companyId){
+ return checklistCompanyProfiles.find(profile=>profile.companyId===companyId)||null;
+}
+
+function activeChecklistCompanies(){
+ return companies.filter(company=>checklistProfile(company.id)?.active);
+}
+
+function obligationApplies(companyId,type){
+ return checklistProfile(companyId)?.enabledTypes.includes(type)||false;
+}
+
+function defaultDeadlineFor(companyId,type,monthKey){
+ const profile=checklistProfile(companyId);
+ const day=profile?.defaultDeadlines?.[type]||checklistTypes.find(item=>item.key===type)?.defaultDay||20;
+ const [yearValue,monthValue]=monthKey.split('-').map(Number);
+ const lastDay=new Date(yearValue,monthValue,0).getDate();
+ return `${yearValue}-${String(monthValue).padStart(2,'0')}-${String(Math.min(day,lastDay)).padStart(2,'0')}`;
+}
+
+function ensureChecklistMonthGenerated(){
+ const monthKey=checklistMonthKey();
+
+ activeChecklistCompanies().forEach(company=>{
+  const profile=checklistProfile(company.id);
+  profile.enabledTypes.forEach(type=>{
+   const exists=checklistItems.some(item=>
+    item.companyId===company.id &&
+    item.type===type &&
+    item.month===monthKey
+   );
+
+   if(!exists){
+    checklistItems.push({
+     id:Date.now()+Math.random(),
+     companyId:company.id,
+     type,
+     month:monthKey,
+     deadline:defaultDeadlineFor(company.id,type,monthKey),
+     notes:'',
+     status:'pending',
+     sentAt:null,
+     sentBy:null,
+     reminderAt:null,
+     reminderBy:null
+    });
+   }
+  });
+ });
+}
+
+function openChecklistCompaniesManager(){
+ openModal('Firmy na liście kontrolnej',`
+  <div class="checklist-company-heading">
+   <strong>Zarządzaj firmami</strong>
+   <span>Edytuj dane i obowiązki firmy albo przenieś firmę do archiwum. Ustawienia są zapamiętywane w kolejnych miesiącach.</span>
+  </div>
+
+  <div class="checklist-company-manager">
+   ${companies.map(company=>{
+    const profile=checklistProfile(company.id);
+    const active=Boolean(profile?.active);
+
+    return `<div class="checklist-company-manager-row">
+     <div>
+      <strong>${company.name}</strong>
+      <small>${active?'Widoczna na liście':'Nie jest dodana do listy'}</small>
+     </div>
+
+     <div class="checklist-obligation-chips">
+      ${checklistTypes.map(type=>`
+       <label class="obligation-chip ${profile?.enabledTypes.includes(type.key)?'selected':''}">
+        <input type="checkbox"
+               ${profile?.enabledTypes.includes(type.key)?'checked':''}
+               ${active?'':'disabled'}
+               onchange="toggleChecklistCompanyObligation(${company.id},'${type.key}',this.checked)">
+        ${type.label}
+       </label>
+      `).join('')}
+     </div>
+
+     <div>
+      <div class="checklist-company-manager-actions">
+       ${active?`
+        <button type="button" class="btn" onclick="openChecklistCompanyEdit(${company.id})">✎ Edytuj</button>
+        <button type="button" class="btn warning" onclick="archiveChecklistCompany(${company.id})">📦 Archiwizuj</button>
+       `:`
+        <button type="button" class="btn primary" onclick="addCompanyToChecklist(${company.id})">↩ Przywróć do listy</button>
+       `}
+      </div>
+     </div>
+    </div>`;
+   }).join('')}
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Gotowe</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+
+
+function openChecklistCompanyEdit(companyId){
+ const company=companies.find(item=>item.id===companyId);
+ const profile=checklistProfile(companyId);
+ if(!company||!profile) return;
+
+ openModal('Edytuj firmę',`
+  <div class="checklist-company-heading">
+   <strong>${company.name}</strong>
+   <span>W tym miejscu zmieniasz dane firmy, kontakt, księgowość oraz sposób powiadamiania.</span>
+  </div>
+
+  <div class="form-grid">
+   <div class="field">
+    <label>Nazwa firmy</label>
+    <input id="editChecklistCompanyName" value="${company.name||''}" required>
+   </div>
+
+   <div class="field">
+    <label>NIP</label>
+    <input id="editChecklistCompanyNip" value="${company.nip||''}">
+   </div>
+
+   <div class="field">
+    <label>Osoba kontaktowa</label>
+    <input id="editChecklistCompanyContact" value="${company.contact||''}">
+   </div>
+
+   <div class="field">
+    <label>Forma prowadzenia księgowości</label>
+    <input id="editChecklistCompanyAccounting" value="${company.accountingForm||''}" placeholder="Np. KPiR, VAT">
+   </div>
+
+   <div class="field">
+    <label>Forma opodatkowania</label>
+    <input id="editChecklistCompanyTax" value="${company.taxForm||''}" placeholder="Np. ryczałt, liniowy">
+   </div>
+
+   <div class="field">
+    <label>Kod ZUS</label>
+    <input id="editChecklistCompanyZusCode" value="${company.zusCode||''}" placeholder="Np. 051000">
+   </div>
+
+   <div class="field">
+    <label>E-mail</label>
+    <input id="editChecklistCompanyEmail" type="email" value="${profile.email||company.notificationEmail||''}">
+   </div>
+
+   <div class="field">
+    <label>Numer telefonu</label>
+    <input id="editChecklistCompanyPhone" type="tel" value="${profile.phone||company.notificationPhone||''}">
+   </div>
+
+   <div class="field full">
+    <label>Kanały powiadomień</label>
+    <div class="checklist-new-obligations">
+     ${['email','whatsapp'].map(channel=>`
+      <label class="obligation-chip ${profile.notificationChannels?.includes(channel)?'selected':''}">
+       <input type="checkbox"
+              name="editChecklistCompanyChannel"
+              value="${channel}"
+              ${profile.notificationChannels?.includes(channel)?'checked':''}>
+       ${notificationChannelLabel(channel)}
+      </label>
+     `).join('')}
+    </div>
+   </div>
+
+   <div class="field full">
+    <label>Stałe obowiązki firmy</label>
+    <div class="checklist-new-obligations">
+     ${checklistTypes.map(type=>`
+      <label class="obligation-chip ${profile.enabledTypes.includes(type.key)?'selected':''}">
+       <input type="checkbox"
+              name="editChecklistCompanyObligation"
+              value="${type.key}"
+              ${profile.enabledTypes.includes(type.key)?'checked':''}>
+       ${type.label}
+      </label>
+     `).join('')}
+    </div>
+   </div>
+  </div>
+
+  <div class="edit-company-period-note">
+   <strong>Okresy A1 i kodu ZUS</strong>
+   <span>Daty od–do zmieniasz bezpośrednio po kliknięciu ich komórek w tabeli.</span>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="openChecklistCompaniesManager()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz zmiany</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const name=document.getElementById('editChecklistCompanyName').value.trim();
+  const email=document.getElementById('editChecklistCompanyEmail').value.trim();
+  const phone=document.getElementById('editChecklistCompanyPhone').value.trim();
+
+  const channels=[...document.querySelectorAll('input[name="editChecklistCompanyChannel"]:checked')]
+   .map(input=>input.value);
+
+  const enabledTypes=[...document.querySelectorAll('input[name="editChecklistCompanyObligation"]:checked')]
+   .map(input=>input.value);
+
+  if(!name){
+   showToast('Wpisz nazwę firmy');
+   return;
+  }
+
+  if(channels.includes('email')&&!email){
+   showToast('Dla powiadomień e-mail wpisz adres e-mail');
+   return;
+  }
+
+  if(channels.includes('whatsapp')&&!phone){
+   showToast('Dla WhatsApp wpisz numer telefonu');
+   return;
+  }
+
+  company.name=name;
+  company.nip=document.getElementById('editChecklistCompanyNip').value.trim();
+  company.contact=document.getElementById('editChecklistCompanyContact').value.trim();
+  company.accountingForm=document.getElementById('editChecklistCompanyAccounting').value.trim();
+  company.taxForm=document.getElementById('editChecklistCompanyTax').value.trim();
+  company.zusCode=document.getElementById('editChecklistCompanyZusCode').value.trim();
+  company.notificationEmail=email;
+  company.notificationPhone=phone;
+
+  profile.email=email;
+  profile.phone=phone;
+  profile.notificationChannels=channels;
+  profile.enabledTypes=enabledTypes;
+
+  enabledTypes.forEach(type=>{
+   if(!profile.defaultDeadlines[type]){
+    profile.defaultDeadlines[type]=checklistTypes.find(item=>item.key===type)?.defaultDay||20;
+   }
+  });
+
+  ensureChecklistMonthGenerated();
+
+  addOfficeActivity(
+   'Edytowano dane firmy',
+   'Lista kontrolna',
+   company.name
+  );
+
+  closeModal();
+  showToast('Dane firmy zostały zapisane');
+  currentView='checklist';
+  render();
+ });
+}
+
+function notificationChannelLabel(channel){
+ return channel==='email'?'E-mail':channel==='sms'?'SMS':'WhatsApp';
+}
+
+function openChecklistNotificationSettings(companyId){
+ const company=companies.find(item=>item.id===companyId);
+ const profile=checklistProfile(companyId);
+ if(!company||!profile) return;
+
+ openModal('Kontakt i formy powiadomienia',`
+  <div class="checklist-company-heading">
+   <strong>${company.name}</strong>
+   <span>Wybierz kanały, których można użyć przy powiadamianiu tej firmy.</span>
+  </div>
+
+  <div class="form-grid">
+   <div class="field">
+    <label>E-mail</label>
+    <input id="editChecklistNotificationEmail" type="email" value="${profile.email||''}" placeholder="klient@firma.pl">
+   </div>
+
+   <div class="field">
+    <label>Numer telefonu</label>
+    <input id="editChecklistNotificationPhone" type="tel" value="${profile.phone||''}" placeholder="600 123 456">
+   </div>
+
+   <div class="field full">
+    <label>Dostępne kanały</label>
+    <div class="checklist-new-obligations">
+     ${['email','sms','whatsapp'].map(channel=>`
+      <label class="obligation-chip ${profile.notificationChannels?.includes(channel)?'selected':''}">
+       <input type="checkbox"
+              name="editChecklistNotificationChannel"
+              value="${channel}"
+              ${profile.notificationChannels?.includes(channel)?'checked':''}>
+       ${notificationChannelLabel(channel)}
+      </label>
+     `).join('')}
+    </div>
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const channels=[...document.querySelectorAll('input[name="editChecklistNotificationChannel"]:checked')]
+   .map(input=>input.value);
+
+  const email=document.getElementById('editChecklistNotificationEmail').value.trim();
+  const phone=document.getElementById('editChecklistNotificationPhone').value.trim();
+
+  if(channels.includes('email')&&!email){
+   showToast('Wpisz adres e-mail');
+   return;
+  }
+
+  if((channels.includes('sms')||channels.includes('whatsapp'))&&!phone){
+   showToast('Wpisz numer telefonu');
+   return;
+  }
+
+  profile.notificationChannels=channels;
+  profile.email=email;
+  profile.phone=phone;
+
+  company.notificationEmail=email;
+  company.notificationPhone=phone;
+
+  addOfficeActivity(
+   'Zmieniono dane powiadomień',
+   'Lista kontrolna',
+   company.name
+  );
+
+  closeModal();
+  showToast('Dane kontaktowe zostały zapisane');
+  currentView='checklist';
+  render();
+ });
+}
+
+function addCompanyToChecklist(companyId){
+ let profile=checklistProfile(companyId);
+
+ if(profile){
+  profile.active=true;
+ }else{
+  checklistCompanyProfiles.push({
+   companyId,
+   active:true,
+   enabledTypes:[],
+   defaultDeadlines:{}
+  });
+ }
+
+ archivedChecklistCompanies=archivedChecklistCompanies.filter(id=>id!==companyId);
+
+ addOfficeActivity(
+  'Dodano firmę do listy kontrolnej',
+  'Lista kontrolna',
+  companyName(companyId)
+ );
+
+ closeModal();
+ ensureChecklistMonthGenerated();
+ showToast('Firma została dodana do listy');
+ currentView='checklist';
+ render();
+}
+
+function archiveChecklistCompany(companyId){
+ const profile=checklistProfile(companyId);
+ if(!profile) return;
+
+ profile.active=false;
+
+ if(!archivedChecklistCompanies.includes(companyId)){
+  archivedChecklistCompanies.push(companyId);
+ }
+
+ addOfficeActivity(
+  'Zarchiwizowano firmę z listy kontrolnej',
+  'Lista kontrolna',
+  companyName(companyId)
+ );
+
+ closeModal();
+ showToast('Firma została usunięta z aktywnej listy');
+ currentView='checklist';
+ render();
+}
+
+function toggleChecklistCompanyObligation(companyId,type,enabled){
+ let profile=checklistProfile(companyId);
+ if(!profile) return;
+
+ if(enabled){
+  if(!profile.enabledTypes.includes(type)){
+   profile.enabledTypes.push(type);
+  }
+
+  if(!profile.defaultDeadlines[type]){
+   profile.defaultDeadlines[type]=checklistTypes.find(item=>item.key===type)?.defaultDay||20;
+  }
+ }else{
+  profile.enabledTypes=profile.enabledTypes.filter(item=>item!==type);
+
+  checklistItems=checklistItems.filter(item=>
+   !(item.companyId===companyId &&
+     item.type===type &&
+     item.month===checklistMonthKey() &&
+     item.status==='pending' &&
+     !item.reminderAt &&
+     !item.sentAt)
+  );
+ }
+
+ addOfficeActivity(
+  enabled?'Włączono stały obowiązek':'Wyłączono stały obowiązek',
+  'Lista kontrolna',
+  `${companyName(companyId)} — ${checklistTypeLabel(type)}`
+ );
+
+ ensureChecklistMonthGenerated();
+ openChecklistCompaniesManager();
+}
+
+function openAddNewChecklistCompany(){
+ openModal('Dodaj nową firmę do listy',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Nazwa firmy</label>
+    <input id="newChecklistCompanyName" required>
+   </div>
+
+   <div class="field">
+    <label>NIP</label>
+    <input id="newChecklistCompanyNip">
+   </div>
+
+   <div class="field">
+    <label>Forma prowadzenia księgowości</label>
+    <input id="newChecklistCompanyAccounting" placeholder="Np. KPiR, VAT">
+   </div>
+
+   <div class="field">
+    <label>Forma opodatkowania</label>
+    <input id="newChecklistCompanyTax" placeholder="Np. ryczałt, liniowy">
+   </div>
+
+   <div class="field">
+    <label>A1 ważne od</label>
+    <input id="newChecklistCompanyA1From" type="date">
+   </div>
+
+   <div class="field">
+    <label>A1 ważne do</label>
+    <input id="newChecklistCompanyA1To" type="date">
+   </div>
+
+   <div class="field">
+    <label>Kod ZUS</label>
+    <input id="newChecklistCompanyZusCode" placeholder="Np. 051000">
+   </div>
+
+   <div class="field">
+    <label>Kod ZUS ważny od</label>
+    <input id="newChecklistCompanyZusFrom" type="date">
+   </div>
+
+   <div class="field">
+    <label>Kod ZUS ważny do</label>
+    <input id="newChecklistCompanyZusTo" type="date">
+   </div>
+
+   <div class="field">
+    <label>E-mail do powiadomień</label>
+    <input id="newChecklistCompanyEmail" type="email" placeholder="np. klient@firma.pl">
+   </div>
+
+   <div class="field">
+    <label>Numer telefonu</label>
+    <input id="newChecklistCompanyPhone" type="tel" placeholder="np. 600 123 456">
+   </div>
+
+   <div class="field full">
+    <label>Formy powiadomienia</label>
+    <div class="checklist-new-obligations">
+     <label class="obligation-chip">
+      <input type="checkbox" name="newChecklistNotificationChannel" value="email">
+      E-mail
+     </label>
+     <label class="obligation-chip">
+      <input type="checkbox" name="newChecklistNotificationChannel" value="sms">
+      SMS
+     </label>
+     <label class="obligation-chip">
+      <input type="checkbox" name="newChecklistNotificationChannel" value="whatsapp">
+      WhatsApp
+     </label>
+    </div>
+   </div>
+
+   <div class="field full">
+    <label>Stałe obowiązki firmy</label>
+    <div class="checklist-new-obligations">
+     ${checklistTypes.map(type=>`
+      <label class="obligation-chip">
+       <input type="checkbox" name="newChecklistObligation" value="${type.key}">
+       ${type.label}
+      </label>
+     `).join('')}
+    </div>
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Dodaj firmę</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const companyId=Date.now();
+
+  const a1From=document.getElementById('newChecklistCompanyA1From').value;
+  const a1To=document.getElementById('newChecklistCompanyA1To').value;
+  const zusFrom=document.getElementById('newChecklistCompanyZusFrom').value;
+  const zusTo=document.getElementById('newChecklistCompanyZusTo').value;
+
+  if((a1From&&!a1To)||(!a1From&&a1To)){
+   showToast('Dla A1 wpisz obie daty albo pozostaw oba pola puste');
+   return;
+  }
+
+  if((zusFrom&&!zusTo)||(!zusFrom&&zusTo)){
+   showToast('Dla kodu ZUS wpisz obie daty albo pozostaw oba pola puste');
+   return;
+  }
+
+  if(a1From&&a1To<a1From){
+   showToast('Nieprawidłowy okres A1');
+   return;
+  }
+
+  if(zusFrom&&zusTo<zusFrom){
+   showToast('Nieprawidłowy okres kodu ZUS');
+   return;
+  }
+
+  const a1Label=a1From?formatPeriodDates(a1From,a1To):'';
+  const zusRangeLabel=zusFrom?formatPeriodDates(zusFrom,zusTo):'';
+
+  const enabledTypes=[...document.querySelectorAll('input[name="newChecklistObligation"]:checked')]
+   .map(input=>input.value);
+
+  const notificationChannels=[...document.querySelectorAll('input[name="newChecklistNotificationChannel"]:checked')]
+   .map(input=>input.value);
+
+  const notificationEmail=document.getElementById('newChecklistCompanyEmail').value.trim();
+  const notificationPhone=document.getElementById('newChecklistCompanyPhone').value.trim();
+
+  if(notificationChannels.includes('email')&&!notificationEmail){
+   showToast('Dla powiadomień e-mail wpisz adres e-mail');
+   return;
+  }
+
+  if((notificationChannels.includes('sms')||notificationChannels.includes('whatsapp'))&&!notificationPhone){
+   showToast('Dla SMS lub WhatsApp wpisz numer telefonu');
+   return;
+  }
+
+  companies.push({
+   id:companyId,
+   name:document.getElementById('newChecklistCompanyName').value.trim(),
+   nip:document.getElementById('newChecklistCompanyNip').value.trim(),
+   contact:'',
+   status:'Aktywna',
+   accountingForm:document.getElementById('newChecklistCompanyAccounting').value.trim(),
+   taxForm:document.getElementById('newChecklistCompanyTax').value.trim(),
+   zusCode:document.getElementById('newChecklistCompanyZusCode').value.trim(),
+   zusCodeRange:zusRangeLabel,
+   a1Range:a1Label,
+   notificationEmail,
+   notificationPhone
+  });
+
+  checklistCompanyProfiles.push({
+   companyId,
+   active:true,
+   enabledTypes,
+   defaultDeadlines:Object.fromEntries(
+    enabledTypes.map(type=>[
+     type,
+     checklistTypes.find(item=>item.key===type)?.defaultDay||20
+    ])
+   ),
+   notificationChannels,
+   email:notificationEmail,
+   phone:notificationPhone
+  });
+
+  if(a1Label){
+   checklistPeriodHistory.push({
+    id:Date.now()+1,
+    companyId,
+    kind:'a1',
+    from:a1From,
+    to:a1To,
+    label:a1Label,
+    current:true,
+    createdAt:new Date().toISOString(),
+    createdBy:currentOfficeUserId
+   });
+  }
+
+  if(zusRangeLabel){
+   checklistPeriodHistory.push({
+    id:Date.now()+2,
+    companyId,
+    kind:'zus',
+    from:zusFrom,
+    to:zusTo,
+    label:zusRangeLabel,
+    current:true,
+    createdAt:new Date().toISOString(),
+    createdBy:currentOfficeUserId
+   });
+  }
+
+  addOfficeActivity(
+   'Dodano nową firmę do listy kontrolnej',
+   'Lista kontrolna',
+   companyName(companyId)
+  );
+
+  closeModal();
+  ensureChecklistMonthGenerated();
+  showToast('Firma została dodana');
+  currentView='checklist';
+  render();
+ });
+}
+
+const polishMonths = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+const polishMonthsShort = ['Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru'];
+
+function checklistMonthKey(year=checklistYear,month=checklistSelectedMonth){
+ return `${year}-${String(month).padStart(2,'0')}`;
+}
+
+function setChecklistYear(year){
+ checklistYear=Number(year);
+ checklistMonth=checklistMonthKey();
+ ensureChecklistMonthGenerated();
+ render();
+}
+
+function changeChecklistYear(delta){
+ checklistYear+=delta;
+ checklistMonth=checklistMonthKey();
+ ensureChecklistMonthGenerated();
+ render();
+}
+
+function setChecklistMonthNumber(month){
+ checklistSelectedMonth=Number(month);
+ checklistMonth=checklistMonthKey();
+ ensureChecklistMonthGenerated();
+ render();
+}
+
+function setChecklistSection(section){
+ checklistSection=section;
+ render();
+}
+
+function checklistCellFor(companyId,type){
+ return checklistItems.find(item=>
+  item.companyId===companyId &&
+  item.type===type &&
+  item.month===checklistMonthKey()
+ )||null;
+}
+
+function checklistCellClass(item){
+ if(!item) return 'not-applicable';
+ if(item.status==='sent') return 'sent';
+ if(item.status==='not_applicable') return 'not-applicable';
+ if(item.reminderAt) return 'reminded';
+ const days=daysToDate(item.deadline);
+ if(days!==null&&days<0) return 'overdue';
+ return 'pending';
+}
+
+function checklistCellContent(item,type){
+ if(!item){
+  return `<button class="matrix-cell add-action" onclick="openEmptyChecklistCell(0,'${type.key||''}')">
+   <span>＋</span><small>Dodaj akcję</small>
+  </button>`;
+ }
+
+ let label='Do wysłania';
+ let icon='□';
+
+ if(item.status==='sent'){
+  icon='✓';
+  label=`Wysłano ${new Date(item.sentAt).toLocaleDateString('pl-PL')}`;
+ }else if(item.status==='not_applicable'){
+  icon='—';
+  label='Nie dotyczy';
+ }else if(item.reminderAt){
+  icon='🔔';
+  label=`Powiadomiono ${new Date(item.reminderAt).toLocaleDateString('pl-PL')}`;
+ }
+
+ return `<button class="matrix-cell ${checklistCellClass(item)}" onclick="openChecklistCellActions(${item.id})">
+  <span>${icon}</span>
+  <small>${label}</small>
+ </button>`;
+}
+
+function archiveChecklistItem(itemId){
+ const item=checklistItems.find(x=>x.id===itemId);
+ if(!item) return;
+ checklistItems=checklistItems.filter(x=>x.id!==itemId);
+ item.archivedAt=new Date().toISOString();
+ item.archivedBy=currentOfficeUserId;
+ archivedChecklistItems.unshift(item);
+ addOfficeActivity('Zarchiwizowano pozycję','Lista kontrolna',`${companyName(item.companyId)} — ${checklistTypeLabel(item.type)} za ${item.month}`);
+ closeModal();
+ showToast('Pozycja przeniesiona do archiwum');
+ render();
+}
+
+function restoreChecklistItem(itemId){
+ const item=archivedChecklistItems.find(x=>x.id===itemId);
+ if(!item) return;
+ archivedChecklistItems=archivedChecklistItems.filter(x=>x.id!==itemId);
+ delete item.archivedAt;
+ delete item.archivedBy;
+ checklistItems.push(item);
+ addOfficeActivity('Przywrócono pozycję','Lista kontrolna',`${companyName(item.companyId)} — ${checklistTypeLabel(item.type)} za ${item.month}`);
+ showToast('Pozycja przywrócona');
+ render();
+}
+
+function permanentlyDeleteChecklistItem(itemId){
+ const item=archivedChecklistItems.find(x=>x.id===itemId);
+ if(!item) return;
+ if(!confirm('Trwale usunąć tę pozycję? Tej operacji nie można cofnąć.')) return;
+ archivedChecklistItems=archivedChecklistItems.filter(x=>x.id!==itemId);
+ addOfficeActivity('Trwale usunięto pozycję','Lista kontrolna',`${companyName(item.companyId)} — ${checklistTypeLabel(item.type)} za ${item.month}`);
+ showToast('Pozycja została trwale usunięta');
+ render();
+}
+
+
+function createChecklistAction(companyId,type,status){
+ const item={
+  id:Date.now(),
+  companyId,
+  type,
+  month:checklistMonthKey(),
+  deadline:'',
+  notes:'',
+  status:'pending',
+  sentAt:null,
+  sentBy:null,
+  reminderAt:null,
+  reminderBy:null
+ };
+
+ if(status==='sent'){
+  item.status='sent';
+  item.sentAt=new Date().toISOString();
+  item.sentBy=currentOfficeUserId;
+ }else if(status==='not_applicable'){
+  item.status='not_applicable';
+ }
+
+ checklistItems.push(item);
+
+ const actionLabel=status==='sent'
+  ?'Oznaczono jako wysłane'
+  :status==='not_applicable'
+    ?'Oznaczono jako nie dotyczy'
+    :'Dodano do wysłania';
+
+ addOfficeActivity(
+  actionLabel,
+  'Lista kontrolna',
+  `${companyName(companyId)} — ${checklistTypeLabel(type)} za ${checklistMonthKey()}`
+ );
+
+ closeModal();
+ showToast('Akcja została dodana');
+ currentView='checklist';
+ render();
+}
+
+function openEmptyChecklistCell(companyId,type){
+ const company=companies.find(item=>item.id===companyId);
+ if(!company) return;
+
+ openModal(`${company.name} — ${checklistTypeLabel(type)}`,`
+  <div class="checklist-company-heading">
+   <strong>Dodaj akcję na ${polishMonths[checklistSelectedMonth-1]} ${checklistYear}</strong>
+   <span>Każdy miesiąc zaczyna się pusty. Wybierz tylko to, co faktycznie dotyczy tej firmy.</span>
+  </div>
+
+  <div class="empty-cell-actions">
+   <button type="button" class="empty-action-card pending"
+           onclick="createChecklistAction(${companyId},'${type}','pending')">
+    <span>□</span>
+    <strong>Do wysłania</strong>
+    <small>Obowiązek dotyczy firmy, ale jeszcze nie został wykonany.</small>
+   </button>
+
+   <button type="button" class="empty-action-card sent"
+           onclick="createChecklistAction(${companyId},'${type}','sent')">
+    <span>✓</span>
+    <strong>Wysłane</strong>
+    <small>Zapisze dzisiejszą datę wysłania i użytkownika.</small>
+   </button>
+
+   <button type="button" class="empty-action-card neutral"
+           onclick="createChecklistAction(${companyId},'${type}','not_applicable')">
+    <span>—</span>
+    <strong>Nie dotyczy</strong>
+    <small>Firma nie ma tego obowiązku w wybranym miesiącu.</small>
+   </button>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function openChecklistCellActions(itemId){
+ const item=checklistItems.find(x=>x.id===itemId);
+ if(!item) return;
+
+ openModal(`${companyName(item.companyId)} — ${checklistTypeLabel(item.type)}`,`
+  <div class="checklist-action-summary">
+   <div><span>Miesiąc</span><strong>${polishMonths[Number(item.month.slice(5,7))-1]} ${item.month.slice(0,4)}</strong></div>
+   <div><span>Termin</span><strong>${fmt(item.deadline)}</strong></div>
+   <div><span>Status</span><strong>${item.status==='sent'?'Wysłane':item.status==='not_applicable'?'Nie dotyczy':item.reminderAt?'Powiadomiono':'Do wysłania'}</strong></div>
+  </div>
+  ${item.sentAt?`<div class="sent-info-box">Wysłano: <strong>${new Date(item.sentAt).toLocaleString('pl-PL')}</strong><br>Przez: ${officeUserName(item.sentBy)}</div>`:''}
+  ${item.reminderAt?`<div class="reminder-info-box">
+   Powiadomiono: <strong>${new Date(item.reminderAt).toLocaleString('pl-PL')}</strong><br>
+   Kanał: ${notificationChannelLabel(item.reminderChannel)}<br>
+   Odbiorca: ${item.reminderRecipient||'-'}<br>
+   Przez: ${officeUserName(item.reminderBy)}
+  </div>`:''}
+  ${item.status==='not_applicable'?`<div class="neutral-info-box">Ten obowiązek został oznaczony jako <strong>nie dotyczy</strong> w tym miesiącu.</div>`:''}
+  <div class="checklist-action-menu">
+   ${item.status==='not_applicable'?`
+    <button type="button" class="btn warning" onclick="removeChecklistAction(${item.id})">↩ Cofnij „nie dotyczy”</button>
+   `:item.status!=='sent'?`
+    <button type="button" class="btn" onclick="sendChecklistReminder(${item.id})">🔔 Powiadom klienta</button>
+    <button type="button" class="btn primary" onclick="markChecklistSent(${item.id})">✓ Oznacz jako wysłane</button>
+   `:`
+    <button type="button" class="btn warning" onclick="undoChecklistSent(${item.id})">↩ Cofnij akcję</button>
+   `}
+   <button type="button" class="btn" onclick="closeModal();openEditChecklistItem(${item.id})">✎ Edytuj</button>
+   <button type="button" class="btn" onclick="archiveChecklistItem(${item.id})">📦 Archiwizuj</button>
+  </div>
+ `,event=>event.preventDefault());
+}
+
+
+function removeChecklistAction(itemId){
+ const item=checklistItems.find(entry=>entry.id===itemId);
+ if(!item) return;
+
+ checklistItems=checklistItems.filter(entry=>entry.id!==itemId);
+
+ addOfficeActivity(
+  'Cofnięto akcję',
+  'Lista kontrolna',
+  `${companyName(item.companyId)} — ${checklistTypeLabel(item.type)} za ${item.month}`
+ );
+
+ closeModal();
+ showToast('Komórka została wyzerowana');
+ currentView='checklist';
+ render();
+}
+
+function checklistTypeLabel(key){
+ return checklistTypes.find(type=>type.key===key)?.label||key.toUpperCase();
+}
+
+function checklistPendingCount(){
+ return checklistItems.filter(item=>item.month===checklistMonth&&item.status!=='sent'&&item.status!=='not_applicable').length;
+}
+
+function checklistDeadlineState(item){
+ const days=daysToDate(item.deadline);
+ if(item.status==='sent') return {className:'safe',label:'Wysłane'};
+ if(days===null) return {className:'important',label:'Brak terminu'};
+ if(days<0) return {className:'critical-expired',label:`Po terminie ${Math.abs(days)} dni`};
+ if(days<=3) return {className:'critical-expired',label:`Termin za ${days} dni`};
+ if(days<=7) return {className:'urgent',label:`Termin za ${days} dni`};
+ return {className:'important',label:`Termin za ${days} dni`};
+}
+
+function filteredChecklistItems(){
+ return checklistItems
+  .filter(item=>item.month===checklistMonth)
+  .filter(item=>checklistCompanyFilter==='all'||item.companyId===Number(checklistCompanyFilter))
+  .filter(item=>{
+   if(checklistStatusFilter==='all') return true;
+   if(checklistStatusFilter==='sent') return item.status==='sent';
+   if(checklistStatusFilter==='pending') return item.status!=='sent'&&item.status!=='not_applicable';
+   if(checklistStatusFilter==='reminded') return Boolean(item.reminderAt);
+   return true;
+  })
+  .sort((a,b)=>a.deadline.localeCompare(b.deadline));
+}
+
+function checklistView(){
+ ensureChecklistMonthGenerated();
+ const monthKey=checklistMonthKey();
+ const monthItems=checklistItems.filter(item=>item.month===monthKey);
+ const sent=monthItems.filter(item=>item.status==='sent').length;
+ const reminded=monthItems.filter(item=>item.reminderAt&&item.status!=='sent').length;
+ const pending=monthItems.filter(item=>item.status!=='sent'&&item.status!=='not_applicable').length;
+ const overdue=monthItems.filter(item=>item.status!=='sent'&&item.status!=='not_applicable'&&item.deadline&&daysToDate(item.deadline)<0).length;
+
+ if(checklistSection==='archive') return checklistArchiveView();
+ if(checklistSection==='history') return checklistHistoryView();
+
+ return `<div class="page-header">
+  <div>
+   <span class="premium-eyebrow">CENTRUM TERMINÓW KSIĘGOWYCH</span>
+   <h2>Lista kontrolna — aktywne</h2>
+   <p>Każdy miesiąc zaczyna się od pustej tabeli. Dla każdej firmy wybierasz tylko obowiązki, które jej dotyczą: ZUS, VAT, PIT, CIT lub KPiR.</p>
+  </div>
+  <div class="actions">
+   <button class="btn" onclick="openChecklistCompaniesManager()">Zarządzaj firmami</button>
+   <button class="btn" onclick="setChecklistSection('archive')">Archiwum</button>
+   <button class="btn" onclick="setChecklistSection('history')">Historia działań</button>
+   <button class="btn primary" onclick="openAddNewChecklistCompany()">Dodaj firmę</button>
+  </div>
+ </div>
+
+ <div class="year-month-panel">
+  <div class="year-switcher">
+   <button onclick="changeChecklistYear(-1)">‹</button>
+   <strong>${checklistYear}</strong>
+   <button onclick="changeChecklistYear(1)">›</button>
+  </div>
+  <div class="month-tabs">
+   ${polishMonthsShort.map((name,index)=>`<button class="${checklistSelectedMonth===index+1?'active':''}" onclick="setChecklistMonthNumber(${index+1})">${name}</button>`).join('')}
+  </div>
+ </div>
+
+ <div class="checklist-summary-grid compact">
+  <div class="checklist-summary-card"><span>Wszystkie</span><strong>${monthItems.length}</strong></div>
+  <div class="checklist-summary-card pending"><span>Do wysłania</span><strong>${pending}</strong></div>
+  <div class="checklist-summary-card sent"><span>Wysłane</span><strong>${sent}</strong></div>
+  <div class="checklist-summary-card reminded"><span>Przypomniano</span><strong>${reminded}</strong></div>
+  <div class="checklist-summary-card overdue"><span>Po terminie</span><strong>${overdue}</strong></div>
+ </div>
+
+ <div class="panel checklist-filter-panel">
+  <div class="checklist-filters matrix-filters">
+   <div class="field"><label>Szukaj firmy</label><input placeholder="Nazwa firmy..." oninput="filterChecklistMatrix(this.value)"></div>
+   <div class="field"><label>Status</label><select onchange="setChecklistStatusFilter(this.value)">
+    <option value="all">Wszystkie</option>
+    <option value="pending">Do wysłania</option>
+    <option value="sent">Wysłane</option>
+    <option value="reminded">Przypomniano</option>
+   </select></div>
+  </div>
+ </div>
+
+ <div class="checklist-scope-note">
+  <strong>Zakres tego modułu:</strong> tylko kontrola księgowa firm według przesłanego Excela. Ten ekran nie pokazuje pracowników ani spraw kadrowych.
+ </div>
+
+ <div class="panel matrix-panel">
+  <div class="matrix-scroll">
+   <table class="checklist-matrix" id="checklistMatrix">
+    <thead>
+     <tr>
+      <th class="sticky-col">Firma</th>
+      ${checklistTypes.map(type=>`<th class="col-monthly-action">${type.label}</th>`).join('')}
+      <th class="col-a1-period">A1 od–do</th>
+      <th class="col-accounting-form">Forma księgowości</th>
+      <th class="col-zus-code">Kod ZUS</th>
+      <th class="col-zus-period">Kod ZUS od–do</th>
+      <th class="col-tax-form">Forma opodatkowania</th>
+     </tr>
+    </thead>
+    <tbody>
+     ${activeChecklistCompanies().map(company=>`
+      <tr data-company-name="${company.name.toLowerCase()}">
+       <td class="sticky-col"><strong>${company.name}</strong></td>
+       ${checklistTypes.map(type=>{
+        const item=checklistCellFor(company.id,type.key);
+        if(!item) return `<td>
+         <button class="matrix-cell add-action" onclick="openEmptyChecklistCell(${company.id},'${type.key}')">
+          <span>＋</span><small>Dodaj akcję</small>
+         </button>
+        </td>`;
+        return `<td class="col-monthly-action">${checklistCellContent(item,type)}</td>`;
+       }).join('')}
+       <td class="col-a1-period">
+        ${(()=>{
+         const status=periodStatus(company.id,'a1');
+         return `<button class="period-cell ${status.className}" onclick="openCompanyPeriodManager(${company.id},'a1')">
+          <strong>${periodDisplay(company,'a1')}</strong>
+          <small>${status.label}</small>
+         </button>`;
+        })()}
+       </td>
+       <td class="col-accounting-form">${company.accountingForm||'KPiR / VAT'}</td>
+       <td class="col-zus-code">${company.zusCode||'051000'}</td>
+       <td class="col-zus-period">
+        ${(()=>{
+         const status=periodStatus(company.id,'zus');
+         return `<button class="period-cell ${status.className}" onclick="openCompanyPeriodManager(${company.id},'zus')">
+          <strong>${periodDisplay(company,'zus')}</strong>
+          <small>${status.label}</small>
+         </button>`;
+        })()}
+       </td>
+       <td class="col-tax-form">${company.taxForm||'Zasady ogólne'}</td>
+      </tr>`).join('')}
+    </tbody>
+   </table>
+  </div>
+  <div class="matrix-legend">
+   <span><i class="legend sent"></i> wysłane — data wysłania</span>
+   <span><i class="legend reminded"></i> przypomniano</span>
+   <span><i class="legend pending"></i> do wysłania</span>
+   <span><i class="legend add"></i> dodaj akcję — miesiąc zaczyna się pusty</span>
+   <span><i class="legend neutral"></i> nie dotyczy</span>
+  </div>
+ </div>`;
+}
+
+
+
+function openCompanyPeriodManager(companyId,kind){
+ const company=companies.find(item=>item.id===companyId);
+ if(!company) return;
+
+ const records=ensureCompanyPeriodHistory(companyId,kind);
+ const current=records.find(item=>item.current)||null;
+ const history=records.filter(item=>!item.current);
+ const status=periodStatus(companyId,kind);
+
+ openModal(`${periodKindLabel(kind)} — okres obowiązywania`,`
+  <div class="checklist-company-heading">
+   <strong>${company.name}</strong>
+   <span>Ten okres jest danymi stałymi firmy. Wyświetla się we wszystkich miesiącach aż do zmiany lub przedłużenia.</span>
+  </div>
+
+  <div class="current-period-card ${status.className}">
+   <span>Aktualny okres</span>
+   <strong>${current?(current.label||formatPeriodDates(current.from,current.to)):'Brak okresu'}</strong>
+   <small>${status.label}</small>
+  </div>
+
+  <div class="period-action-buttons">
+   <button type="button" class="btn" onclick="openEditCurrentPeriod(${companyId},'${kind}')">
+    ✎ Edytuj aktualny
+   </button>
+   <button type="button" class="btn primary" onclick="openExtendCompanyPeriod(${companyId},'${kind}')">
+    ＋ Przedłuż / dodaj nowy
+   </button>
+  </div>
+
+  <h3 style="margin:20px 0 10px">Historia okresów</h3>
+  <div class="period-history-list">
+   ${history.length?history.map(item=>`
+    <div class="period-history-row">
+     <div>
+      <strong>${item.label||formatPeriodDates(item.from,item.to)}</strong>
+      <small>Zapisano ${new Date(item.createdAt).toLocaleString('pl-PL')} · ${officeUserName(item.createdBy)}</small>
+     </div>
+     <span class="history-archive-label">Poprzedni</span>
+    </div>
+   `).join(''):'<div class="empty">Brak poprzednich okresów.</div>'}
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Zamknij</button>
+  </footer>
+ `,event=>event.preventDefault());
+}
+
+function openEditCurrentPeriod(companyId,kind){
+ const company=companies.find(item=>item.id===companyId);
+ const current=ensureCompanyPeriodHistory(companyId,kind).find(item=>item.current);
+ if(!company) return;
+
+ openModal(`Edytuj aktualny okres — ${periodKindLabel(kind)}`,`
+  <div class="form-grid">
+   <div class="field">
+    <label>Ważne od</label>
+    <input id="editPeriodFrom" type="date" value="${current?.from||''}">
+   </div>
+
+   <div class="field">
+    <label>Ważne do</label>
+    <input id="editPeriodTo" type="date" value="${current?.to||''}" required>
+   </div>
+
+   <div class="field full">
+    <label>Opis widoczny w tabeli</label>
+    <input id="editPeriodLabel"
+           value="${current?.label||''}"
+           placeholder="Zostaw puste, aby system utworzył opis z dat">
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="openCompanyPeriodManager(${companyId},'${kind}')">Wróć</button>
+   <button type="submit" class="btn primary">Zapisz poprawkę</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const from=document.getElementById('editPeriodFrom').value;
+  const to=document.getElementById('editPeriodTo').value;
+  const customLabel=document.getElementById('editPeriodLabel').value.trim();
+
+  if(!to){
+   showToast('Wpisz datę końcową');
+   return;
+  }
+
+  if(from&&to<from){
+   showToast('Data końcowa nie może być wcześniejsza od początkowej');
+   return;
+  }
+
+  const label=customLabel||formatPeriodDates(from,to);
+
+  if(current){
+   current.from=from;
+   current.to=to;
+   current.label=label;
+   current.updatedAt=new Date().toISOString();
+   current.updatedBy=currentOfficeUserId;
+  }else{
+   checklistPeriodHistory.push({
+    id:Date.now(),
+    companyId,
+    kind,
+    from,
+    to,
+    label,
+    current:true,
+    createdAt:new Date().toISOString(),
+    createdBy:currentOfficeUserId
+   });
+  }
+
+  if(kind==='a1') company.a1Range=label;
+  else company.zusCodeRange=label;
+
+  addOfficeActivity(
+   'Poprawiono aktualny okres',
+   'Lista kontrolna',
+   `${company.name} — ${periodKindLabel(kind)}: ${label}`
+  );
+
+  closeModal();
+  showToast('Aktualny okres został poprawiony');
+  currentView='checklist';
+  render();
+ });
+}
+
+function openExtendCompanyPeriod(companyId,kind){
+ const company=companies.find(item=>item.id===companyId);
+ if(!company) return;
+
+ openModal(`Przedłuż — ${periodKindLabel(kind)}`,`
+  <div class="checklist-company-heading">
+   <strong>${company.name}</strong>
+   <span>Poprzedni okres trafi do historii. Nowy będzie widoczny w bieżącym i kolejnych miesiącach.</span>
+  </div>
+
+  <div class="form-grid">
+   <div class="field">
+    <label>Nowy okres od</label>
+    <input id="extendPeriodFrom" type="date" required>
+   </div>
+
+   <div class="field">
+    <label>Nowy okres do</label>
+    <input id="extendPeriodTo" type="date" required>
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="openCompanyPeriodManager(${companyId},'${kind}')">Wróć</button>
+   <button type="submit" class="btn primary">Zapisz nowy okres</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const from=document.getElementById('extendPeriodFrom').value;
+  const to=document.getElementById('extendPeriodTo').value;
+
+  if(!from||!to){
+   showToast('Wpisz obie daty');
+   return;
+  }
+
+  if(to<from){
+   showToast('Data końcowa nie może być wcześniejsza od początkowej');
+   return;
+  }
+
+  checklistPeriodHistory
+   .filter(item=>item.companyId===companyId&&item.kind===kind&&item.current)
+   .forEach(item=>item.current=false);
+
+  const label=formatPeriodDates(from,to);
+
+  checklistPeriodHistory.push({
+   id:Date.now(),
+   companyId,
+   kind,
+   from,
+   to,
+   label,
+   current:true,
+   createdAt:new Date().toISOString(),
+   createdBy:currentOfficeUserId
+  });
+
+  if(kind==='a1') company.a1Range=label;
+  else company.zusCodeRange=label;
+
+  addOfficeActivity(
+   'Przedłużono okres',
+   'Lista kontrolna',
+   `${company.name} — ${periodKindLabel(kind)}: ${label}`
+  );
+
+  closeModal();
+  showToast('Nowy okres został zapisany');
+  currentView='checklist';
+  render();
+ });
+}
+
+function openChecklistCompanySettings(companyId){
+ const company=companies.find(item=>item.id===companyId);
+ if(!company) return;
+
+ openModal('Dane księgowe firmy',`
+  <div class="checklist-company-heading">
+   <strong>${company.name}</strong>
+   <span>Te dane dotyczą wyłącznie listy kontrolnej i nie otwierają modułu pracowników.</span>
+  </div>
+
+  <div class="form-grid">
+   <div class="field">
+    <label>A1 od–do</label>
+    <input id="checklistCompanyA1" value="${company.a1Range||''}" placeholder="Np. 01.01.2026–31.12.2026">
+   </div>
+
+   <div class="field">
+    <label>Forma prowadzenia księgowości</label>
+    <input id="checklistCompanyAccounting" value="${company.accountingForm||''}" placeholder="Np. KPiR, VAT">
+   </div>
+
+   <div class="field">
+    <label>Kod ZUS</label>
+    <input id="checklistCompanyZusCode" value="${company.zusCode||''}" placeholder="Np. 051000">
+   </div>
+
+   <div class="field">
+    <label>Kod ZUS od–do</label>
+    <input id="checklistCompanyZusRange" value="${company.zusCodeRange||''}" placeholder="Np. 01.01.2026–31.12.2027">
+   </div>
+
+   <div class="field">
+    <label>Forma opodatkowania</label>
+    <input id="checklistCompanyTax" value="${company.taxForm||''}" placeholder="Np. ryczałt, liniowy">
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Zapisz dane księgowe</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  company.a1Range=document.getElementById('checklistCompanyA1').value.trim();
+  company.accountingForm=document.getElementById('checklistCompanyAccounting').value.trim();
+  company.zusCode=document.getElementById('checklistCompanyZusCode').value.trim();
+  company.zusCodeRange=document.getElementById('checklistCompanyZusRange').value.trim();
+  company.taxForm=document.getElementById('checklistCompanyTax').value.trim();
+
+  addOfficeActivity(
+   'Zmieniono dane księgowe firmy',
+   'Lista kontrolna',
+   company.name
+  );
+
+  closeModal();
+  showToast('Dane listy kontrolnej zostały zapisane');
+  currentView='checklist';
+  render();
+ });
+}
+
+function checklistArchiveView(){
+ return `<div class="page-header">
+  <div><span class="premium-eyebrow">LISTA KONTROLNA</span><h2>Archiwum</h2><p>Pozycje usunięte z aktywnej listy. Można je przywrócić albo trwale usunąć.</p></div>
+  <button class="btn" onclick="setChecklistSection('active')">← Wróć do aktywnych</button>
+ </div>
+ <div class="panel" style="margin-bottom:18px">
+  <div class="page-header compact">
+   <div><h3>Archiwum firm listy kontrolnej</h3><p>Firmy usunięte z aktywnego widoku.</p></div>
+  </div>
+
+  ${archivedChecklistCompanies.length?`
+   <table>
+    <thead><tr><th>Firma</th><th>Akcja</th></tr></thead>
+    <tbody>
+     ${archivedChecklistCompanies.map(companyId=>`
+      <tr>
+       <td><strong>${companyName(companyId)}</strong></td>
+       <td><button class="btn" onclick="addCompanyToChecklist(${companyId})">↩ Przywróć do listy</button></td>
+      </tr>
+     `).join('')}
+    </tbody>
+   </table>
+  `:'<div class="empty">Brak zarchiwizowanych firm listy kontrolnej.</div>'}
+ </div>
+
+ <div class="panel">
+  <div class="page-header compact">
+   <div><h3>Archiwum pojedynczych pozycji</h3><p>Archiwalne wpisy konkretnych miesięcy.</p></div>
+  </div>
+
+  ${archivedChecklistItems.length?`<table><thead><tr><th>Firma</th><th>Obowiązek</th><th>Miesiąc</th><th>Zarchiwizowano</th><th>Przez</th><th>Akcja</th></tr></thead>
+  <tbody>${archivedChecklistItems.map(item=>`<tr>
+   <td>${companyName(item.companyId)}</td>
+   <td>${checklistTypeLabel(item.type)}</td>
+   <td>${item.month}</td>
+   <td>${new Date(item.archivedAt).toLocaleString('pl-PL')}</td>
+   <td>${officeUserName(item.archivedBy)}</td>
+   <td><button class="btn" onclick="restoreChecklistItem(${item.id})">Przywróć</button>
+   <button class="btn danger" onclick="permanentlyDeleteChecklistItem(${item.id})">Usuń trwale</button></td>
+  </tr>`).join('')}</tbody></table>`:'<div class="empty">Archiwum jest puste.</div>'}
+ </div>`;
+}
+
+function checklistHistoryView(){
+ const entries=officeActivityLog.filter(entry=>entry.module==='Lista kontrolna');
+ return `<div class="page-header">
+  <div><span class="premium-eyebrow">LISTA KONTROLNA</span><h2>Historia działań</h2><p>Kto, co i kiedy zrobił w module listy kontrolnej.</p></div>
+  <button class="btn" onclick="setChecklistSection('active')">← Wróć do aktywnych</button>
+ </div>
+ <div class="panel simple-activity-list">
+  ${entries.length?entries.map(entry=>`<div class="simple-activity-item"><div><strong>${entry.action}</strong><span>${entry.details}</span></div><small>${officeUserName(entry.userId)}<br>${new Date(entry.createdAt).toLocaleString('pl-PL')}</small></div>`).join(''):'<div class="empty">Brak historii.</div>'}
+ </div>`;
+}
+
+function filterChecklistMatrix(value){
+ const query=value.trim().toLowerCase();
+ document.querySelectorAll('#checklistMatrix tbody tr').forEach(row=>{
+  row.style.display=row.dataset.companyName.includes(query)?'':'none';
+ });
+}
+
+function openQuickCreateChecklist(companyId,type){
+ openChecklistForm({companyId,type,month:checklistMonthKey(),deadline:'',notes:'',_quick:true});
+}
+
+
+function setChecklistMonth(value){
+ checklistMonth=value||checklistMonth;
+ render();
+}
+
+function setChecklistCompanyFilter(value){
+ checklistCompanyFilter=value;
+ render();
+}
+
+function setChecklistStatusFilter(value){
+ checklistStatusFilter=value;
+ currentView='checklist';
+ render();
+}
+
+function markChecklistSent(itemId){
+ const item=checklistItems.find(item=>item.id===itemId);
+ if(!item) return;
+
+ item.status='sent';
+ item.sentAt=new Date().toISOString();
+ item.sentBy=currentOfficeUserId;
+ item.lastAction='sent';
+
+ addOfficeActivity(
+  'Oznaczono jako wysłane',
+  'Lista kontrolna',
+  `${companyName(item.companyId)} — ${checklistTypeLabel(item.type)} za ${item.month}`
+ );
+
+ closeModal();
+ showToast('Pozycja została oznaczona jako wysłana');
+ render();
+}
+
+function undoChecklistSent(itemId){
+ const item=checklistItems.find(item=>item.id===itemId);
+ if(!item) return;
+
+ const previousSentAt=item.sentAt;
+ const previousSentBy=item.sentBy;
+ item.status='pending';
+ item.sentAt=null;
+ item.sentBy=null;
+ item.lastAction='undo';
+ item.lastUndoAt=new Date().toISOString();
+ item.lastUndoBy=currentOfficeUserId;
+
+ addOfficeActivity(
+  'Cofnięto oznaczenie wysłania',
+  'Lista kontrolna',
+  `${companyName(item.companyId)} — ${checklistTypeLabel(item.type)} za ${item.month}`
+ );
+
+ closeModal();
+ showToast('Cofnięto oznaczenie');
+ render();
+}
+
+
+function updateChecklistNotificationRecipient(companyId,channel){
+ const profile=checklistProfile(companyId);
+ const input=document.getElementById('checklistReminderRecipient');
+ if(!profile||!input) return;
+
+ input.value=channel==='email'?(profile.email||''):(profile.phone||'');
+}
+
+function sendChecklistReminder(itemId){
+ const item=checklistItems.find(item=>item.id===itemId);
+ if(!item) return;
+
+ const profile=checklistProfile(item.companyId);
+ const channels=profile?.notificationChannels||[];
+
+ if(!channels.length){
+  openChecklistNotificationSettings(item.companyId);
+  showToast('Najpierw ustaw formę powiadomienia');
+  return;
+ }
+
+ openModal('Powiadom klienta',`
+  <div class="reminder-preview">
+   <span class="premium-eyebrow">POWIADOMIENIE DO KLIENTA</span>
+   <h3>${companyName(item.companyId)} — ${checklistTypeLabel(item.type)}</h3>
+   <p>Termin: <strong>${fmt(item.deadline)}</strong></p>
+  </div>
+
+  <div class="form-grid">
+   <div class="field">
+    <label>Kanał</label>
+    <select id="checklistReminderChannel" onchange="updateChecklistNotificationRecipient(${item.companyId},this.value)">
+     ${channels.map(channel=>`<option value="${channel}">${notificationChannelLabel(channel)}</option>`).join('')}
+    </select>
+   </div>
+   <div class="field">
+    <label>Odbiorca</label>
+    <input id="checklistReminderRecipient" value="${channels[0]==='email'?(profile.email||''):(profile.phone||'')}" readonly>
+   </div>
+   <div class="field full">
+    <label>Treść</label>
+    <textarea id="checklistReminderText" rows="5">Przypominamy o obowiązku: ${checklistTypeLabel(item.type)}. Termin: ${fmt(item.deadline)}.</textarea>
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Wyślij powiadomienie</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const channel=document.getElementById('checklistReminderChannel').value;
+  const recipient=document.getElementById('checklistReminderRecipient').value.trim();
+  const message=document.getElementById('checklistReminderText').value.trim();
+
+  if(!recipient){
+   showToast('Brak danych odbiorcy dla wybranego kanału');
+   return;
+  }
+
+  item.reminderAt=new Date().toISOString();
+  item.reminderBy=currentOfficeUserId;
+  item.reminderChannel=channel;
+  item.reminderRecipient=recipient;
+  item.reminderMessage=message;
+
+  addOfficeActivity(
+   'Wysłano powiadomienie',
+   'Lista kontrolna',
+   `${companyName(item.companyId)} — ${checklistTypeLabel(item.type)}; kanał: ${notificationChannelLabel(channel)}; odbiorca: ${recipient}`
+  );
+
+  closeModal();
+  showToast('Powiadomienie zostało wysłane i zapisane');
+  currentView='checklist';
+  render();
+ });
+}
+
+function openAddChecklistItem(){
+ openChecklistForm(null);
+}
+
+function openEditChecklistItem(itemId){
+ openChecklistForm(checklistItems.find(item=>item.id===itemId)||null);
+}
+
+function openChecklistForm(item){
+ const editing=Boolean(item&&item.id);
+
+ openModal(editing?'Edytuj pozycję':'Dodaj pozycję',`
+  <div class="form-grid">
+   <div class="field">
+    <label>Firma</label>
+    <select id="checklistFormCompany">
+     ${companies.map(company=>`<option value="${company.id}" ${item?.companyId===company.id?'selected':''}>${company.name}</option>`).join('')}
+    </select>
+   </div>
+   <div class="field">
+    <label>Obowiązek</label>
+    <select id="checklistFormType">
+     ${checklistTypes.map(type=>`<option value="${type.key}" ${item?.type===type.key?'selected':''}>${type.label}</option>`).join('')}
+    </select>
+   </div>
+   <div class="field">
+    <label>Miesiąc</label>
+    <input id="checklistFormMonth" type="month" value="${item?.month||checklistMonth}" required>
+   </div>
+   <div class="field">
+    <label>Termin</label>
+    <input id="checklistFormDeadline" type="date" value="${item?.deadline||''}" required>
+   </div>
+   <div class="field full">
+    <label>Uwagi</label>
+    <textarea id="checklistFormNotes" rows="4">${item?.notes||''}</textarea>
+   </div>
+  </div>
+
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   ${editing?`<button type="button" class="btn danger" onclick="deleteChecklistItem(${item.id})">Usuń</button>`:''}
+   <button type="submit" class="btn primary">${editing?'Zapisz zmiany':'Dodaj pozycję'}</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const values={
+   companyId:Number(document.getElementById('checklistFormCompany').value),
+   type:document.getElementById('checklistFormType').value,
+   month:document.getElementById('checklistFormMonth').value,
+   deadline:document.getElementById('checklistFormDeadline').value,
+   notes:document.getElementById('checklistFormNotes').value.trim()
+  };
+
+  if(editing){
+   Object.assign(item,values);
+   addOfficeActivity('Edytowano pozycję','Lista kontrolna',`${companyName(item.companyId)} — ${checklistTypeLabel(item.type)}`);
+  }else{
+   checklistItems.push({
+    id:Date.now(),
+    ...values,
+    status:'pending',
+    sentAt:null,
+    sentBy:null,
+    reminderAt:null,
+    reminderBy:null
+   });
+   addOfficeActivity('Dodano pozycję','Lista kontrolna',`${companyName(values.companyId)} — ${checklistTypeLabel(values.type)}`);
+  }
+
+  closeModal();
+  showToast(editing?'Pozycja została poprawiona':'Pozycja została dodana');
+  checklistMonth=values.month;
+  render();
+ });
+}
+
+function deleteChecklistItem(itemId){
+ const item=checklistItems.find(item=>item.id===itemId);
+ if(!item) return;
+
+ checklistItems=checklistItems.filter(entry=>entry.id!==itemId);
+ addOfficeActivity('Usunięto pozycję','Lista kontrolna',`${companyName(item.companyId)} — ${checklistTypeLabel(item.type)}`);
+
+ closeModal();
+ showToast('Pozycja została usunięta');
+ render();
+}
+
+function openChecklistActivity(){
+ const entries=officeActivityLog.filter(entry=>entry.module==='Lista kontrolna');
+
+ openModal('Historia listy kontrolnej',`
+  <div class="simple-activity-list">
+   ${entries.length?entries.map(entry=>`
+    <div class="simple-activity-item">
+     <div>
+      <strong>${entry.action}</strong>
+      <span>${entry.details}</span>
+     </div>
+     <small>${officeUserName(entry.userId)}<br>${new Date(entry.createdAt).toLocaleString('pl-PL')}</small>
+    </div>
+   `).join(''):'<div class="empty">Brak zapisanych działań.</div>'}
+  </div>
+  <footer><button type="button" class="btn" onclick="closeModal()">Zamknij</button></footer>
+ `,event=>event.preventDefault());
+}
+
+function officeTeamView(){
+ const user=currentOfficeUser();
+ const isOwner=user.role==='owner_admin';
+
+ return `<div class="page-header">
+  <div>
+   <span class="premium-eyebrow">DOSTĘP DO BIURA</span>
+   <h2>Zespół biura</h2>
+   <p>Każda księgowa pracuje na własnym koncie, dzięki czemu system zapisuje autora każdej operacji.</p>
+  </div>
+  ${isOwner?'<button class="btn primary" onclick="openAddOfficeUser()">Dodaj księgową</button>':''}
+ </div>
+
+ <div class="panel">
+  <table>
+   <thead><tr><th>Użytkownik</th><th>E-mail</th><th>Rola</th><th>Status</th><th>Uprawnienia</th><th></th></tr></thead>
+   <tbody>
+    ${officeUsers.map(member=>`<tr>
+     <td><div class="office-user-cell"><span class="avatar small">${member.initials}</span><strong>${member.name}</strong></div></td>
+     <td>${member.email}</td>
+     <td><span class="status ${member.role==='owner_admin'?'important':'safe'}">${roleLabel(member.role)}</span></td>
+     <td><span class="status ${member.status==='Aktywne'?'safe':'archived-status'}">${member.status}</span></td>
+     <td>${member.role==='owner_admin'?'Pełny dostęp i zarządzanie księgowymi':'Pełna praca na firmach, bez zarządzania kontami'}</td>
+     <td>${isOwner&&member.role!=='owner_admin'?`<button class="btn" onclick="toggleOfficeUserStatus(${member.id})">${member.status==='Aktywne'?'Zablokuj':'Odblokuj'}</button>`:''}</td>
+    </tr>`).join('')}
+   </tbody>
+  </table>
+ </div>
+
+ <div class="panel">
+  <div class="page-header compact">
+   <div><h3>Ostatnie działania</h3><p>Prosty podgląd, kto ostatnio wykonywał operacje w systemie.</p></div>
+  </div>
+  <div class="simple-activity-list">
+   ${officeActivityLog.slice(0,8).map(entry=>`
+    <div class="simple-activity-item">
+     <div><strong>${entry.action}</strong><span>${entry.module} · ${entry.details}</span></div>
+     <small>${officeUserName(entry.userId)}<br>${new Date(entry.createdAt).toLocaleString('pl-PL')}</small>
+    </div>
+   `).join('')}
+  </div>
+ </div>`;
+}
+
+function openAccountSwitcher(){
+ openModal('Przełącz konto demonstracyjne',`
+  <p class="modal-intro">W prawdziwej wersji każda osoba loguje się własnym e-mailem i hasłem. W demo możesz przełączyć użytkownika, aby zobaczyć różnice w uprawnieniach.</p>
+  <div class="account-switch-list">
+   ${officeUsers.filter(user=>user.status==='Aktywne').map(user=>`
+    <button type="button" class="account-switch-card ${user.id===currentOfficeUserId?'active':''}" onclick="switchOfficeUser(${user.id})">
+     <span class="avatar">${user.initials}</span>
+     <span><strong>${user.name}</strong><small>${roleLabel(user.role)}</small></span>
+     ${user.id===currentOfficeUserId?'<span class="status safe">Aktywne konto</span>':''}
+    </button>
+   `).join('')}
+  </div>
+  <footer><button type="button" class="btn" onclick="closeModal()">Zamknij</button></footer>
+ `,event=>event.preventDefault());
+}
+
+function switchOfficeUser(userId){
+ currentOfficeUserId=userId;
+ closeModal();
+ showToast(`Przełączono na: ${currentOfficeUser().name}`);
+ render();
+}
+
+function openAddOfficeUser(){
+ if(currentOfficeUser().role!=='owner_admin'){
+  showToast('Tylko Grażyna może dodawać nowe księgowe');
+  return;
+ }
+
+ openModal('Dodaj księgową',`
+  <div class="form-grid">
+   <div class="field"><label>Imię i nazwisko</label><input id="newOfficeUserName" required></div>
+   <div class="field"><label>E-mail</label><input id="newOfficeUserEmail" type="email" required></div>
+  </div>
+  <footer>
+   <button type="button" class="btn" onclick="closeModal()">Anuluj</button>
+   <button type="submit" class="btn primary">Wyślij zaproszenie</button>
+  </footer>
+ `,event=>{
+  event.preventDefault();
+
+  const name=document.getElementById('newOfficeUserName').value.trim();
+  const email=document.getElementById('newOfficeUserEmail').value.trim();
+  const initials=name.split(' ').map(part=>part[0]).join('').slice(0,2).toUpperCase();
+
+  officeUsers.push({
+   id:Date.now(),
+   name,
+   email,
+   role:'office_admin',
+   status:'Aktywne',
+   initials
+  });
+
+  addOfficeActivity('Dodano księgową','Zespół biura',`${name} — ${email}`);
+  closeModal();
+  showToast('Konto księgowej zostało utworzone w demo');
+  render();
+ });
+}
+
+function toggleOfficeUserStatus(userId){
+ if(currentOfficeUser().role!=='owner_admin') return;
+
+ const user=officeUsers.find(user=>user.id===userId);
+ if(!user) return;
+
+ user.status=user.status==='Aktywne'?'Zablokowane':'Aktywne';
+ addOfficeActivity(user.status==='Aktywne'?'Odblokowano konto':'Zablokowano konto','Zespół biura',user.name);
+ showToast(`Konto: ${user.status.toLowerCase()}`);
+ render();
+}
+
+
 function documentsView(){
  const missingMedical=employees.filter(employee=>!employee.medical);
  const missingBhp=employees.filter(employee=>!employee.bhp);
@@ -3526,6 +6263,11 @@ function saveCompanyStatus(companyId,newStatus){
 }
 
 function openCompany(id){
+ currentView='companies';
+ document.querySelectorAll('#adminNav [data-view]').forEach(button=>{
+  button.classList.toggle('active',button.dataset.view==='companies');
+ });
+
  const company=companies.find(item=>item.id===id);
  if(!company) return;
 
@@ -3543,7 +6285,10 @@ function openCompany(id){
     <h2>${company.name}</h2>
     <p>NIP: ${company.nip} · Kontakt: ${company.contact}</p>
    </div>
-   <button class="btn" onclick="render()">Wróć</button>
+   <div class="actions">
+    <button class="btn" onclick="render()">Wróć</button>
+    <button class="btn warning" onclick="openArchiveCompanyModal(${company.id})">Archiwizuj firmę</button>
+   </div>
   </div>
 
   ${issues.length?`
@@ -6815,6 +9560,11 @@ function openCompanyForm(){openModal('Dodaj firmę',`
    <div class="field full"><label>Adres</label><input id="cAddress" placeholder="Ulica, kod pocztowy, miejscowość"></div>
    <div class="field"><label>Status</label><select id="cStatus"><option>Aktywna</option><option>Wymaga uwagi</option><option>Nieaktywna</option></select></div>
    <div class="field"><label>Opiekun księgowy</label><input id="cAccountant" placeholder="Np. Grażyna Zachwieja"></div>
+   <div class="field"><label>Forma prowadzenia księgowości</label><input id="cAccountingForm" placeholder="Np. KPiR, VAT"></div>
+   <div class="field"><label>Kod ZUS</label><input id="cZusCode" placeholder="Np. 051000"></div>
+   <div class="field"><label>Kod ZUS od–do</label><input id="cZusCodeRange" placeholder="Np. 01.01.2026–31.12.2027"></div>
+   <div class="field"><label>Forma opodatkowania</label><input id="cTaxForm" placeholder="Np. ryczałt, liniowy"></div>
+   <div class="field"><label>A1 od–do</label><input id="cA1Range" placeholder="Np. 01.01.2026–31.12.2026"></div>
    <div class="field full"><label>Uwagi</label><textarea id="cNotes" rows="3"></textarea></div>
  </div>
  <footer><button class="btn" type="button" onclick="closeModal()">Anuluj</button><button class="btn primary">Zapisz firmę</button></footer>`,
@@ -6831,6 +9581,11 @@ function openCompanyForm(){openModal('Dodaj firmę',`
      address:cAddress.value,
      status:cStatus.value,
      accountant:cAccountant.value,
+     accountingForm:cAccountingForm.value,
+     zusCode:cZusCode.value,
+     zusCodeRange:cZusCodeRange.value,
+     taxForm:cTaxForm.value,
+     a1Range:cA1Range.value,
      notes:cNotes.value
    });
    closeModal();
